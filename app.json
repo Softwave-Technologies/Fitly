@@ -3,7 +3,6 @@
     "name": "Fitly",
     "slug": "Fitly",
     "version": "1.0.0",
-
     "scheme": "Fitly",
     "web": {
       "bundler": "metro",
@@ -21,28 +20,33 @@
     ],
     "experiments": {
       "typedRoutes": true,
-
       "tsconfigPaths": true
     },
-
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-
     "userInterfaceStyle": "light",
-
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anilyavas.Fitly"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.anilyavas.Fitly"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "439f0a79-e79e-4ef5-abe7-7ec80ac361d3"
       }
     }
   }
