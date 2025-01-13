@@ -1,9 +1,20 @@
-import { View, Text } from 'react-native';
+import { Text, SafeAreaView, View } from 'react-native';
+import Swiper from 'react-native-swiper';
 
 export default function OnboardingPage() {
   return (
-    <View className="flex-1">
-      <Text className="text-2xl font-bold">Onboarding</Text>
-    </View>
+    <SafeAreaView className="flex-1 bg-black">
+      <Swiper loop={false} showsPagination dotColor="white">
+        <View>
+          <Text className="text-center text-2xl font-bold text-white">Onboarding</Text>
+        </View>
+        <View>
+          <Text>Workout</Text>
+        </View>
+        <View>
+          <Text>Tracking</Text>
+        </View>
+      </Swiper>
+    </SafeAreaView>
   );
 }
