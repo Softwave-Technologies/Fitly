@@ -1,5 +1,5 @@
-import { View } from 'react-native';
+import { Redirect } from 'expo-router';
 
 export default function Home() {
-  return <View className="flex-1" />;
+  return <Redirect href="/(auth)/onboarding" />;
 }
