@@ -1,18 +1,62 @@
-import { Text, SafeAreaView, View } from 'react-native';
+import { Text, SafeAreaView, View, Image, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
+
+//@ts-ignore
+import onboard1 from '../../assets/onboarding/onboard1.jpg';
+//@ts-ignore
+import onboard2 from '../../assets/onboarding/onboard2.jpg';
+//@ts-ignore
+import onboard3 from '../../assets/onboarding/onboard3.jpg';
 
 export default function OnboardingPage() {
   return (
     <SafeAreaView className="flex-1 bg-black">
       <Swiper loop={false} showsPagination dotColor="white">
-        <View>
-          <Text className="text-center text-2xl font-bold text-white">Onboarding</Text>
+        <View className="items-center justify-center gap-7 p-10">
+          <Image
+            source={onboard1}
+            style={{
+              height: Dimensions.get('window').height / 2,
+              width: Dimensions.get('window').width - 50,
+            }}
+          />
+          <Text className="text-center text-2xl font-bold text-white">
+            Stay on Top of Your Fitness Journey
+          </Text>
+          <Text className="text-center text-lg font-semibold text-gray-400">
+            Easily log and track your workouts with real-time progress updates. From running to
+            weightlifting, monitor every move and stay motivated to achieve your fitness goals.
+          </Text>
         </View>
-        <View>
-          <Text>Workout</Text>
+        <View className="items-center justify-center gap-7 p-10">
+          <Image
+            source={onboard2}
+            style={{
+              height: Dimensions.get('window').height / 2,
+              width: Dimensions.get('window').width - 50,
+            }}
+          />
+          <Text className="text-center text-2xl font-bold text-white">
+            Challenge Yourself, Compete with Others
+          </Text>
+          <Text className="text-center text-lg font-semibold text-gray-400">
+            Push your limits by joining exciting fitness challenges. Compete with friends, climb
+            leaderboards, and unlock your true potential in a supportive community.
+          </Text>
         </View>
-        <View>
-          <Text>Tracking</Text>
+        <View className="items-center justify-center gap-7 p-10">
+          <Image
+            source={onboard3}
+            style={{
+              height: Dimensions.get('window').height / 2,
+              width: Dimensions.get('window').width - 50,
+            }}
+          />
+          <Text className="text-center text-2xl font-bold text-white">Celebrate Your Success</Text>
+          <Text className="text-center text-lg font-semibold text-gray-400">
+            Share your fitness milestones with friends and inspire others. Whether it’s completing a
+            challenge or reaching a personal best, let your achievements shine.
+          </Text>
         </View>
       </Swiper>
     </SafeAreaView>
