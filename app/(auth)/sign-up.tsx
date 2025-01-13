@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   buttonText: {
-    color: 'darkgrey',
+    color: 'black',
     fontWeight: 'bold',
     padding: 5,
   },
