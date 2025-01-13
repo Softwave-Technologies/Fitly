@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { Text, SafeAreaView, View, Image, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
 
@@ -7,6 +8,8 @@ import onboard1 from '../../assets/onboarding/onboard1.jpg';
 import onboard2 from '../../assets/onboarding/onboard2.jpg';
 //@ts-ignore
 import onboard3 from '../../assets/onboarding/onboard3.jpg';
+
+import { Button } from '~/components/Button';
 
 export default function OnboardingPage() {
   return (
@@ -57,6 +60,11 @@ export default function OnboardingPage() {
             Share your fitness milestones with friends and inspire others. Whether it’s completing a
             challenge or reaching a personal best, let your achievements shine.
           </Text>
+          <Button
+            title="Get Started"
+            onPress={() => router.push('/(auth)/sign-in')}
+            style={{ width: Dimensions.get('window').width - 100 }}
+          />
         </View>
       </Swiper>
     </SafeAreaView>
