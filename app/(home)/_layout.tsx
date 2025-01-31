@@ -13,11 +13,15 @@ export default function HomeLayout() {
       }}>
       <Tabs.Screen
         name="index"
-        options={{ tabBarIcon: ({ color }) => <FontAwesome name="home" size={20} color={color} /> }}
+        options={{ tabBarIcon: ({ color }) => <FontAwesome name="home" size={25} color={color} /> }}
       />
       <Tabs.Screen
         name="saved"
-        options={{ tabBarIcon: ({ color }) => <FontAwesome name="save" size={20} color={color} /> }}
+        options={{ tabBarIcon: ({ color }) => <FontAwesome name="save" size={25} color={color} /> }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{ tabBarIcon: ({ color }) => <FontAwesome name="user" size={25} color={color} /> }}
       />
     </Tabs>
   );

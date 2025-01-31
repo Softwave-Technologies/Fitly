@@ -1,11 +1,16 @@
+import { useUser } from '@clerk/clerk-expo';
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, Text, SafeAreaView, Image } from 'react-native';
 
 export default function HomePage() {
+  const { user } = useUser();
   return (
     <SafeAreaView className="flex-1 bg-black">
-      <View className="p-10">
-        <Text className="text-2xl font-bold text-green-700">Welcome Back!</Text>
+      <View className="flex-row items-center justify-between p-10">
+        <Text className="text-2xl font-bold text-green-600">Welcome {user?.fullName} !</Text>
+        {user?.imageUrl && (
+          <Image source={{ uri: user.imageUrl }} className="h-16 w-16 rounded-full" />
+        )}
       </View>
       <StatusBar style="light" />
     </SafeAreaView>
