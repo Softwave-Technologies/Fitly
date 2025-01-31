@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <SafeAreaView className="flex-1 bg-black">
       <View className="p-10">
-        <Text className="text-xl font-bold text-green-700">Welcome</Text>
+        <Text className="text-2xl font-bold text-green-700">Welcome Back!</Text>
       </View>
       <StatusBar style="light" />
     </SafeAreaView>
