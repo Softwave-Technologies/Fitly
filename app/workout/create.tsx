@@ -4,7 +4,7 @@ import CreateWorkout from '~/components/CreateWorkout';
 
 export default function CreateScreen() {
   return (
-    <View className="flex-1 bg-black">
+    <View className="flex-1 bg-gray-900">
       <SafeAreaView>
         <CreateWorkout />
       </SafeAreaView>
