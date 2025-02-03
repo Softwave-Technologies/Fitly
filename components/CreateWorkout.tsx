@@ -5,29 +5,22 @@ import { View, Text, Alert } from 'react-native';
 import { Button } from './Button';
 import SelectionComponentList from './SelectionComponentList';
 
+import getWorkout from '~/utils/getWorkout';
+
 export default function CreateWorkout() {
-  const [workout, setWorkout] = useState(null);
+  const [workout, setWorkout] = useState<any>(null);
   const [focus, setFocus] = useState('');
   const [level, setLevel] = useState('');
   const [duration, setDuration] = useState('');
 
-  const createWorkout = async ({
-    focus,
-    level,
-    duration,
-  }: {
-    focus: string;
-    level: string;
-    duration: string;
-  }) => {
-    if (!focus || !level || !duration) {
-      Alert.alert('Please select all options');
+  const createWorkout = () => {
+    const result = getWorkout({ focus, level, duration });
+    if (!result) {
+      Alert.alert('Error while generating workout!');
       return;
     }
-    // Send prompts to openai and get the workout data
-    const prompt =
-      // Return to home screen
-      router.push('/(home)');
+    setWorkout(result);
+    router.push('/(home)', workout);
   };
 
   return (
