@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <SafeAreaView className="flex-1 bg-gray-900">
       <View className="border-b-hairline flex-row items-center justify-between border-gray-300 p-10">
-        <Text className="text-2xl font-bold text-green-600">Welcome {user?.firstName} !</Text>
+        <Text className="text-2xl font-bold text-white">Welcome {user?.firstName} !</Text>
         {user?.imageUrl && (
           <Image source={{ uri: user.imageUrl }} className="h-16 w-16 rounded-full" />
         )}

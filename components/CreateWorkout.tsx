@@ -11,15 +11,23 @@ export default function CreateWorkout() {
   const [level, setLevel] = useState('');
   const [duration, setDuration] = useState('');
 
-  const createWorkout = async () => {
+  const createWorkout = async ({
+    focus,
+    level,
+    duration,
+  }: {
+    focus: string;
+    level: string;
+    duration: string;
+  }) => {
     if (!focus || !level || !duration) {
       Alert.alert('Please select all options');
       return;
     }
     // Send prompts to openai and get the workout data
-
-    // Return to home screen
-    router.push('/(home)');
+    const prompt =
+      // Return to home screen
+      router.push('/(home)');
   };
 
   return (
