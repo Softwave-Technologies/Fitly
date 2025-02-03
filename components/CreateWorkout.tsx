@@ -8,19 +8,39 @@ import SelectionComponentList from './SelectionComponentList';
 import getWorkout from '~/utils/getWorkout';
 
 export default function CreateWorkout() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [workout, setWorkout] = useState<any>(null);
   const [focus, setFocus] = useState('');
   const [level, setLevel] = useState('');
   const [duration, setDuration] = useState('');
 
-  const createWorkout = () => {
-    const result = getWorkout({ focus, level, duration });
-    if (!result) {
-      Alert.alert('Error while generating workout!');
+  const createWorkout = async () => {
+    if (!focus || !level || !duration) {
+      Alert.alert('Please select all options');
       return;
     }
-    setWorkout(result);
-    router.push('/(home)', workout);
+
+    try {
+      console.log('Fetching workout with:', { focus, level, duration });
+      const result = await getWorkout(focus, level, duration);
+
+      if (!result) {
+        console.error('Error: getWorkout returned null or undefined');
+        Alert.alert('Error fetching workout. Please try again.');
+        return;
+      }
+
+      console.log('Workout received:', result);
+      setWorkout(result);
+
+      router.push({
+        pathname: '/(home)',
+        params: { workout: JSON.stringify(result) },
+      });
+    } catch (error) {
+      console.error('Error while generating workout!', error);
+      Alert.alert('Failed to generate workout. Please try again.');
+    }
   };
 
   return (

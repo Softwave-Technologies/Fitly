@@ -1,12 +1,4 @@
-export default async function getWorkout({
-  focus,
-  duration,
-  level,
-}: {
-  focus: string;
-  duration: string;
-  level: string;
-}) {
+export default async function getWorkout(focus: string, level: string, duration: string) {
   const prompt = `
     Generate a structured JSON workout plan with exercises based on:
     - Focus: ${focus}
@@ -43,11 +35,14 @@ export default async function getWorkout({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${process.env.EXPO_PUBLIC_OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
         model: 'gpt-4',
-        messages: [{ role: 'system', content: prompt }],
+        messages: [
+          { role: 'system', content: 'You are a helpful fitness AI assistant.' },
+          { role: 'user', content: prompt },
+        ],
         temperature: 0.7,
       }),
     });
