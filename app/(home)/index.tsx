@@ -1,8 +1,8 @@
 import { useUser } from '@clerk/clerk-expo';
+import { FontAwesome } from '@expo/vector-icons';
+import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, SafeAreaView, Image } from 'react-native';
-
-import CreateWorkout from '~/components/CreateWorkout';
+import { View, Text, SafeAreaView, Image, Pressable } from 'react-native';
 
 export default function HomePage() {
   const { user } = useUser();
@@ -15,10 +15,16 @@ export default function HomePage() {
           <Image source={{ uri: user.imageUrl }} className="h-16 w-16 rounded-full" />
         )}
       </View>
-      {/* Create workout */}
-      <CreateWorkout />
       {/* Created workout text and steps */}
       {/* Calorie track */}
+      {/* Create workout */}
+      <View className="absolute bottom-7 right-7 rounded-full bg-green-500">
+        <Link asChild href="/workout/create">
+          <Pressable className="m-4">
+            <FontAwesome name="plus" color="white" size={20} />
+          </Pressable>
+        </Link>
+      </View>
       <StatusBar style="light" />
     </SafeAreaView>
   );
