@@ -1,11 +1,24 @@
 import { useUser } from '@clerk/clerk-expo';
 import { FontAwesome } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useEffect, useState } from 'react';
 import { View, Text, SafeAreaView, Image, Pressable } from 'react-native';
 
 export default function HomePage() {
   const { user } = useUser();
+  const [workout, setWorkout] = useState(null);
+
+  useEffect(() => {
+    const fetchWorkout = async () => {
+      const data = await AsyncStorage.getItem('workout');
+      if (data) {
+        setWorkout(JSON.parse(data));
+      }
+    };
+    fetchWorkout();
+  }, []);
 
   return (
     <SafeAreaView className="flex-1 bg-gray-900">
@@ -16,6 +29,7 @@ export default function HomePage() {
         )}
       </View>
       {/* Created workout text and steps */}
+
       {/* Calorie track */}
       {/* Create workout */}
       <View className="absolute bottom-7 right-7 rounded-full bg-green-500">

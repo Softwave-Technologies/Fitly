@@ -13,7 +13,8 @@ export default async function getWorkout(focus: string, level: string, duration:
     - Duration (seconds)
     - Estimated Calories Burned
     - Description
-  
+    - Muscle Groups Targeted (e.g., "Chest", "Biceps", "Quads")
+
     Return JSON in this format:
     {
       "workout": [
@@ -24,7 +25,8 @@ export default async function getWorkout(focus: string, level: string, duration:
           "rest_time": "30 sec",
           "duration_seconds": 45,
           "calories_burned": 12.5,
-          "description": "Brief exercise description"
+          "description": "Brief exercise description",
+          "muscle_groups": ["Chest", "Triceps"]
         }
       ]
     }

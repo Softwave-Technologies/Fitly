@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { View, Text, Alert } from 'react-native';
@@ -8,8 +9,6 @@ import SelectionComponentList from './SelectionComponentList';
 import getWorkout from '~/utils/getWorkout';
 
 export default function CreateWorkout() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [workout, setWorkout] = useState<any>(null);
   const [focus, setFocus] = useState('');
   const [level, setLevel] = useState('');
   const [duration, setDuration] = useState('');
@@ -31,12 +30,8 @@ export default function CreateWorkout() {
       }
 
       console.log('Workout received:', result);
-      setWorkout(result);
-
-      router.push({
-        pathname: '/(home)',
-        params: { workout: JSON.stringify(result) },
-      });
+      await AsyncStorage.setItem('workout', JSON.stringify(result));
+      router.push('/(home)');
     } catch (error) {
       console.error('Error while generating workout!', error);
       Alert.alert('Failed to generate workout. Please try again.');
