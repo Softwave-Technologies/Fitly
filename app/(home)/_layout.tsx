@@ -16,8 +16,10 @@ export default function HomeLayout() {
         options={{ tabBarIcon: ({ color }) => <FontAwesome name="home" size={25} color={color} /> }}
       />
       <Tabs.Screen
-        name="saved"
-        options={{ tabBarIcon: ({ color }) => <FontAwesome name="save" size={25} color={color} /> }}
+        name="history"
+        options={{
+          tabBarIcon: ({ color }) => <FontAwesome name="history" size={25} color={color} />,
+        }}
       />
       <Tabs.Screen
         name="profile"
