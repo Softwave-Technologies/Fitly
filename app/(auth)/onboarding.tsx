@@ -1,4 +1,5 @@
 import { router } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { Text, SafeAreaView, View, Image, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
 
@@ -14,6 +15,7 @@ import { Button } from '~/components/Button';
 export default function OnboardingPage() {
   return (
     <SafeAreaView className="flex-1 bg-black">
+      <Text className="text-center text-3xl font-bold text-green-600">Fitly</Text>
       <Swiper loop={false} showsPagination dotColor="white">
         <View className="items-center justify-center gap-7 p-10">
           <Image
@@ -67,6 +69,7 @@ export default function OnboardingPage() {
           />
         </View>
       </Swiper>
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 }

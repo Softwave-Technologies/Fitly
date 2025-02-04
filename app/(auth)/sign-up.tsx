@@ -11,6 +11,8 @@ import {
   Dimensions,
   View,
   Pressable,
+  Platform,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 export default function SignUpScreen() {
@@ -75,39 +77,41 @@ export default function SignUpScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.bodyContainer}>
-        <Text style={styles.title}>Sign Up</Text>
-        <Text style={styles.inputText}>Email</Text>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <View style={styles.bodyContainer}>
+          <Text style={styles.title}>Sign Up</Text>
+          <Text style={styles.inputText}>Email</Text>
 
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          value={emailAddress}
-          placeholder="Enter email"
-          onChangeText={(email) => setEmailAddress(email)}
-        />
-        <Text style={styles.inputText}>Password</Text>
-        <TextInput
-          style={styles.textInput}
-          value={password}
-          placeholder="Enter password"
-          secureTextEntry
-          onChangeText={(password) => setPassword(password)}
-        />
-        {password.length < 8 && (
-          <Text style={styles.warningMessage}>Password must be minimum of 8 characters!</Text>
-        )}
-        <Button title="Continue" onPress={onSignUpPress} color="cyan" />
-        <View style={styles.button}>
-          <Text style={[styles.buttonText, { color: 'white' }]}>Already have an account?</Text>
-          <Link asChild href="/(auth)/sign-in">
-            <Pressable style={styles.buttonContainer}>
-              <Text style={styles.buttonText}>Sign In</Text>
-            </Pressable>
-          </Link>
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            value={emailAddress}
+            placeholder="Enter email"
+            onChangeText={(email) => setEmailAddress(email)}
+          />
+          <Text style={styles.inputText}>Password</Text>
+          <TextInput
+            style={styles.textInput}
+            value={password}
+            placeholder="Enter password"
+            secureTextEntry
+            onChangeText={(password) => setPassword(password)}
+          />
+          {password.length < 8 && (
+            <Text style={styles.warningMessage}>Password must be minimum of 8 characters!</Text>
+          )}
+          <Button title="Continue" onPress={onSignUpPress} color="cyan" />
+          <View style={styles.button}>
+            <Text style={[styles.buttonText, { color: 'white' }]}>Already have an account?</Text>
+            <Link asChild href="/(auth)/sign-in">
+              <Pressable style={styles.buttonContainer}>
+                <Text style={styles.buttonText}>Sign In</Text>
+              </Pressable>
+            </Link>
+          </View>
         </View>
-      </View>
-      <StatusBar style="light" />
+        <StatusBar style="light" />
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

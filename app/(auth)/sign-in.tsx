@@ -12,6 +12,8 @@ import {
   SafeAreaView,
   Dimensions,
   Pressable,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 
 export default function Page() {
@@ -65,40 +67,42 @@ export default function Page() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.bodyContainer}>
-        <Text style={styles.title}>Sign In</Text>
-        <Text style={styles.inputText}>Email</Text>
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          value={emailAddress}
-          placeholder="Enter email"
-          onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
-        />
-        <Text style={styles.inputText}>Password</Text>
-        <TextInput
-          style={styles.textInput}
-          value={password}
-          placeholder="Enter password"
-          secureTextEntry
-          onChangeText={(password) => setPassword(password)}
-        />
-        {error && <Text style={styles.errorMessage}>{error}</Text>}
-        <Pressable style={styles.googleButton} onPress={handleGoogleAuth}>
-          <Text style={styles.signInGoogleText}>Sign in with Google</Text>
-          <FontAwesome name="google" size={20} color="black" />
-        </Pressable>
-        <Button title="Sign in" onPress={onSignInPress} color="cyan" />
-        <View style={styles.signupContainer}>
-          <Text style={styles.bottomText}>Don't have an account?</Text>
-          <Link href="/sign-up" asChild>
-            <Pressable style={styles.signupButton}>
-              <Text style={styles.signupText}>Sign Up</Text>
-            </Pressable>
-          </Link>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <View style={styles.bodyContainer}>
+          <Text style={styles.title}>Sign In</Text>
+          <Text style={styles.inputText}>Email</Text>
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            value={emailAddress}
+            placeholder="Enter email"
+            onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
+          />
+          <Text style={styles.inputText}>Password</Text>
+          <TextInput
+            style={styles.textInput}
+            value={password}
+            placeholder="Enter password"
+            secureTextEntry
+            onChangeText={(password) => setPassword(password)}
+          />
+          {error && <Text style={styles.errorMessage}>{error}</Text>}
+          <Pressable style={styles.googleButton} onPress={handleGoogleAuth}>
+            <Text style={styles.signInGoogleText}>Sign in with Google</Text>
+            <FontAwesome name="google" size={20} color="black" />
+          </Pressable>
+          <Button title="Sign in" onPress={onSignInPress} color="cyan" />
+          <View style={styles.signupContainer}>
+            <Text style={styles.bottomText}>Don't have an account?</Text>
+            <Link href="/sign-up" asChild>
+              <Pressable style={styles.signupButton}>
+                <Text style={styles.signupText}>Sign Up</Text>
+              </Pressable>
+            </Link>
+          </View>
+          <StatusBar style="light" />
         </View>
-        <StatusBar style="light" />
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

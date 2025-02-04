@@ -28,6 +28,13 @@ export default function HomePage() {
           <Image source={{ uri: user.imageUrl }} className="h-16 w-16 rounded-full" />
         )}
       </View>
+      {!workout && (
+        <View className="flex-1 items-center p-2">
+          <Text className="text-lg font-semibold text-red-600">
+            No ongoing workout data has ben found!
+          </Text>
+        </View>
+      )}
       {/* Created workout text and steps */}
 
       {/* Calorie track */}
