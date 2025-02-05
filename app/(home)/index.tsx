@@ -6,7 +6,8 @@ import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
 
 import CreateWorkout from '~/components/CreateWorkout';
 
-type Workout = {
+// Define the structure of a workout
+interface Workout {
   name: string;
   sets: number;
   reps: string;
@@ -15,7 +16,7 @@ type Workout = {
   calories_burned: number;
   description: string;
   muscle_groups: string[];
-};
+}
 
 export default function HomePage() {
   const { user } = useUser();
@@ -44,14 +45,14 @@ export default function HomePage() {
         <CreateWorkout />
       </View>
       {/* Created workout text and steps */}
-      <View className="p-4">
+      <View className="flex-1 p-4">
         <Text className="border-b-hairline border-gray-300 pb-2 text-2xl font-bold text-white">
           Workouts
         </Text>
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
           {workouts.length > 0 ? (
             workouts.map((workout, index) => (
-              <View key={index} className="mb-4">
+              <View key={index} className="mb-4 rounded bg-gray-800 p-2">
                 <Text className="font-bold text-white">{workout.name}</Text>
                 <Text className="text-white">Sets: {workout.sets}</Text>
                 <Text className="text-white">Reps: {workout.reps}</Text>
