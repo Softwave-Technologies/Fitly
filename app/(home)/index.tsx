@@ -5,18 +5,7 @@ import { useEffect, useState } from 'react';
 import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
 
 import CreateWorkout from '~/components/CreateWorkout';
-
-// Define the structure of a workout
-interface Workout {
-  name: string;
-  sets: number;
-  reps: string;
-  rest_time: string;
-  duration_seconds: number;
-  calories_burned: number;
-  description: string;
-  muscle_groups: string[];
-}
+import { Workout } from '~/types/types';
 
 export default function HomePage() {
   const { user } = useUser();

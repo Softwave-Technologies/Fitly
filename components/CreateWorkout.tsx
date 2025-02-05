@@ -2,7 +2,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { View, Alert } from 'react-native';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 import { Button } from './Button';
 import SelectionComponentList from './SelectionComponentList';
@@ -13,16 +12,14 @@ export default function CreateWorkout() {
   const [focus, setFocus] = useState('');
   const [level, setLevel] = useState('');
   const [duration, setDuration] = useState('');
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const createWorkout = async () => {
-    if (!focus || !level || !duration || !selectedDate) {
+    if (!focus || !level || !duration) {
       Alert.alert('Please select all options');
       return;
     }
 
     try {
-      console.log('Fetching workout with:', { focus, level, duration, selectedDate });
+      console.log('Fetching workout with:', { focus, level, duration });
       const result = await getWorkout(focus, level, duration);
 
       if (!result) {
@@ -43,17 +40,6 @@ export default function CreateWorkout() {
   return (
     <View>
       <SelectionComponentList setFocus={setFocus} setLevel={setLevel} setDuration={setDuration} />
-      <Button title="Select Date" onPress={() => setDatePickerVisibility(true)} />
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"
-        date={selectedDate}
-        onConfirm={(date) => {
-          setDatePickerVisibility(false);
-          setSelectedDate(date);
-        }}
-        onCancel={() => setDatePickerVisibility(false)}
-      />
       <View className="m-10 gap-5">
         <Button
           title="Create Workout"
