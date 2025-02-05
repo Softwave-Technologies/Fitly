@@ -1,25 +1,11 @@
 import { useUser } from '@clerk/clerk-expo';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native';
+import { View, Text, SafeAreaView, Image } from 'react-native';
 
 import CreateWorkout from '~/components/CreateWorkout';
-import { Workout } from '~/types/types';
 
 export default function HomePage() {
   const { user } = useUser();
-  const [workouts, setWorkouts] = useState<Workout[]>([]);
-
-  useEffect(() => {
-    const fetchWorkouts = async () => {
-      const data = await AsyncStorage.getItem('workout');
-      if (data) {
-        setWorkouts(JSON.parse(data).workout);
-      }
-    };
-    fetchWorkouts();
-  }, []);
 
   return (
     <SafeAreaView className="flex-1 bg-gray-900">
@@ -34,31 +20,6 @@ export default function HomePage() {
         <CreateWorkout />
       </View>
       {/* Created workout text and steps */}
-      <View className="flex-1 p-4">
-        <Text className="border-b-hairline border-gray-300 pb-2 text-2xl font-bold text-white">
-          Workouts
-        </Text>
-        <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
-          {workouts.length > 0 ? (
-            workouts.map((workout, index) => (
-              <View key={index} className="mb-4 rounded bg-gray-800 p-2">
-                <Text className="font-bold text-white">{workout.name}</Text>
-                <Text className="text-white">Sets: {workout.sets}</Text>
-                <Text className="text-white">Reps: {workout.reps}</Text>
-                <Text className="text-white">Rest Time: {workout.rest_time}</Text>
-                <Text className="text-white">Duration: {workout.duration_seconds} seconds</Text>
-                <Text className="text-white">Calories Burned: {workout.calories_burned}</Text>
-                <Text className="text-white">Description: {workout.description}</Text>
-                <Text className="text-white">
-                  Muscle Groups: {workout.muscle_groups.join(', ')}
-                </Text>
-              </View>
-            ))
-          ) : (
-            <Text className="text-white">No workouts found.</Text>
-          )}
-        </ScrollView>
-      </View>
       {/* Calorie track */}
       <StatusBar style="light" />
     </SafeAreaView>
