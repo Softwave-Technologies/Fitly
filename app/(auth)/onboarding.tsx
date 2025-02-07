@@ -23,6 +23,7 @@ export default function OnboardingPage() {
             style={{
               height: Dimensions.get('window').height / 2,
               width: Dimensions.get('window').width - 50,
+              borderRadius: 30,
             }}
           />
           <Text className="text-center text-2xl font-bold text-white">
@@ -39,6 +40,7 @@ export default function OnboardingPage() {
             style={{
               height: Dimensions.get('window').height / 2,
               width: Dimensions.get('window').width - 50,
+              borderRadius: 30,
             }}
           />
           <Text className="text-center text-2xl font-bold text-white">
@@ -55,6 +57,7 @@ export default function OnboardingPage() {
             style={{
               height: Dimensions.get('window').height / 2,
               width: Dimensions.get('window').width - 50,
+              borderRadius: 30,
             }}
           />
           <Text className="text-center text-2xl font-bold text-white">Celebrate Your Success</Text>
