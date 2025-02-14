@@ -5,7 +5,6 @@ import { StatusBar } from 'expo-status-bar';
 import { View, Text, SafeAreaView, Image, Pressable } from 'react-native';
 
 import CreateWorkout from '~/components/CreateWorkout';
-import StepCounter from '~/components/StepCounter';
 
 export default function HomePage() {
   const { user } = useUser();
@@ -30,9 +29,6 @@ export default function HomePage() {
         </Pressable>
       </View>
       {/* Steps */}
-      <View>
-        <StepCounter />
-      </View>
       {/* Create workout */}
       <View>
         <CreateWorkout />

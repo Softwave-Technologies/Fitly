@@ -1,11 +1,17 @@
-export default async function getWorkout(focus: string, level: string, duration: string) {
+import { WorkoutResponse } from '../types/types';
+
+export default async function getWorkout(
+  focus: string,
+  level: string,
+  duration: string
+): Promise<WorkoutResponse | null> {
   const prompt = `
-    Generate a structured JSON workout plan with exercises based on:
+    Generate 3 structured JSON workout plans with different exercises based on:
     - Focus: ${focus}
     - Level: ${level}
     - Duration: ${duration}
   
-    Each exercise should include:
+    Each workout should include:
     - Name
     - Sets
     - Reps
@@ -13,20 +19,25 @@ export default async function getWorkout(focus: string, level: string, duration:
     - Duration (seconds)
     - Estimated Calories Burned
     - Description
-    - Muscle Groups Targeted (e.g., "Chest", "Biceps", "Quads")
+    - Muscle Groups Targeted
 
     Return JSON in this format:
     {
-      "workout": [
+      "workouts": [
         {
-          "name": "Exercise Name",
-          "sets": 4,
-          "reps": "12-15",
-          "rest_time": "30 sec",
-          "duration_seconds": 45,
-          "calories_burned": 12.5,
-          "description": "Brief exercise description",
-          "muscle_groups": ["Chest", "Triceps"]
+          "name": "Workout Plan 1",
+          "exercises": [
+            {
+              "name": "Exercise Name",
+              "sets": 4,
+              "reps": "12-15",
+              "rest_time": "30 sec",
+              "duration_seconds": 45,
+              "calories_burned": 12.5,
+              "description": "Brief exercise description",
+              "muscle_groups": ["Chest", "Triceps"]
+            }
+          ]
         }
       ]
     }
@@ -48,10 +59,16 @@ export default async function getWorkout(focus: string, level: string, duration:
         temperature: 0.7,
       }),
     });
+
     const data = await response.json();
-    return JSON.parse(data.choices[0].message.content);
+    if (!data.choices || !data.choices[0]?.message?.content) {
+      console.error('Error: Invalid response format', data);
+      return null;
+    }
+
+    return JSON.parse(data.choices[0].message.content) as WorkoutResponse;
   } catch (error) {
-    console.error('Error while generating workout! ', error);
+    console.error('Error while generating workout:', error);
     return null;
   }
 }
