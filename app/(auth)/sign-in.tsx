@@ -47,14 +47,12 @@ export default function Page() {
 
   const handleGoogleAuth = React.useCallback(async () => {
     try {
-      const { createdSessionId, setActive } = await googleAuth();
-
-      if (!setActive) {
-        throw new Error('setActive is not defined');
-      }
+      const { createdSessionId } = await googleAuth();
 
       if (createdSessionId) {
-        await setActive({ session: createdSessionId });
+        if (setActive) {
+          await setActive({ session: createdSessionId });
+        }
         router.push('/(home)');
       } else {
         throw new Error('Google sign-in failed to create a session.');
