@@ -1,7 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { View, Text, useWindowDimensions } from 'react-native';
+import { View, Text, useWindowDimensions, ActivityIndicator } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
+
+import { Button } from './Button';
 
 export default function WaterIntake() {
   const { width, height } = useWindowDimensions();
@@ -42,25 +44,30 @@ export default function WaterIntake() {
     ],
   };
 
+  if (loading) {
+    return <ActivityIndicator size="large" />;
+  }
+
   return (
     <View>
       <Text>Water Intake</Text>
       <BarChart
         data={data}
         width={width - 40}
-        height={220}
+        height={height / 4}
         yAxisLabel=""
         yAxisSuffix="ml"
         chartConfig={{
-          backgroundGradientFrom: '#fff',
-          backgroundGradientTo: '#fff',
+          backgroundGradientFrom: '#1a202c',
+          backgroundGradientTo: '#1a202c',
           decimalPlaces: 0,
-          color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+          color: (opacity = 1) => `rgba(56, 189, 248, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           barPercentage: 0.6,
         }}
         style={{ borderRadius: 8, alignSelf: 'center' }}
       />
+      <Button title="Add Water(200ml)" className="m-6 bg-green-600/50" onPress={addWaterIntake} />
     </View>
   );
 }
