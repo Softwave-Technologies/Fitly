@@ -14,8 +14,6 @@ export default function HomePage() {
     return <Redirect href="/(auth)/sign-in" />;
   }
 
-  const handleWorkoutCreate = () => {};
-
   return (
     <SafeAreaView className="flex-1 bg-gray-900">
       <View className="border-b-hairline flex-row items-center gap-5 border-gray-300 p-4">
@@ -32,7 +30,7 @@ export default function HomePage() {
       </View>
       {/* Nutrition and water track */}
       <View>
-        <Text className="p-4 text-xl font-bold text-green-500">Daily Water Intake</Text>
+        <Text className="p-4 pl-6 text-xl font-bold text-green-500">Daily Water Intake</Text>
         <WaterIntake />
       </View>
       {/* Create workout */}
