@@ -2,8 +2,9 @@ import { useClerk, useUser } from '@clerk/clerk-expo';
 import { FontAwesome } from '@expo/vector-icons';
 import { Redirect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, SafeAreaView, Image, Pressable } from 'react-native';
+import { View, Text, SafeAreaView, Image, Pressable, ScrollView } from 'react-native';
 
+import NutritionTrack from '~/components/NutritionTrack';
 import WaterIntake from '~/components/WaterIntake';
 
 export default function HomePage() {
@@ -29,10 +30,16 @@ export default function HomePage() {
         </Pressable>
       </View>
       {/* Nutrition and water track */}
-      <View>
-        <Text className="p-4 pl-6 text-xl font-bold text-green-500">Daily Water Intake</Text>
-        <WaterIntake />
-      </View>
+      <ScrollView showsVerticalScrollIndicator={false} className="pb-4">
+        <View>
+          <Text className="p-4 pl-6 text-xl font-bold text-green-500">Daily Water Intake</Text>
+          <WaterIntake />
+        </View>
+        <View>
+          <Text className="p-4 pl-6 text-xl font-bold text-green-500">Nutrition Calorie Track</Text>
+          <NutritionTrack />
+        </View>
+      </ScrollView>
       {/* Create workout */}
       {/* Created workout text and steps */}
       <StatusBar style="light" />
