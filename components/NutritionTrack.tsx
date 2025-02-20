@@ -1,7 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, TextInput, Pressable, Alert } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
+
+import { Button } from './Button';
 
 type Meal = {
   id: number;
@@ -77,14 +79,41 @@ export default function NutritionTrack() {
     }
   };
 
+  const onSetGoal = async () => {
+    Alert.prompt('Set Daily Goal', 'Enter your daily calorie goal', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Set',
+        onPress: async (goal) => {
+          if (goal) {
+            setGoal(parseInt(goal));
+            await AsyncStorage.setItem('calorieGoal', JSON.stringify(goal));
+          }
+        },
+      },
+    ]);
+  };
+
   return (
-    <View className="flex-1 p-4">
+    <View className="flex-1 p-2">
       <View className="flex-row items-center">
         <Text className="px-4 text-xl text-white">
-          Daily Calorie Goal: {totalCalories} / {goal} kcal
+          Daily Kcal Goal: {totalCalories} / {goal} kcal
         </Text>
+        <View className="flex-row gap-4">
+          <Pressable onPress={onSetGoal}>
+            <Text className="rounded bg-green-600/40 p-2 text-white">Change</Text>
+          </Pressable>
+        </View>
       </View>
       <ProgressBar progress={totalCalories / goal} color="green" className="my-2 h-10 p-4" />
+      <View>
+        <TextInput />
+        <TextInput />
+      </View>
       <FlatList
         scrollEnabled={false}
         data={meals}
