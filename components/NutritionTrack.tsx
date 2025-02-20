@@ -41,7 +41,7 @@ export default function NutritionTrack() {
     }
   };
 
-  const SaveMeal = async () => {
+  const saveMeal = async () => {
     if (!mealName || !mealCalories) return;
     const newMeal: Meal = {
       id: Date.now(),
@@ -52,6 +52,16 @@ export default function NutritionTrack() {
     const updatedMeals = [...meals, newMeal];
     setMeals(updatedMeals);
     setTotalCalories((prevCalories) => prevCalories + newMeal.calories);
+    await AsyncStorage.setItem('meals', JSON.stringify(updatedMeals));
+  };
+
+  const deleteMeal = async (id: number) => {
+    const updatedMeals = meals.filter((meal) => meal.id !== id);
+    const deletedMeal = meals.find((meal) => meal.id === id);
+    if (deletedMeal) {
+      setTotalCalories((prevCalories) => prevCalories - deletedMeal.calories);
+    }
+    setMeals(updatedMeals);
     await AsyncStorage.setItem('meals', JSON.stringify(updatedMeals));
   };
 
