@@ -10,14 +10,25 @@ export default function WaterIntake() {
   const [waterData, setWaterData] = useState<number[]>([0, 0, 0, 0, 0, 0]);
   const [loading, setLoading] = useState(true);
 
+  const timeLabels = ['6AM', '9AM', '12PM', '3PM', '6PM', '9PM'];
+  const timeRanges = [6, 9, 12, 15, 18, 21];
+
   useEffect(() => {
-    loadWaterData();
+    checkAndResetData();
   }, []);
 
-  const loadWaterData = async () => {
+  const checkAndResetData = async () => {
     try {
       const storedData = await AsyncStorage.getItem('waterIntakeData');
-      if (storedData) {
+      const storedDate = await AsyncStorage.getItem('lastUpdateDate');
+
+      const today = new Date().toISOString().split('T')[0];
+
+      if (storedDate !== today) {
+        await AsyncStorage.setItem('waterIntakeData', JSON.stringify([0, 0, 0, 0, 0, 0]));
+        await AsyncStorage.setItem('lastUpdateDate', today);
+        setWaterData([0, 0, 0, 0, 0, 0]);
+      } else if (storedData) {
         setWaterData(JSON.parse(storedData));
       }
     } catch (error) {
@@ -27,10 +38,33 @@ export default function WaterIntake() {
     }
   };
 
+  const getCurrentTimeSlot = () => {
+    const currentHour = new Date().getHours();
+    let closestIndex = 0;
+
+    for (let i = 0; i < timeRanges.length; i++) {
+      if (currentHour >= timeRanges[i]) {
+        closestIndex = i;
+      } else {
+        break;
+      }
+    }
+
+    return closestIndex;
+  };
+
+  const addWaterIntake = async () => {
+    const index = getCurrentTimeSlot();
+    const newData = [...waterData];
+    newData[index] += 200;
+    setWaterData(newData);
+    await AsyncStorage.setItem('waterIntakeData', JSON.stringify(newData));
+  };
+
   const updateWaterIntake = async (index: number) => {
     Alert.prompt(
       'Edit Water Intake',
-      `Enter new amount for ${data.labels[index]}`,
+      `Enter new amount for ${timeLabels[index]}`,
       [
         { text: 'Cancel', style: 'cancel' },
         {
@@ -53,19 +87,12 @@ export default function WaterIntake() {
     );
   };
 
-  const addWaterIntake = async () => {
-    const newData = [...waterData];
-    newData[newData.length - 1] += 200;
-    setWaterData(newData);
-    await AsyncStorage.setItem('waterIntakeData', JSON.stringify(newData));
-  };
-
   if (loading) {
     return <ActivityIndicator size="large" />;
   }
 
   const data = {
-    labels: ['6AM', '9AM', '12PM', '3PM', '6PM', '9PM'],
+    labels: timeLabels,
     datasets: [{ data: waterData }],
   };
 
@@ -89,7 +116,7 @@ export default function WaterIntake() {
           style={{ borderRadius: 8, alignSelf: 'center' }}
         />
 
-        {/* Transparent Grid for Touch Detection */}
+        {/* Touch-sensitive areas for editing */}
         <View
           style={{
             position: 'absolute',
