@@ -36,7 +36,7 @@ export default function HomePage() {
           <WaterIntake />
         </View>
         <View>
-          <Text className="p-4 pl-6 text-xl font-bold text-green-500">Nutrition Calorie Track</Text>
+          <Text className="p-4 pl-6 text-xl font-bold text-green-500">Nutrition Track</Text>
           <NutritionTrack />
         </View>
       </ScrollView>

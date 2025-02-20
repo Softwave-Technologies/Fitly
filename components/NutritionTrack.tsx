@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
+import { ProgressBar } from 'react-native-paper';
 
 type Meal = {
   id: number;
@@ -76,5 +77,25 @@ export default function NutritionTrack() {
     }
   };
 
-  return <View />;
+  return (
+    <View className="flex-1 p-4">
+      <View className="flex-row items-center">
+        <Text className="px-4 text-xl text-white">
+          Daily Calorie Goal: {totalCalories} / {goal} kcal
+        </Text>
+      </View>
+      <ProgressBar progress={totalCalories / goal} color="green" className="my-2 h-10 p-4" />
+      <FlatList
+        scrollEnabled={false}
+        data={meals}
+        renderItem={({ item }) => (
+          <View className="flex-row justify-between p-2">
+            <Text className="text-lg text-white">{item.name}</Text>
+            <Text className="text-lg text-white">{item.calories}</Text>
+            <Text className="text-lg-text-white">{item.category}</Text>
+          </View>
+        )}
+      />
+    </View>
+  );
 }

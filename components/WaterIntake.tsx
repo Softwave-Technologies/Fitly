@@ -109,7 +109,7 @@ export default function WaterIntake() {
             backgroundGradientFrom: '#1a202c',
             backgroundGradientTo: '#1a202c',
             decimalPlaces: 0,
-            color: (opacity = 1) => `rgba(56, 189, 248, ${opacity})`,
+            color: (opacity = 1) => `rgba(103, 232, 249, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             barPercentage: 0.6,
           }}
@@ -141,7 +141,7 @@ export default function WaterIntake() {
       </View>
 
       {/* Add Water Intake Button */}
-      <Button title="Add Water (200ml)" className="m-6 bg-green-600/50" onPress={addWaterIntake} />
+      <Button title="Add Water (200ml)" className="m-6 bg-green-600/40" onPress={addWaterIntake} />
     </View>
   );
 }
