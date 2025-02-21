@@ -1,9 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Picker } from '@react-native-picker/picker';
 import { useEffect, useState } from 'react';
 import { View, Text, FlatList, TextInput, Pressable, Alert } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
-
-import { Button } from './Button';
 
 type Meal = {
   id: number;
@@ -25,6 +24,10 @@ export default function NutritionTrack() {
     loadNutritionData();
     checkForDailyReset();
   }, []);
+
+  useEffect(() => {
+    setTotalCalories(meals.reduce((sum, meal) => sum + meal.calories, 0));
+  }, [meals]);
 
   const loadNutritionData = async () => {
     setLoading(true);
@@ -89,7 +92,7 @@ export default function NutritionTrack() {
         text: 'Set',
         onPress: async (goal) => {
           if (goal) {
-            setGoal(parseInt(goal));
+            setGoal(parseInt(goal, 10));
             await AsyncStorage.setItem('calorieGoal', JSON.stringify(goal));
           }
         },
@@ -110,9 +113,31 @@ export default function NutritionTrack() {
         </View>
       </View>
       <ProgressBar progress={totalCalories / goal} color="green" className="my-2 h-10 p-4" />
-      <View>
-        <TextInput />
-        <TextInput />
+      <View className="border-hairline m-2 gap-2 rounded-lg border-gray-600 p-2">
+        <View className="border-b-hairline flex-row items-center justify-between border-gray-200">
+          <Text className="text-lg font-semibold text-white">Meal Name: </Text>
+          <TextInput value={mealName} onChangeText={setMealName} className="p-2" />
+        </View>
+        <View className="border-b-hairline flex-row items-center justify-between border-gray-200">
+          <Text className="text-lg font-semibold text-white">Calories: </Text>
+          <TextInput
+            value={mealCalories.toString()}
+            onChangeText={(text) => setMealCalories(parseInt(text, 10))}
+            className="p-2 text-white"
+          />
+        </View>
+        <View className="flex-row items-center justify-between">
+          <Text className="text-lg font-semibold text-white">Category: </Text>
+          {/* Category selector */}
+          <Picker
+            selectedValue={mealCategory}
+            onValueChange={(value) => setMealCategory(value)}
+            style={{ color: 'white' }}>
+            {['Breakfast', 'Lunch', 'Dinner', 'Snack'].map((category) => (
+              <Picker.Item key={category} label={category} value={category} />
+            ))}
+          </Picker>
+        </View>
       </View>
       <FlatList
         scrollEnabled={false}
