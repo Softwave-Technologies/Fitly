@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { View, Alert, ActivityIndicator, useWindowDimensions, Pressable } from 'react-native';
+import { View, Alert, ActivityIndicator, useWindowDimensions, Pressable, Text } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
 
 import { Button } from './Button';
@@ -87,6 +87,17 @@ export default function WaterIntake() {
     );
   };
 
+  const DAILY_GOAL = 2000;
+
+  const calculateWaterIntake = () => {
+    const totalIntake = waterData.reduce((acc, val) => acc + val, 0);
+    const progress = Math.min((totalIntake / DAILY_GOAL) * 100, 100);
+
+    return { totalIntake, progress };
+  };
+
+  const { totalIntake, progress } = calculateWaterIntake();
+
   if (loading) {
     return <ActivityIndicator size="large" />;
   }
@@ -139,9 +150,18 @@ export default function WaterIntake() {
           ))}
         </View>
       </View>
+      {/* Daily water intake goal display */}
+      <View className="mt-4 items-center">
+        <Text className="font-semibold text-white">
+          Total Water Intake: {totalIntake}ml / {DAILY_GOAL}ml
+        </Text>
+        <View className="mt-2 h-4 w-11/12 justify-center rounded-lg bg-gray-700">
+          <View style={{ width: `${progress}%` }} className="h-full rounded-lg bg-green-500" />
+        </View>
+      </View>
 
       {/* Add Water Intake Button */}
-      <Button title="Add Water (200ml)" className="m-6 bg-green-600/40" onPress={addWaterIntake} />
+      <Button title="Add Water (200ml)" className="m-6 bg-green-700" onPress={addWaterIntake} />
     </View>
   );
 }
