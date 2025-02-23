@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import { View, Alert, ActivityIndicator, useWindowDimensions, Pressable, Text } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
+import { ProgressBar } from 'react-native-paper';
 
 import { Button } from './Button';
 
@@ -96,7 +97,7 @@ export default function WaterIntake() {
     return { totalIntake, progress };
   };
 
-  const { totalIntake, progress } = calculateWaterIntake();
+  const { totalIntake } = calculateWaterIntake();
 
   if (loading) {
     return <ActivityIndicator size="large" />;
@@ -155,9 +156,7 @@ export default function WaterIntake() {
         <Text className="font-semibold text-white">
           Total Water Intake: {totalIntake}ml / {DAILY_GOAL}ml
         </Text>
-        <View className="mt-2 h-4 w-11/12 justify-center rounded-lg bg-gray-700">
-          <View style={{ width: `${progress}%` }} className="h-full rounded-lg bg-green-500" />
-        </View>
+        <ProgressBar progress={totalIntake / DAILY_GOAL} color="green" className="w-11/12 py-4" />
       </View>
 
       {/* Add Water Intake Button */}

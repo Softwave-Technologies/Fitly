@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import { useEffect, useState } from 'react';
-import { View, Text, FlatList, TextInput, Pressable, Alert } from 'react-native';
+import { View, Text, FlatList, TextInput, Pressable, Alert, ActivityIndicator } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
 
 type Meal = {
@@ -99,6 +99,8 @@ export default function NutritionTrack() {
       },
     ]);
   };
+
+  if (loading) return <ActivityIndicator size="large" />;
 
   return (
     <View className="flex-1 p-2">
