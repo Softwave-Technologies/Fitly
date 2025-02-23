@@ -61,45 +61,47 @@ export default function Profile() {
         </View>
         <View className="p-4">
           {user?.imageUrl && <Image source={{ uri: user?.imageUrl }} style={styles.image} />}
-          <View style={styles.infoContainer}>
-            <Text style={styles.infoTitle}>Email Address:</Text>
-            <Text style={styles.infoText}>{user?.primaryEmailAddress?.emailAddress}</Text>
-          </View>
+          <View className="border-hairline border-gray-300 p-2">
+            <View style={styles.infoContainer}>
+              <Text style={styles.infoTitle}>Email Address:</Text>
+              <Text style={styles.infoText}>{user?.primaryEmailAddress?.emailAddress}</Text>
+            </View>
 
-          <View style={styles.infoContainer}>
-            <Text style={styles.infoTitle}>Current Password:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter Current Password..."
-              value={currentPassword}
-              secureTextEntry
-              onChangeText={setCurrentPassword}
-              placeholderTextColor="white"
-            />
-          </View>
+            <View style={styles.infoContainer}>
+              <Text style={styles.infoTitle}>Current Password:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter Current Password..."
+                value={currentPassword}
+                secureTextEntry
+                onChangeText={setCurrentPassword}
+                placeholderTextColor="white"
+              />
+            </View>
 
-          <View style={styles.infoContainer}>
-            <Text style={styles.infoTitle}>New Password:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter New Password..."
-              value={password}
-              secureTextEntry
-              onChangeText={setPassword}
-              placeholderTextColor="white"
-            />
-          </View>
+            <View style={styles.infoContainer}>
+              <Text style={styles.infoTitle}>New Password:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter New Password..."
+                value={password}
+                secureTextEntry
+                onChangeText={setPassword}
+                placeholderTextColor="white"
+              />
+            </View>
 
-          <View style={styles.infoContainer}>
-            <Text style={styles.infoTitle}>Confirm Password:</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Confirm New Password..."
-              value={confirmPassword}
-              secureTextEntry
-              onChangeText={setConfirmPassword}
-              placeholderTextColor="white"
-            />
+            <View style={styles.infoContainer}>
+              <Text style={styles.infoTitle}>Confirm Password:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Confirm New Password..."
+                value={confirmPassword}
+                secureTextEntry
+                onChangeText={setConfirmPassword}
+                placeholderTextColor="white"
+              />
+            </View>
           </View>
 
           <View style={styles.buttonContainer}>
@@ -138,8 +140,6 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     alignItems: 'center',
-    borderColor: 'gainsboro',
-    borderWidth: 1,
     flexDirection: 'row',
     padding: 10,
     marginVertical: 8,
@@ -154,6 +154,9 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     flex: 1,
+    borderBottomWidth: 1,
+    borderColor: 'white',
+    padding: 5,
   },
   input: {
     flex: 1,
