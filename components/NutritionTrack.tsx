@@ -1,4 +1,6 @@
+import { FontAwesome } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Picker } from '@react-native-picker/picker';
 import { useEffect, useState } from 'react';
 import { View, Text, FlatList, Pressable, Alert, ActivityIndicator, TextInput } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
@@ -18,7 +20,7 @@ export default function NutritionTrack() {
   const [loading, setLoading] = useState(false);
   const [mealName, setMealName] = useState<string>('');
   const [mealCalories, setMealCalories] = useState<number>(0);
-  const [mealCategory, setMealCategory] = useState<string>('Breakfast');
+  const [mealCategory, setMealCategory] = useState<string>('');
   const [totalCalories, setTotalCalories] = useState<number>(0);
 
   useEffect(() => {
@@ -105,7 +107,7 @@ export default function NutritionTrack() {
 
   return (
     <View className="flex-1 p-2">
-      <View className="flex-row items-center">
+      <View className="flex-row justify-center">
         <Text className="px-4 text-xl text-white">
           Daily Kcal Goal: {totalCalories} / {goal} kcal
         </Text>
@@ -115,7 +117,11 @@ export default function NutritionTrack() {
           </Pressable>
         </View>
       </View>
-      <ProgressBar progress={totalCalories / goal} color="green" className="my-2 h-10 p-4" />
+      <ProgressBar
+        progress={Math.min(totalCalories / goal, 1)}
+        color="green"
+        className="w-11/12 self-center px-2 py-4"
+      />
       {/* Meal log */}
       <View className="m-2 gap-4 bg-gray-600 p-6">
         <View className="flex-row gap-3">
@@ -131,13 +137,32 @@ export default function NutritionTrack() {
           <Text className="font-semibold text-white">Meal Calories: </Text>
           <TextInput
             className="text-white"
-            value={mealCalories.toString()}
-            onChangeText={() => setMealCalories.toString()}
+            value={mealCalories ? mealCalories.toString() : ''}
+            onChangeText={(text) => {
+              const parsed = parseInt(text, 10);
+              setMealCalories(isNaN(parsed) ? 0 : parsed);
+            }}
+            keyboardType="numeric"
           />
         </View>
-        <View className="flex-row gap-3">
+        <View className="flex-row items-center rounded p-2">
           <Text className="font-semibold text-white">Meal Category: </Text>
-          <TextInput className="text-white" value={mealCategory} onChangeText={setMealCategory} />
+          <View className="flex-1 rounded border border-white">
+            <Picker
+              selectedValue={mealCategory}
+              onValueChange={(itemValue) => setMealCategory(itemValue)}
+              style={{
+                color: 'white',
+                backgroundColor: 'transparent',
+                height: 40,
+              }}
+              dropdownIconColor="white">
+              <Picker.Item label="Breakfast" value="Breakfast" />
+              <Picker.Item label="Lunch" value="Lunch" />
+              <Picker.Item label="Dinner" value="Dinner" />
+              <Picker.Item label="Snack" value="Snack" />
+            </Picker>
+          </View>
         </View>
       </View>
       <Button onPress={saveMeal} title="Add Meal" className="m-6 bg-green-700" />
@@ -151,6 +176,7 @@ export default function NutritionTrack() {
             <Text className="text-lg text-white">{item.name}</Text>
             <Text className="text-lg text-white">{item.calories}</Text>
             <Text className="text-lg-text-white">{item.category}</Text>
+            <FontAwesome name="close" size={20} color="red" onPress={() => deleteMeal(item.id)} />
           </View>
         )}
       />
