@@ -160,7 +160,12 @@ export default function WaterIntake() {
       </View>
 
       {/* Add Water Intake Button */}
-      <Button title="Add Water (200ml)" className="m-6 bg-green-700" onPress={addWaterIntake} />
+      <Button
+        title="Add Water (200ml)"
+        className="m-6"
+        style={{ backgroundColor: 'green' }}
+        onPress={addWaterIntake}
+      />
     </View>
   );
 }

@@ -108,15 +108,13 @@ export default function NutritionTrack() {
 
   return (
     <View className="flex-1 p-2">
-      <View className="flex-row justify-center">
+      <View className="flex-row items-center justify-center">
         <Text className="px-4 text-xl text-white">
           Daily Kcal Goal: {totalCalories} / {goal} kcal
         </Text>
-        <View className="flex-row gap-4">
-          <Pressable onPress={onSetGoal}>
-            <Text className="rounded bg-green-600/40 p-2 text-white">Change</Text>
-          </Pressable>
-        </View>
+        <Pressable onPress={onSetGoal}>
+          <Text className="rounded bg-green-600/40 p-2 text-white">Change</Text>
+        </Pressable>
       </View>
       <ProgressBar
         progress={Math.min(totalCalories / goal, 1)}
@@ -125,19 +123,26 @@ export default function NutritionTrack() {
       />
       {/* Meal log */}
       <View className="m-2 gap-4 bg-gray-600 p-6">
-        <View className="flex-row gap-3">
-          <Text className="font-semibold text-white">Meal Name: </Text>
+        <View className=" flex-row gap-3  ">
+          <View className="w-32">
+            <Text className="font-semibold text-white">Meal Name: </Text>
+          </View>
           <TextInput
+            placeholderTextColor="white"
             value={mealName}
             onChangeText={setMealName}
-            placeholder="e.g. Apple"
-            className="text-white"
+            placeholder="e.g. Apple..."
+            className="border-b-hairline flex-1 border-gray-300 text-white"
           />
         </View>
         <View className="flex-row gap-3">
-          <Text className="font-semibold text-white">Meal Calories: </Text>
+          <View className="w-32">
+            <Text className="font-semibold text-white">Meal Calories: </Text>
+          </View>
           <TextInput
-            className="text-white"
+            placeholder="Enter calories..."
+            placeholderTextColor="white"
+            className="border-b-hairline flex-1 border-gray-300 text-white"
             value={mealCalories ? mealCalories.toString() : ''}
             onChangeText={(text) => {
               const parsed = parseInt(text, 10);
@@ -146,8 +151,10 @@ export default function NutritionTrack() {
             keyboardType="numeric"
           />
         </View>
-        <View className="flex-row items-center gap-3">
-          <Text className="font-semibold text-white">Meal Category: </Text>
+        <View className="flex-row items-center gap-3 ">
+          <View className="w-32">
+            <Text className="font-semibold text-white">Meal Category: </Text>
+          </View>
           {categories.map((category) => (
             <Pressable
               className={`border-hairline rounded-lg ${mealCategory === category ? 'border-green-500' : 'border-white'} p-1`}
@@ -161,7 +168,12 @@ export default function NutritionTrack() {
           ))}
         </View>
       </View>
-      <Button onPress={saveMeal} title="Add Meal" className="m-6 bg-green-700" />
+      <Button
+        onPress={saveMeal}
+        title="Add Meal"
+        className="m-6 "
+        style={{ backgroundColor: 'green' }}
+      />
 
       {/* Meal display */}
       <FlatList
