@@ -1,6 +1,5 @@
 import { FontAwesome } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Picker } from '@react-native-picker/picker';
 import { useEffect, useState } from 'react';
 import { View, Text, FlatList, Pressable, Alert, ActivityIndicator, TextInput } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
@@ -22,6 +21,8 @@ export default function NutritionTrack() {
   const [mealCalories, setMealCalories] = useState<number>(0);
   const [mealCategory, setMealCategory] = useState<string>('');
   const [totalCalories, setTotalCalories] = useState<number>(0);
+
+  const categories = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
 
   useEffect(() => {
     loadNutritionData();
@@ -145,24 +146,19 @@ export default function NutritionTrack() {
             keyboardType="numeric"
           />
         </View>
-        <View className="flex-row items-center rounded p-2">
+        <View className="flex-row items-center gap-3">
           <Text className="font-semibold text-white">Meal Category: </Text>
-          <View className="flex-1 rounded border border-white">
-            <Picker
-              selectedValue={mealCategory}
-              onValueChange={(itemValue) => setMealCategory(itemValue)}
-              style={{
-                color: 'white',
-                backgroundColor: 'transparent',
-                height: 40,
-              }}
-              dropdownIconColor="white">
-              <Picker.Item label="Breakfast" value="Breakfast" />
-              <Picker.Item label="Lunch" value="Lunch" />
-              <Picker.Item label="Dinner" value="Dinner" />
-              <Picker.Item label="Snack" value="Snack" />
-            </Picker>
-          </View>
+          {categories.map((category) => (
+            <Pressable
+              className={`border-hairline rounded-lg ${mealCategory === category ? 'border-green-500' : 'border-white'} p-1`}
+              key={category}
+              onPress={() => setMealCategory(category)}>
+              <Text
+                className={`font-semibold ${mealCategory === category ? 'text-green-500' : 'text-white'}`}>
+                {category}
+              </Text>
+            </Pressable>
+          ))}
         </View>
       </View>
       <Button onPress={saveMeal} title="Add Meal" className="m-6 bg-green-700" />
