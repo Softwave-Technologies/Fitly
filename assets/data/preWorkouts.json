@@ -1,0 +1,298 @@
+[
+  {
+    "id": "1",
+    "name": "Full Body Strength",
+    "category": "Strength Training",
+    "description": "A well-rounded strength training routine that targets all major muscle groups.",
+    "exercises": [
+      {
+        "name": "Push-ups",
+        "description": "A bodyweight exercise that strengthens the chest, shoulders, and triceps.",
+        "sets": "3 sets of 15 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Pushup.jpg"
+      },
+      {
+        "name": "Barbell Squat",
+        "description": "A compound lower body exercise that engages the quadriceps, hamstrings, and glutes.",
+        "sets": "4 sets of 10 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/9/9a/SquatBarbell.jpg"
+      },
+      {
+        "name": "Deadlifts",
+        "description": "An exercise that targets the posterior chain, including hamstrings, glutes, and lower back.",
+        "sets": "3 sets of 8 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Deadlift.gif"
+      },
+      {
+        "name": "Pull-ups",
+        "description": "A bodyweight exercise that builds back and biceps strength.",
+        "sets": "3 sets of 8 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Pull_up.gif"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Upper Body Hypertrophy",
+    "category": "Muscle Growth",
+    "description": "A workout designed for upper body muscle growth and endurance.",
+    "exercises": [
+      {
+        "name": "Dumbbell Shoulder Press",
+        "description": "An overhead press that targets the deltoid muscles.",
+        "sets": "3 sets of 12 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/7/70/Shoulder_Press.gif"
+      },
+      {
+        "name": "Incline Bench Press",
+        "description": "A variation of the bench press focusing on the upper chest.",
+        "sets": "4 sets of 10 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/9/90/Bench-press.jpg"
+      },
+      {
+        "name": "Bicep Curls",
+        "description": "An isolated exercise for strengthening the biceps.",
+        "sets": "3 sets of 15 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Biceps_curl.jpg"
+      },
+      {
+        "name": "Tricep Dips",
+        "description": "A bodyweight movement that strengthens the triceps.",
+        "sets": "3 sets of 10 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Bench-Dip-2.jpg"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Lower Body Power",
+    "category": "Strength & Conditioning",
+    "description": "A workout designed to build lower body strength and power.",
+    "exercises": [
+      {
+        "name": "Bulgarian Split Squat",
+        "description": "A single-leg squat variation that increases balance and lower body strength.",
+        "sets": "3 sets of 12 reps per leg",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/83/Bulgarian_Split_Squat.gif"
+      },
+      {
+        "name": "Romanian Deadlifts",
+        "description": "A deadlift variation targeting hamstrings and glutes.",
+        "sets": "3 sets of 10 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/84/Romanian_Deadlift.gif"
+      },
+      {
+        "name": "Calf Raises",
+        "description": "A simple exercise for strengthening the calf muscles.",
+        "sets": "3 sets of 20 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/7/79/Calf-Raise.gif"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Fat Burning HIIT",
+    "category": "High Intensity",
+    "description": "A high-intensity interval training (HIIT) session for fat loss and endurance.",
+    "exercises": [
+      {
+        "name": "Jump Squats",
+        "description": "An explosive movement that enhances lower body power and endurance.",
+        "sets": "4 sets of 12 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/9/92/Squat_Jump.gif"
+      },
+      {
+        "name": "Mountain Climbers",
+        "description": "A full-body workout that improves endurance and core strength.",
+        "sets": "4 sets of 30 seconds",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/5/56/Mountain_Climbers.gif"
+      },
+      {
+        "name": "Burpees",
+        "description": "A combination of strength and cardio that burns fat fast.",
+        "sets": "3 sets of 15 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Burpee.gif"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Mobility & Recovery",
+    "category": "Flexibility & Recovery",
+    "description": "A routine focused on flexibility, mobility, and active recovery.",
+    "exercises": [
+      {
+        "name": "Cat-Cow Stretch",
+        "description": "A yoga movement that improves spinal mobility.",
+        "sets": "3 sets of 30 seconds",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/1/10/Cat_Cow_Yoga.gif"
+      },
+      {
+        "name": "Downward Dog",
+        "description": "A yoga pose that stretches the hamstrings, calves, and shoulders.",
+        "sets": "3 sets of 30 seconds",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Downward_Dog.gif"
+      },
+      {
+        "name": "Hip Flexor Stretch",
+        "description": "A stretch that improves hip mobility and reduces stiffness.",
+        "sets": "3 sets of 30 seconds per side",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Hip_Flexor_Stretch.gif"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Core Strength Builder",
+    "category": "Core Training",
+    "description": "A workout focused on strengthening the core muscles for stability and performance.",
+    "exercises": [
+      {
+        "name": "Plank",
+        "description": "A static hold that engages the entire core.",
+        "sets": "3 sets of 60 seconds",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/1/11/Plank.jpg"
+      },
+      {
+        "name": "Russian Twists",
+        "description": "An oblique-targeting movement performed with or without weights.",
+        "sets": "3 sets of 20 reps (10 per side)",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/2/20/Russian_Twist.gif"
+      },
+      {
+        "name": "Leg Raises",
+        "description": "A lower abdominal exercise that helps build strong hip flexors.",
+        "sets": "3 sets of 15 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Leg_Raises.gif"
+      },
+      {
+        "name": "Bicycle Crunches",
+        "description": "An advanced crunch variation that targets all areas of the core.",
+        "sets": "3 sets of 30 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Bicycle_Crunches.gif"
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Endurance Challenge",
+    "category": "Cardio & Stamina",
+    "description": "A cardiovascular workout designed to improve stamina and endurance.",
+    "exercises": [
+      {
+        "name": "Jump Rope",
+        "description": "A full-body exercise that enhances coordination and endurance.",
+        "sets": "5 sets of 60 seconds",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Jump_Rope.gif"
+      },
+      {
+        "name": "Rowing Machine",
+        "description": "A low-impact cardio workout that engages both upper and lower body.",
+        "sets": "4 sets of 500 meters",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Rowing_machine.jpg"
+      },
+      {
+        "name": "Sprint Intervals",
+        "description": "Short bursts of high-speed running to improve cardiovascular efficiency.",
+        "sets": "6 sets of 30 seconds sprint, 60 seconds walk",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Sprint.jpg"
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Bodyweight Warrior",
+    "category": "Calisthenics",
+    "description": "A workout using only bodyweight exercises to build strength and control.",
+    "exercises": [
+      {
+        "name": "Pistol Squats",
+        "description": "A single-leg squat variation that builds lower body strength and balance.",
+        "sets": "3 sets of 8 reps per leg",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Pistol_Squat.gif"
+      },
+      {
+        "name": "Handstand Push-ups",
+        "description": "An advanced calisthenics move that strengthens shoulders and triceps.",
+        "sets": "3 sets of 8 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Handstand_Pushup.gif"
+      },
+      {
+        "name": "L-Sit Hold",
+        "description": "A core-intensive isometric hold requiring strength and balance.",
+        "sets": "3 sets of 20 seconds",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/86/L-Sit.gif"
+      },
+      {
+        "name": "Archer Push-ups",
+        "description": "A unilateral push-up variation for chest and arm strength.",
+        "sets": "3 sets of 10 reps per side",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Archer_Pushups.gif"
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Functional Fitness",
+    "category": "Functional Training",
+    "description": "A workout focused on improving movement efficiency and injury prevention.",
+    "exercises": [
+      {
+        "name": "Farmers Carry",
+        "description": "A grip and core strength-building exercise using weights.",
+        "sets": "3 sets of 30 meters",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Farmers_Carry.gif"
+      },
+      {
+        "name": "Medicine Ball Slams",
+        "description": "A full-body explosive movement to improve power.",
+        "sets": "3 sets of 15 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Medicine_Ball_Slam.gif"
+      },
+      {
+        "name": "Kettlebell Swings",
+        "description": "A hip-driven exercise that builds posterior chain strength.",
+        "sets": "3 sets of 20 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Kettlebell_Swing.gif"
+      },
+      {
+        "name": "Battle Ropes",
+        "description": "A high-intensity conditioning exercise that engages the whole body.",
+        "sets": "4 sets of 30 seconds",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Battle_Ropes.gif"
+      }
+    ]
+  },
+  {
+    "id": "10",
+    "name": "Kettlebell Strength",
+    "category": "Kettlebell Training",
+    "description": "A workout utilizing kettlebells for strength and endurance.",
+    "exercises": [
+      {
+        "name": "Turkish Get-up",
+        "description": "A full-body movement that improves stability and coordination.",
+        "sets": "3 sets of 5 reps per side",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Turkish_Get-Up.gif"
+      },
+      {
+        "name": "Goblet Squats",
+        "description": "A squat variation using a kettlebell to enhance lower body strength.",
+        "sets": "4 sets of 12 reps",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Goblet_Squat.gif"
+      },
+      {
+        "name": "Kettlebell Snatch",
+        "description": "An explosive movement targeting power and coordination.",
+        "sets": "3 sets of 10 reps per arm",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Kettlebell_Snatch.gif"
+      },
+      {
+        "name": "Single Arm Kettlebell Press",
+        "description": "A unilateral press for shoulder stability and strength.",
+        "sets": "3 sets of 8 reps per arm",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/2/29/Kettlebell_Press.gif"
+      }
+    ]
+  }
+]
