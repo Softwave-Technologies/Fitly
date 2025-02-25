@@ -1,80 +1,61 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
+import { Program, Workout, Exercise } from '../types/types';
 import { supabase } from '../utils/supabase';
 
-type Exercise = {
-  name: string;
-  sets: number;
-  reps: number;
-};
-
-type Workout = {
-  id: string;
-  name: string;
-  image: string;
+interface WorkoutStore {
+  programs: Program[];
+  workouts: Record<string, Workout[]>;
   exercises: Exercise[];
-};
 
-type UserProgress = {
-  workout_id: string;
-  completed_at: string;
-};
+  fetchPrograms: () => Promise<void>;
+  fetchWorkouts: (programId: string) => Promise<void>;
+  fetchExercises: () => Promise<void>;
+}
 
-type WorkoutState = {
-  workouts: Workout[];
-  userProgress: UserProgress[];
-  fetchWorkouts: () => Promise<void>;
-  fetchUserProgress: (userId: string) => Promise<void>;
-  logWorkoutCompletion: (userId: string, workoutId: string) => Promise<void>;
-};
+const useWorkoutStore = create<WorkoutStore>()(
+  persist(
+    (set) => ({
+      programs: [],
+      workouts: {},
+      exercises: [],
 
-export const useWorkoutStore = create<WorkoutState>((set) => ({
-  workouts: [],
-  userProgress: [],
-
-  // Fetch all workouts
-  fetchWorkouts: async () => {
-    const { data, error } = await supabase.from('workouts').select('*');
-    if (error) console.error('Error fetching workouts:', error);
-    set({ workouts: data || [] });
-  },
-
-  // Fetch user progress (Requires userId from Clerk)
-  fetchUserProgress: async (userId) => {
-    if (!userId) return;
-
-    const { data, error } = await supabase
-      .from('user_progress')
-      .select('workout_id, completed_at')
-      .eq('user_id', userId);
-
-    if (error) console.error('Error fetching progress:', error);
-    set({ userProgress: data || [] });
-  },
-
-  // Log a workout completion
-  logWorkoutCompletion: async (userId, workoutId) => {
-    if (!userId) return;
-
-    const { error } = await supabase.from('user_progress').insert([
-      {
-        user_id: userId,
-        workout_id: workoutId,
-        completed_at: new Date().toISOString(),
+      fetchPrograms: async () => {
+        const { data, error } = await supabase.from('programs').select('*');
+        if (error) {
+          console.error('Error fetching programs:', error);
+          return;
+        }
+        set({ programs: data as Program[] });
       },
-    ]);
 
-    if (error) {
-      console.error('Error logging workout:', error);
-      return;
-    }
+      fetchWorkouts: async (programId: string) => {
+        const { data, error } = await supabase
+          .from('workouts')
+          .select('*')
+          .eq('program_id', programId);
 
-    // Update Zustand state immediately
-    set((state) => ({
-      userProgress: [
-        ...state.userProgress,
-        { workout_id: workoutId, completed_at: new Date().toISOString() },
-      ],
-    }));
-  },
-}));
+        if (error) {
+          console.error('Error fetching workouts:', error);
+          return;
+        }
+        set((state) => ({
+          workouts: { ...state.workouts, [programId]: data as Workout[] },
+        }));
+      },
+
+      fetchExercises: async () => {
+        const { data, error } = await supabase.from('exercises').select('*');
+        if (error) {
+          console.error('Error fetching exercises:', error);
+          return;
+        }
+        set({ exercises: data as Exercise[] });
+      },
+    }),
+    { name: 'workout-store' }
+  )
+);
+
+export default useWorkoutStore;

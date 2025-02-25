@@ -1,17 +1,20 @@
-export type WorkoutResponse = {
-  workouts: Workout[];
+export type Program = {
+  id: string;
+  name: string;
+  description?: string;
 };
 
 export type Workout = {
+  id: string;
+  program_id: string;
   name: string;
-  exercises: {
-    name: string;
-    sets: number;
-    reps: string;
-    rest_time: string;
-    duration_seconds: number;
-    calories_burned: number;
-    description: string;
-    muscle_groups: string[];
-  }[];
+  description?: string;
+};
+
+export type Exercise = {
+  id: string;
+  workout_id: string;
+  name: string;
+  sets: number;
+  reps: number;
 };
