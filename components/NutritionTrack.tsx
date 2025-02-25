@@ -182,9 +182,9 @@ export default function NutritionTrack() {
         data={meals}
         renderItem={({ item }) => (
           <View className="border-b-hairline flex-row items-center justify-between border-gray-300 p-4">
-            <Text className="text-lg text-white">{item.name}</Text>
-            <Text className="text-lg text-white">{item.calories}</Text>
-            <Text className="text-lg text-white">{item.category}</Text>
+            <Text className="w-32 text-lg text-white">{item.name}</Text>
+            <Text className="w-20 text-center text-lg text-white">{item.calories}</Text>
+            <Text className="w-24 text-lg text-white">{item.category}</Text>
             <FontAwesome name="close" size={20} color="red" onPress={() => deleteMeal(item.id)} />
           </View>
         )}
