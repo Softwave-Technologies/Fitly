@@ -176,14 +176,15 @@ export default function NutritionTrack() {
       />
 
       {/* Meal display */}
+      <Text className="px-4 text-xl font-bold text-green-500">Meals</Text>
       <FlatList
         scrollEnabled={false}
         data={meals}
         renderItem={({ item }) => (
-          <View className="flex-row justify-between p-2">
+          <View className="border-b-hairline flex-row items-center justify-between border-gray-300 p-4">
             <Text className="text-lg text-white">{item.name}</Text>
             <Text className="text-lg text-white">{item.calories}</Text>
-            <Text className="text-lg-text-white">{item.category}</Text>
+            <Text className="text-lg text-white">{item.category}</Text>
             <FontAwesome name="close" size={20} color="red" onPress={() => deleteMeal(item.id)} />
           </View>
         )}
