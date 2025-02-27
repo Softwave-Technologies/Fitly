@@ -1,5 +1,6 @@
-import { useLocalSearchParams } from 'expo-router';
-import { View, Text, ScrollView } from 'react-native';
+import { Entypo } from '@expo/vector-icons';
+import { router, useLocalSearchParams } from 'expo-router';
+import { View, Text, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import workouts from '../../assets/data/preWorkouts.json';
@@ -12,6 +13,12 @@ export default function WorkoutDetails() {
     <View className="flex-1 bg-gray-900">
       <SafeAreaView className="p-4">
         <ScrollView showsVerticalScrollIndicator={false}>
+          {/* Back Button */}
+          <Pressable
+            className="absolute right-5 top-1 z-10"
+            onPress={() => router.push('/workout')}>
+            <Entypo name="cross" size={25} color="white" />
+          </Pressable>
           {/* Title Section */}
           <Text className="border-b border-gray-700 pb-3 text-3xl font-bold text-green-400">
             {selectedWorkout?.name}
@@ -30,7 +37,7 @@ export default function WorkoutDetails() {
           <View className="mt-6">
             <Text className="text-xl font-semibold text-green-400">Exercises:</Text>
             {selectedWorkout?.exercises.map((exercise) => (
-              <View key={exercise.name} className="mt-4 rounded-lg bg-gray-800 p-4 shadow-md">
+              <View key={exercise.name} className="mt-4 gap-1 rounded-lg bg-gray-800 p-4 shadow-md">
                 <Text className="text-lg font-semibold text-white">💪 {exercise.name}</Text>
                 <Text className="mt-1 text-gray-300">- {exercise.description}</Text>
                 <Text className="text-gray-300">- {exercise.instructions}</Text>
