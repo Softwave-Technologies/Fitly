@@ -49,7 +49,7 @@ export default function WorkoutHistory() {
           transparent={false}
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}>
-          <CreateWorkout onClose={() => setModalVisible(false)} />
+          <CreateWorkout userId={userId ?? ''} onClose={() => setModalVisible(false)} />
         </Modal>
       </SafeAreaView>
     </View>
