@@ -10,10 +10,6 @@ import { Workout } from '~/types/types';
 export default function WorkoutPage() {
   const [workouts, setWorkouts] = useState(preMadeWorkouts);
 
-  const createWorkout = async () => {};
-  const updateWorkout = async () => {};
-  const deleteWorkout = async () => {};
-
   return (
     <View className="flex-1 bg-gray-900">
       <SafeAreaView className="flex-1">

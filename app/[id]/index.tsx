@@ -15,12 +15,12 @@ export default function WorkoutDetails() {
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* Back Button */}
           <Pressable
-            className="absolute right-5 top-1 z-10"
+            className="absolute right-1 top-1 z-10"
             onPress={() => router.push('/workout')}>
             <Entypo name="cross" size={25} color="white" />
           </Pressable>
           {/* Title Section */}
-          <Text className="border-b border-gray-700 pb-3 text-3xl font-bold text-green-400">
+          <Text className="border-b border-gray-700 pb-3 text-2xl font-bold text-green-400">
             {selectedWorkout?.name}
           </Text>
           <Text className="mt-1 text-lg font-semibold text-gray-300">

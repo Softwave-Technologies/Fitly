@@ -4,5 +4,12 @@ export type Workout = {
   description: string;
   instructions: string;
   category: string;
-  exercises: { name: string; sets: string; instructions: string; description: string }[];
+  exercises: Exercise[];
+};
+
+export type Exercise = {
+  name: string;
+  sets: string;
+  instructions: string;
+  description: string;
 };
