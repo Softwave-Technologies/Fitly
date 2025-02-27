@@ -1,4 +1,4 @@
-import { FontAwesome, FontAwesome6 } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome6, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 
 export default function HomeLayout() {
@@ -22,9 +22,11 @@ export default function HomeLayout() {
         }}
       />
       <Tabs.Screen
-        name="history"
+        name="myworkouts"
         options={{
-          tabBarIcon: ({ color }) => <FontAwesome name="history" size={25} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="arm-flex" size={25} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
