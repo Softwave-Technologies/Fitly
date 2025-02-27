@@ -2,13 +2,17 @@ import { create } from 'zustand';
 
 import { supabase } from '../utils/supabase';
 
-import { Workout } from '~/types/types';
+import { Workout, Exercise } from '~/types/types';
 
 interface WorkoutStore {
   workouts: Workout[];
   loading: boolean;
   fetchWorkouts: (userId: string) => Promise<void>;
-  addWorkout: (userId: string, workout: Omit<Workout, 'id' | 'created_at'>) => Promise<void>;
+  addWorkout: (
+    userId: string,
+    workout: Omit<Workout, 'id' | 'exercises'>,
+    exercises: Exercise[]
+  ) => Promise<void>;
   updateWorkout: (id: string, updatedWorkout: Partial<Workout>) => Promise<void>;
   deleteWorkout: (id: string) => Promise<void>;
 }
@@ -25,7 +29,7 @@ export const useWorkoutStore = create<WorkoutStore>((set) => ({
     try {
       const { data, error } = await supabase
         .from('workouts')
-        .select('*')
+        .select('*, exercises(*)')
         .eq('user_id', userId)
         .order('created_at', { ascending: false });
 
@@ -38,19 +42,30 @@ export const useWorkoutStore = create<WorkoutStore>((set) => ({
     }
   },
 
-  addWorkout: async (userId, workout) => {
+  addWorkout: async (userId, workout, exercises) => {
     if (!userId) return;
 
     try {
-      const { data, error } = await supabase
+      const { data: workoutData, error: workoutError } = await supabase
         .from('workouts')
         .insert([{ ...workout, user_id: userId }])
         .select('*')
         .single();
 
-      if (error) throw error;
+      if (workoutError) throw workoutError;
 
-      set((state) => ({ workouts: [data, ...state.workouts] }));
+      const formattedExercises = exercises.map((exercise) => ({
+        ...exercise,
+        workout_id: workoutData.id,
+      }));
+
+      const { error: exercisesError } = await supabase.from('exercises').insert(formattedExercises);
+
+      if (exercisesError) throw exercisesError;
+
+      set((state) => ({
+        workouts: [{ ...workoutData, exercises }, ...state.workouts],
+      }));
     } catch (error) {
       console.error('Error adding workout:', error);
     }
@@ -79,6 +94,8 @@ export const useWorkoutStore = create<WorkoutStore>((set) => ({
 
   deleteWorkout: async (id) => {
     try {
+      await supabase.from('exercises').delete().eq('workout_id', id);
+
       const { error } = await supabase.from('workouts').delete().eq('id', id);
 
       if (error) throw error;
