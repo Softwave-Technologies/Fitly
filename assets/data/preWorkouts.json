@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "name": "Full Body Strength",
     "category": "Strength Training",
     "description": "A well-rounded strength training routine that targets all major muscle groups.",
@@ -33,7 +33,7 @@
     ]
   },
   {
-    "id": "2",
+    "id": 2,
     "name": "Upper Body Hypertrophy",
     "category": "Muscle Growth",
     "description": "A workout designed for upper body muscle growth and endurance.",
@@ -66,7 +66,7 @@
     ]
   },
   {
-    "id": "3",
+    "id": 3,
     "name": "Lower Body Power",
     "category": "Strength & Conditioning",
     "description": "A workout designed to build lower body strength and power.",
@@ -93,7 +93,7 @@
     ]
   },
   {
-    "id": "4",
+    "id": 4,
     "name": "Cardio Blast",
     "category": "Cardio",
     "description": "A high-intensity cardio workout to boost endurance and burn calories.",
@@ -120,7 +120,7 @@
     ]
   },
   {
-    "id": "5",
+    "id": 5,
     "name": "Core & Abs",
     "category": "Core Training",
     "description": "A workout designed to strengthen the core and improve stability.",
@@ -147,7 +147,7 @@
     ]
   },
   {
-    "id": "6",
+    "id": 6,
     "name": "Mobility & Stretching",
     "category": "Recovery",
     "description": "A stretching routine to improve flexibility and mobility.",
@@ -168,7 +168,7 @@
     ]
   },
   {
-    "id": "7",
+    "id": 7,
     "name": "Athletic Performance",
     "category": "Sports Training",
     "description": "A workout focused on improving speed, agility, and explosiveness.",
@@ -195,7 +195,7 @@
     ]
   },
   {
-    "id": "8",
+    "id": 8,
     "name": "Bodyweight HIIT",
     "category": "High-Intensity Interval Training",
     "description": "A fast-paced bodyweight workout to burn fat and increase endurance.",
@@ -222,7 +222,7 @@
     ]
   },
   {
-    "id": "9",
+    "id": 9,
     "name": "Endurance Training",
     "category": "Cardio & Stamina",
     "description": "A workout focused on building cardiovascular endurance and stamina.",
@@ -249,7 +249,7 @@
     ]
   },
   {
-    "id": "10",
+    "id": 10,
     "name": "Flexibility & Yoga",
     "category": "Recovery & Mobility",
     "description": "A routine designed to improve flexibility, reduce stress, and aid recovery.",

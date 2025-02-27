@@ -1,20 +1,8 @@
-export type Program = {
-  id: string;
-  name: string;
-  description?: string;
-};
-
 export type Workout = {
-  id: string;
-  program_id: string;
+  id: number;
   name: string;
-  description?: string;
-};
-
-export type Exercise = {
-  id: string;
-  workout_id: string;
-  name: string;
-  sets: number;
-  reps: number;
+  description: string;
+  instructions: string;
+  category: string;
+  exercises: { name: string; sets: string; instructions: string; description: string }[];
 };

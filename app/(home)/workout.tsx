@@ -4,6 +4,9 @@ import { View, Text, SafeAreaView } from 'react-native';
 
 import preMadeWorkouts from '../../assets/data/preWorkouts.json';
 
+import WorkoutListItem from '~/components/WorkoutListItem';
+import { Workout } from '~/types/types';
+
 export default function WorkoutPage() {
   const [workouts, setWorkouts] = useState(preMadeWorkouts);
 
@@ -19,18 +22,9 @@ export default function WorkoutPage() {
           </Text>
           <FlashList
             data={workouts}
-            keyExtractor={(item) => item.id}
             estimatedItemSize={10}
-            renderItem={({ item }) => (
-              <View className="m-2 rounded-lg bg-gray-200 p-4">
-                <Text className="text-lg font-semibold">{item.name}</Text>
-                {item.exercises.map((exercise, index) => (
-                  <Text key={index}>
-                    {exercise.name} - {exercise.sets}
-                  </Text>
-                ))}
-              </View>
-            )}
+            keyExtractor={(item: Workout) => item.id.toString()}
+            renderItem={({ item }) => <WorkoutListItem item={item} />}
           />
         </View>
       </SafeAreaView>
