@@ -110,6 +110,13 @@ export default function WaterIntake() {
 
   return (
     <View className="p-4">
+      {/* Daily water intake goal display */}
+      <View className="my-2 items-center">
+        <Text className="font-semibold text-white">
+          Total Water Intake: {totalIntake}ml / {DAILY_GOAL}ml
+        </Text>
+        <ProgressBar progress={totalIntake / DAILY_GOAL} color="green" className="w-11/12 py-4" />
+      </View>
       <View>
         <BarChart
           data={data}
@@ -150,13 +157,6 @@ export default function WaterIntake() {
             />
           ))}
         </View>
-      </View>
-      {/* Daily water intake goal display */}
-      <View className="mt-4 items-center">
-        <Text className="font-semibold text-white">
-          Total Water Intake: {totalIntake}ml / {DAILY_GOAL}ml
-        </Text>
-        <ProgressBar progress={totalIntake / DAILY_GOAL} color="green" className="w-11/12 py-4" />
       </View>
 
       {/* Add Water Intake Button */}
