@@ -12,7 +12,7 @@ import { useWorkoutStore } from '~/store/useWorkoutStore';
 
 export default function WorkoutHistory() {
   const { userId } = useAuth();
-  const { fetchWorkouts, workouts } = useWorkoutStore();
+  const { fetchWorkouts, workouts, deleteWorkout } = useWorkoutStore();
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -36,7 +36,21 @@ export default function WorkoutHistory() {
             <FlashList
               data={workouts}
               keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => <WorkoutListItem item={item} />}
+              renderItem={({ item }) => (
+                <View className="flex-row items-center gap-2">
+                  <WorkoutListItem item={item} />
+                  <View className="gap-2">
+                    <Pressable>
+                      <FontAwesome name="edit" size={25} color="gray" />
+                    </Pressable>
+                    <Pressable
+                      onPress={() => deleteWorkout(item.id.toString())}
+                      className="justify-end">
+                      <FontAwesome name="trash" size={25} color="red" />
+                    </Pressable>
+                  </View>
+                </View>
+              )}
             />
           ) : (
             <Text className="text-center text-lg font-semibold text-white">

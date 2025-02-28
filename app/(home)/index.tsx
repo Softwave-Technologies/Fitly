@@ -40,8 +40,6 @@ export default function HomePage() {
           <NutritionTrack />
         </View>
       </ScrollView>
-      {/* Create workout */}
-      {/* Created workout text and steps */}
       <StatusBar style="light" />
     </SafeAreaView>
   );

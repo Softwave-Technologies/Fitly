@@ -176,7 +176,7 @@ export default function NutritionTrack() {
       />
 
       {/* Meal display */}
-      <Text className="px-4 text-xl font-bold text-green-500">Meals</Text>
+      {meals.length !== 0 && <Text className="px-4 text-xl font-bold text-green-500">Meals</Text>}
       <FlatList
         scrollEnabled={false}
         data={meals}
