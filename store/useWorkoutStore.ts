@@ -13,7 +13,11 @@ interface WorkoutStore {
     workout: Omit<Workout, 'id' | 'exercises'>,
     exercises: Exercise[]
   ) => Promise<void>;
-  updateWorkout: (id: string, updatedWorkout: Partial<Workout>) => Promise<void>;
+  updateWorkout: (
+    id: string,
+    updatedWorkout: Partial<Workout>,
+    updatedExercises: Exercise[]
+  ) => Promise<void>;
   deleteWorkout: (id: string) => Promise<void>;
 }
 
@@ -23,7 +27,6 @@ export const useWorkoutStore = create<WorkoutStore>((set) => ({
 
   fetchWorkouts: async (userId) => {
     if (!userId) return;
-
     set({ loading: true });
 
     try {
@@ -71,20 +74,36 @@ export const useWorkoutStore = create<WorkoutStore>((set) => ({
     }
   },
 
-  updateWorkout: async (id, updatedWorkout) => {
+  updateWorkout: async (id, updatedWorkout, updatedExercises) => {
     try {
-      const { data, error } = await supabase
+      const { data: workoutData, error: workoutError } = await supabase
         .from('workouts')
         .update(updatedWorkout)
         .eq('id', id)
         .select('*')
         .single();
 
-      if (error) throw error;
+      if (workoutError) throw workoutError;
+
+      for (const exercise of updatedExercises) {
+        const { error: exerciseError } = await supabase
+          .from('exercises')
+          .update({
+            name: exercise.name,
+            sets: exercise.sets,
+            description: exercise.description,
+            instructions: exercise.instructions,
+          })
+          .eq('id', exercise.id);
+
+        if (exerciseError) throw exerciseError;
+      }
 
       set((state) => ({
         workouts: state.workouts.map((workout) =>
-          workout.id.toString() === id ? { ...workout, ...data } : workout
+          workout.id.toString() === id
+            ? { ...workout, ...workoutData, exercises: updatedExercises }
+            : workout
         ),
       }));
     } catch (error) {
@@ -95,9 +114,7 @@ export const useWorkoutStore = create<WorkoutStore>((set) => ({
   deleteWorkout: async (id) => {
     try {
       await supabase.from('exercises').delete().eq('workout_id', id);
-
       const { error } = await supabase.from('workouts').delete().eq('id', id);
-
       if (error) throw error;
 
       set((state) => ({

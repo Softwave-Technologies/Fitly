@@ -4,6 +4,7 @@ import { View, Text, SafeAreaView, Pressable, TextInput, ScrollView } from 'reac
 
 import { Button } from '~/components/Button';
 import { useWorkoutStore } from '~/store/useWorkoutStore';
+import { Exercise } from '~/types/types';
 
 export default function EditPage() {
   const { id } = useLocalSearchParams();
@@ -14,9 +15,12 @@ export default function EditPage() {
   const [category, setCategory] = useState(workout?.category || '');
   const [description, setDescription] = useState(workout?.description || '');
   const [instructions, setInstructions] = useState(workout?.instructions || '');
-  const [exercises, setExercises] = useState(workout?.exercises || []);
+  const [exercises, setExercises] = useState<Exercise[]>(workout?.exercises || []);
+
   const [exerciseName, setExerciseName] = useState('');
   const [exerciseSets, setExerciseSets] = useState('');
+  const [exerciseDescription, setExerciseDescription] = useState('');
+  const [exerciseInstructions, setExerciseInstructions] = useState('');
 
   if (!workout) {
     return (
@@ -38,66 +42,92 @@ export default function EditPage() {
             <Text className="font-bold text-red-500">CANCEL</Text>
           </Pressable>
         </View>
+
         <ScrollView className="flex-1 p-2" showsVerticalScrollIndicator={false}>
+          {/* Main Workout Fields */}
           <TextInput
-            defaultValue={workout.name}
+            value={name}
             onChangeText={setName}
             placeholder="Workout Name"
             className="m-2 rounded-lg bg-gray-700 p-3 text-white"
             placeholderTextColor="white"
           />
           <TextInput
-            defaultValue={workout.category}
+            value={category}
             onChangeText={setCategory}
             placeholder="Category"
-            placeholderTextColor="white"
             className="m-2 rounded-lg bg-gray-700 p-3 text-white"
+            placeholderTextColor="white"
           />
           <TextInput
-            defaultValue={workout.description}
+            value={description}
             onChangeText={setDescription}
             placeholder="Description"
+            className="m-2 h-20 rounded-lg bg-gray-700 p-3 text-white"
             placeholderTextColor="white"
             multiline
-            className="m-2 h-20 rounded-lg bg-gray-700 p-3 text-white"
           />
           <TextInput
-            defaultValue={workout.instructions}
+            value={instructions}
             onChangeText={setInstructions}
             placeholder="Instructions"
+            className="m-2 h-20 rounded-lg bg-gray-700 p-3 text-white"
             placeholderTextColor="white"
             multiline
-            className="m-2 h-20 rounded-lg bg-gray-700 p-3 text-white"
           />
 
           {/* Display Existing Exercises */}
           <Text className="mt-4 p-4 text-lg font-semibold text-white">Exercises</Text>
-          {exercises?.map((exercise, index) => (
+          {exercises.map((exercise, index) => (
             <View
               key={index}
               className="m-2 flex-row items-center justify-between rounded-lg bg-gray-800 p-3">
               <View className="flex-1">
                 <TextInput
                   value={exercise.name}
-                  onChangeText={(text) => {
+                  onChangeText={(text) =>
                     setExercises((prev) =>
                       prev.map((ex, i) => (i === index ? { ...ex, name: text } : ex))
-                    );
-                  }}
+                    )
+                  }
                   placeholder="Exercise Name"
-                  placeholderTextColor="white"
                   className="m-1 rounded-lg bg-gray-700 p-2 text-white"
+                  placeholderTextColor="white"
                 />
                 <TextInput
                   value={exercise.sets}
-                  onChangeText={(text) => {
+                  onChangeText={(text) =>
                     setExercises((prev) =>
                       prev.map((ex, i) => (i === index ? { ...ex, sets: text } : ex))
-                    );
-                  }}
+                    )
+                  }
                   placeholder="Sets"
-                  placeholderTextColor="white"
                   className="m-1 rounded-lg bg-gray-700 p-2 text-white"
+                  placeholderTextColor="white"
+                />
+                <TextInput
+                  value={exercise.description}
+                  onChangeText={(text) =>
+                    setExercises((prev) =>
+                      prev.map((ex, i) => (i === index ? { ...ex, description: text } : ex))
+                    )
+                  }
+                  placeholder="Description"
+                  className="m-1 rounded-lg bg-gray-700 p-2 text-white"
+                  placeholderTextColor="white"
+                  multiline
+                />
+                <TextInput
+                  value={exercise.instructions}
+                  onChangeText={(text) =>
+                    setExercises((prev) =>
+                      prev.map((ex, i) => (i === index ? { ...ex, instructions: text } : ex))
+                    )
+                  }
+                  placeholder="Instructions"
+                  className="m-1 rounded-lg bg-gray-700 p-2 text-white"
+                  placeholderTextColor="white"
+                  multiline
                 />
               </View>
               <Pressable
@@ -114,26 +144,49 @@ export default function EditPage() {
             value={exerciseName}
             onChangeText={setExerciseName}
             placeholder="Exercise Name"
-            placeholderTextColor="white"
             className="m-2 rounded-lg bg-gray-700 p-3 text-white"
+            placeholderTextColor="white"
           />
           <TextInput
             value={exerciseSets}
             onChangeText={setExerciseSets}
+            keyboardType="numeric"
             placeholder="Sets"
-            placeholderTextColor="white"
             className="m-2 rounded-lg bg-gray-700 p-3 text-white"
+            placeholderTextColor="white"
+          />
+          <TextInput
+            value={exerciseDescription}
+            onChangeText={setExerciseDescription}
+            placeholder="Description"
+            className="m-2 rounded-lg bg-gray-700 p-3 text-white"
+            placeholderTextColor="white"
+            multiline
+          />
+          <TextInput
+            value={exerciseInstructions}
+            onChangeText={setExerciseInstructions}
+            placeholder="Instructions"
+            className="m-2 rounded-lg bg-gray-700 p-3 text-white"
+            placeholderTextColor="white"
+            multiline
           />
           <Pressable
             onPress={() => {
-              if (exerciseName.trim() && exerciseSets.trim()) {
-                setExercises([
-                  ...exercises,
-                  { name: exerciseName, sets: exerciseSets, description: '', instructions: '' },
-                ]);
-                setExerciseName('');
-                setExerciseSets('');
-              }
+              setExercises([
+                ...exercises,
+                {
+                  workout_id: id.toString(),
+                  name: exerciseName,
+                  sets: exerciseSets,
+                  description: exerciseDescription,
+                  instructions: exerciseInstructions,
+                },
+              ]);
+              setExerciseName('');
+              setExerciseSets('');
+              setExerciseDescription('');
+              setExerciseInstructions('');
             }}
             className="m-2 rounded-lg bg-green-500 p-3">
             <Text className="text-center font-bold text-white">Add Exercise</Text>
@@ -144,13 +197,16 @@ export default function EditPage() {
         <Button
           title="Update"
           onPress={() => {
-            updateWorkout(workout.id.toString(), {
-              name,
-              category,
-              description,
-              instructions,
-              exercises,
-            });
+            updateWorkout(
+              workout.id.toString(),
+              {
+                name,
+                category,
+                description,
+                instructions,
+              },
+              exercises
+            );
             router.push('/myworkouts');
           }}
           className="m-8 mb-10 bg-green-600 text-white"

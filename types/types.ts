@@ -8,6 +8,7 @@ export type Workout = {
 };
 
 export type Exercise = {
+  workout_id: string;
   name: string;
   sets: string;
   instructions: string;
