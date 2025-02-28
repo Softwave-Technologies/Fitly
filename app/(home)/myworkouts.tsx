@@ -3,6 +3,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { FlashList } from '@shopify/flash-list';
 import { useEffect, useState } from 'react';
 import { View, Text, Pressable, Modal } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import CreateWorkout from '~/components/CreateWorkout';
@@ -12,13 +13,17 @@ import { useWorkoutStore } from '~/store/useWorkoutStore';
 export default function WorkoutHistory() {
   const { userId } = useAuth();
   const { fetchWorkouts, workouts } = useWorkoutStore();
+  const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     if (userId) {
       fetchWorkouts(userId);
     }
+    setLoading(false);
   }, []);
+
+  if (loading) return <ActivityIndicator className="self-center" size="large" />;
 
   return (
     <View className="flex-1 bg-gray-900">
