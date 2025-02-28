@@ -13,6 +13,7 @@ export default function WaterIntake() {
 
   const timeLabels = ['6AM', '9AM', '12PM', '3PM', '6PM', '9PM'];
   const timeRanges = [6, 9, 12, 15, 18, 21];
+  const goal = 2000;
 
   useEffect(() => {
     checkAndResetData();
@@ -88,11 +89,9 @@ export default function WaterIntake() {
     );
   };
 
-  const DAILY_GOAL = 2000;
-
   const calculateWaterIntake = () => {
     const totalIntake = waterData.reduce((acc, val) => acc + val, 0);
-    const progress = Math.min((totalIntake / DAILY_GOAL) * 100, 100);
+    const progress = Math.min((totalIntake / goal) * 100, 100);
 
     return { totalIntake, progress };
   };
@@ -112,10 +111,10 @@ export default function WaterIntake() {
     <View className="p-4">
       {/* Daily water intake goal display */}
       <View className="my-2 items-center">
-        <Text className="font-semibold text-white">
-          Total Water Intake: {totalIntake}ml / {DAILY_GOAL}ml
+        <Text className="text-xl font-semibold text-white">
+          Total Water Intake: {totalIntake}ml / {goal}ml
         </Text>
-        <ProgressBar progress={totalIntake / DAILY_GOAL} color="green" className="w-11/12 py-4" />
+        <ProgressBar progress={totalIntake / goal} color="green" className="w-11/12 py-4" />
       </View>
       <View>
         <BarChart

@@ -30,16 +30,7 @@ export default function HomePage() {
         </Pressable>
       </View>
       {/* Nutrition and water track */}
-      <ScrollView showsVerticalScrollIndicator={false} className="pb-4">
-        <View>
-          <Text className="p-4 pl-6 text-xl font-bold text-green-500">Daily Water Intake</Text>
-          <WaterIntake />
-        </View>
-        <View>
-          <Text className="p-4 pl-6 text-xl font-bold text-green-500">Nutrition Track</Text>
-          <NutritionTrack />
-        </View>
-      </ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false} className="pb-4" />
       <StatusBar style="light" />
     </SafeAreaView>
   );

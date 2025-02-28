@@ -1,4 +1,4 @@
-import { FontAwesome, FontAwesome6, MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome6, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 
 export default function HomeLayout() {
@@ -14,6 +14,10 @@ export default function HomeLayout() {
       <Tabs.Screen
         name="index"
         options={{ tabBarIcon: ({ color }) => <FontAwesome name="home" size={25} color={color} /> }}
+      />
+      <Tabs.Screen
+        name="tracking"
+        options={{ tabBarIcon: ({ color }) => <Ionicons name="water" size={25} color={color} /> }}
       />
       <Tabs.Screen
         name="workout"
