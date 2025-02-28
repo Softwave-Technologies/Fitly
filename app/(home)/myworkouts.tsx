@@ -1,8 +1,9 @@
 import { useAuth } from '@clerk/clerk-expo';
 import { FontAwesome } from '@expo/vector-icons';
 import { FlashList } from '@shopify/flash-list';
+import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { View, Text, Pressable, Modal } from 'react-native';
+import { View, Text, Pressable, Modal, Alert } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -23,6 +24,16 @@ export default function WorkoutHistory() {
     setLoading(false);
   }, []);
 
+  const handleDeleteWorkout = (id: string) => {
+    Alert.alert('Delete Workout', 'Are you sure you want to delete this workout?', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: () => deleteWorkout(id),
+      },
+    ]);
+  };
   if (loading) return <ActivityIndicator className="self-center" size="large" />;
 
   return (
@@ -35,16 +46,19 @@ export default function WorkoutHistory() {
           {workouts.length > 0 ? (
             <FlashList
               data={workouts}
+              estimatedItemSize={workouts.length}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
                 <View className="flex-row items-center gap-2">
                   <WorkoutListItem item={item} />
                   <View className="gap-2">
-                    <Pressable>
-                      <FontAwesome name="edit" size={25} color="gray" />
-                    </Pressable>
+                    <Link asChild href={`/edit/${item.id}`}>
+                      <Pressable>
+                        <FontAwesome name="edit" size={25} color="gray" />
+                      </Pressable>
+                    </Link>
                     <Pressable
-                      onPress={() => deleteWorkout(item.id.toString())}
+                      onPress={() => handleDeleteWorkout(item.id.toString())}
                       className="justify-end">
                       <FontAwesome name="trash" size={25} color="red" />
                     </Pressable>
