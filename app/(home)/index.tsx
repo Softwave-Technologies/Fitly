@@ -1,5 +1,5 @@
 import { useClerk, useUser } from '@clerk/clerk-expo';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5, FontAwesome6 } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Redirect, useFocusEffect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -13,12 +13,16 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import { ProgressBar } from 'react-native-paper';
+
+import { Button } from '../../components/Button';
+
+import CircularProgress from '~/components/ProgressCircle';
 
 export default function HomePage() {
   const { user } = useUser();
   const { signOut } = useClerk();
   const [waterIntake, setWaterIntake] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [waterData, setWaterData] = useState<number[]>([0, 0, 0, 0, 0, 0]);
 
   const [loading, setLoading] = useState(true);
@@ -59,6 +63,8 @@ export default function HomePage() {
     }
   };
 
+  const addWaterIntake = () => {};
+
   useFocusEffect(
     useCallback(() => {
       fetchProgressData();
@@ -89,14 +95,20 @@ export default function HomePage() {
         </Pressable>
       </View>
       <ScrollView showsVerticalScrollIndicator={false} className="pb-4">
-        <View className="border-hairline m-4  gap-4 rounded-md border-gray-300 p-4">
-          <View className="flex-row items-center gap-2 self-center">
-            <Text className="text-md text-center font-semibold text-white">
-              Water Intake Today {waterIntake} / {waterGoal} ml
-            </Text>
-            {waterIntake / waterGoal >= 1 && <FontAwesome name="check" size={20} color="green" />}
+        <View>
+          <CircularProgress progress={waterIntake} goal={waterGoal} />
+          <View className="flex-row items-center justify-center gap-4">
+            <Button
+              title="Add Water"
+              className="m-2 w-1/2"
+              style={{ backgroundColor: 'royalblue' }}
+              onPress={addWaterIntake}
+            />
+            <View className="items-center gap-1 rounded-xl bg-[#4169e1] p-4">
+              <FontAwesome6 name="glass-water" size={15} color="white" />
+              <Text className="font-semibold text-white">200 ml</Text>
+            </View>
           </View>
-          <ProgressBar progress={waterIntake / waterGoal} color="green" className="p-2" />
         </View>
       </ScrollView>
       <StatusBar style="light" />

@@ -74,8 +74,8 @@ export default function WorkoutHistory() {
         </View>
         <Pressable
           className="absolute bottom-4 right-4 rounded-full bg-green-500 p-4"
-          onPress={() => {}}>
-          <FontAwesome name="plus" size={20} color="black" onPress={() => setModalVisible(true)} />
+          onPress={() => setModalVisible(true)}>
+          <FontAwesome name="plus" size={20} color="black" />
         </Pressable>
         <Modal
           animationType="slide"
