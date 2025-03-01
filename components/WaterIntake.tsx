@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect, useState } from 'react';
+import { useFocusEffect } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { View, Alert, ActivityIndicator, useWindowDimensions, Pressable, Text } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
 import { ProgressBar } from 'react-native-paper';
@@ -15,9 +16,11 @@ export default function WaterIntake() {
   const timeRanges = [6, 9, 12, 15, 18, 21];
   const goal = 2000;
 
-  useEffect(() => {
-    checkAndResetData();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      checkAndResetData();
+    }, [])
+  );
 
   const checkAndResetData = async () => {
     try {

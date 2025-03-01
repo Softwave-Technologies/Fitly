@@ -1,5 +1,5 @@
 import { useClerk, useUser } from '@clerk/clerk-expo';
-import { FontAwesome, FontAwesome5, FontAwesome6 } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Redirect, useFocusEffect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -26,6 +26,7 @@ export default function HomePage() {
   const [waterData, setWaterData] = useState<number[]>([0, 0, 0, 0, 0, 0]);
 
   const [loading, setLoading] = useState(true);
+  const timeRanges = [6, 9, 12, 15, 18, 21];
   const waterGoal = 2000;
 
   const fetchProgressData = async () => {
@@ -63,7 +64,29 @@ export default function HomePage() {
     }
   };
 
-  const addWaterIntake = () => {};
+  const getCurrentTimeSlot = () => {
+    const currentHour = new Date().getHours();
+    let closestIndex = 0;
+
+    for (let i = 0; i < timeRanges.length; i++) {
+      if (currentHour >= timeRanges[i]) {
+        closestIndex = i;
+      } else {
+        break;
+      }
+    }
+
+    return closestIndex;
+  };
+  const addWaterIntake = async () => {
+    const index = getCurrentTimeSlot();
+    const newData = [...waterData];
+    newData[index] += 200;
+    await AsyncStorage.setItem('waterIntakeData', JSON.stringify(newData));
+
+    setWaterData(newData);
+    setWaterIntake(newData.reduce((acc, val) => acc + val, 0));
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -97,18 +120,12 @@ export default function HomePage() {
       <ScrollView showsVerticalScrollIndicator={false} className="pb-4">
         <View>
           <CircularProgress progress={waterIntake} goal={waterGoal} />
-          <View className="flex-row items-center justify-center gap-4">
-            <Button
-              title="Add Water"
-              className="m-2 w-1/2"
-              style={{ backgroundColor: 'royalblue' }}
-              onPress={addWaterIntake}
-            />
-            <View className="items-center gap-1 rounded-xl bg-[#4169e1] p-4">
-              <FontAwesome6 name="glass-water" size={15} color="white" />
-              <Text className="font-semibold text-white">200 ml</Text>
-            </View>
-          </View>
+          <Button
+            title="Add Water 200ml"
+            className="m-2 w-2/3 self-center"
+            style={{ backgroundColor: 'royalblue' }}
+            onPress={addWaterIntake}
+          />
         </View>
       </ScrollView>
       <StatusBar style="light" />
