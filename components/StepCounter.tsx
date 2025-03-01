@@ -6,6 +6,8 @@ import AppleHealthKit, { HealthInputOptions, HealthKitPermissions } from 'react-
 export default function StepCounter() {
   const [steps, setSteps] = useState(0);
   const [isAvailable, setIsAvailable] = useState(false);
+  const goal = 10000;
+  const progress = (steps / goal) * 100;
 
   useEffect(() => {
     if (Platform.OS === 'android') {
@@ -46,9 +48,14 @@ export default function StepCounter() {
   }, []);
 
   return (
-    <View className="p-4">
-      <Text className="text-lg font-bold text-white">
-        {isAvailable || Platform.OS === 'ios' ? `Steps: ${steps}` : 'Step counter not available'}
+    <View className="m-4 rounded-lg bg-gray-800 p-4">
+      <Text className="text-xl font-bold text-white">👟 Steps Today</Text>
+      <Text className="mt-2 text-4xl font-extrabold text-white">{steps}</Text>
+      <View className="mt-4 h-2 w-full rounded-full bg-gray-600">
+        <View className="h-2 rounded-full bg-green-500" style={{ width: `${progress}%` }} />
+      </View>
+      <Text className="mt-2 text-sm text-gray-300">
+        {steps >= goal ? '🎉 Goal reached! Keep moving!' : `🚀 ${goal - steps} steps to go!`}
       </Text>
     </View>
   );
