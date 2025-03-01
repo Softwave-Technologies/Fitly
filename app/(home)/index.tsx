@@ -1,106 +1,18 @@
 import { useClerk, useUser } from '@clerk/clerk-expo';
 import { FontAwesome } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Redirect, useFocusEffect } from 'expo-router';
+import { Redirect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useCallback, useState } from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Image,
-  Pressable,
-  ScrollView,
-  ActivityIndicator,
-} from 'react-native';
+import { View, Text, SafeAreaView, Image, Pressable, ScrollView } from 'react-native';
 
-import { Button } from '../../components/Button';
-
-import CircularProgress from '~/components/ProgressCircle';
+import DailyQuote from '~/components/DailyQuote';
+import MainWaterIntake from '~/components/MainWaterIntake';
 
 export default function HomePage() {
   const { user } = useUser();
   const { signOut } = useClerk();
-  const [waterIntake, setWaterIntake] = useState(0);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [waterData, setWaterData] = useState<number[]>([0, 0, 0, 0, 0, 0]);
-
-  const [loading, setLoading] = useState(true);
-  const timeRanges = [6, 9, 12, 15, 18, 21];
-  const waterGoal = 2000;
-
-  const fetchProgressData = async () => {
-    try {
-      const storedWater = await AsyncStorage.getItem('waterIntakeData');
-      const waterArray = storedWater ? JSON.parse(storedWater) : [0, 0, 0, 0, 0, 0];
-      const totalWater = waterArray.reduce((acc: any, val: any) => acc + val, 0);
-
-      setWaterIntake(totalWater);
-    } catch (error) {
-      console.error('Error fetching progress data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const checkAndResetData = async () => {
-    try {
-      const storedData = await AsyncStorage.getItem('waterIntakeData');
-      const storedDate = await AsyncStorage.getItem('lastUpdateDate');
-
-      const today = new Date().toISOString().split('T')[0];
-
-      if (storedDate !== today) {
-        await AsyncStorage.setItem('waterIntakeData', JSON.stringify([0, 0, 0, 0, 0, 0]));
-        await AsyncStorage.setItem('lastUpdateDate', today);
-        setWaterData([0, 0, 0, 0, 0, 0]);
-      } else if (storedData) {
-        setWaterData(JSON.parse(storedData));
-      }
-    } catch (error) {
-      console.error('Error loading water data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getCurrentTimeSlot = () => {
-    const currentHour = new Date().getHours();
-    let closestIndex = 0;
-
-    for (let i = 0; i < timeRanges.length; i++) {
-      if (currentHour >= timeRanges[i]) {
-        closestIndex = i;
-      } else {
-        break;
-      }
-    }
-
-    return closestIndex;
-  };
-  const addWaterIntake = async () => {
-    const index = getCurrentTimeSlot();
-    const newData = [...waterData];
-    newData[index] += 200;
-    await AsyncStorage.setItem('waterIntakeData', JSON.stringify(newData));
-
-    setWaterData(newData);
-    setWaterIntake(newData.reduce((acc, val) => acc + val, 0));
-  };
-
-  useFocusEffect(
-    useCallback(() => {
-      fetchProgressData();
-      checkAndResetData();
-    }, [])
-  );
 
   if (!user) {
     return <Redirect href="/(auth)/sign-in" />;
-  }
-
-  if (loading) {
-    return <ActivityIndicator size="large" />;
   }
 
   return (
@@ -118,15 +30,10 @@ export default function HomePage() {
         </Pressable>
       </View>
       <ScrollView showsVerticalScrollIndicator={false} className="pb-4">
-        <View>
-          <CircularProgress progress={waterIntake} goal={waterGoal} />
-          <Button
-            title="Add Water 200ml"
-            className="m-2 w-2/3 self-center"
-            style={{ backgroundColor: 'royalblue' }}
-            onPress={addWaterIntake}
-          />
-        </View>
+        {/* Water Intake home */}
+        <MainWaterIntake />
+        {/* Daily quote */}
+        <DailyQuote />
       </ScrollView>
       <StatusBar style="light" />
     </SafeAreaView>
