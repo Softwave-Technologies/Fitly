@@ -1,9 +1,9 @@
 import { useClerk, useUser } from '@clerk/clerk-expo';
 import { FontAwesome } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Redirect } from 'expo-router';
+import { Redirect, useFocusEffect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   View,
   Text,
@@ -19,26 +19,52 @@ export default function HomePage() {
   const { user } = useUser();
   const { signOut } = useClerk();
   const [waterIntake, setWaterIntake] = useState(0);
+  const [waterData, setWaterData] = useState<number[]>([0, 0, 0, 0, 0, 0]);
+
   const [loading, setLoading] = useState(true);
   const waterGoal = 2000;
 
-  useEffect(() => {
-    const fetchProgressData = async () => {
-      try {
-        const storedWater = await AsyncStorage.getItem('waterIntakeData');
-        const waterArray = storedWater ? JSON.parse(storedWater) : [0, 0, 0, 0, 0, 0];
-        const totalWater = waterArray.reduce((acc: any, val: any) => acc + val, 0);
+  const fetchProgressData = async () => {
+    try {
+      const storedWater = await AsyncStorage.getItem('waterIntakeData');
+      const waterArray = storedWater ? JSON.parse(storedWater) : [0, 0, 0, 0, 0, 0];
+      const totalWater = waterArray.reduce((acc: any, val: any) => acc + val, 0);
 
-        setWaterIntake(totalWater);
-      } catch (error) {
-        console.error('Error fetching progress data:', error);
-      } finally {
-        setLoading(false);
+      setWaterIntake(totalWater);
+    } catch (error) {
+      console.error('Error fetching progress data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const checkAndResetData = async () => {
+    try {
+      const storedData = await AsyncStorage.getItem('waterIntakeData');
+      const storedDate = await AsyncStorage.getItem('lastUpdateDate');
+
+      const today = new Date().toISOString().split('T')[0];
+
+      if (storedDate !== today) {
+        await AsyncStorage.setItem('waterIntakeData', JSON.stringify([0, 0, 0, 0, 0, 0]));
+        await AsyncStorage.setItem('lastUpdateDate', today);
+        setWaterData([0, 0, 0, 0, 0, 0]);
+      } else if (storedData) {
+        setWaterData(JSON.parse(storedData));
       }
-    };
+    } catch (error) {
+      console.error('Error loading water data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchProgressData();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchProgressData();
+      checkAndResetData();
+    }, [])
+  );
 
   if (!user) {
     return <Redirect href="/(auth)/sign-in" />;
