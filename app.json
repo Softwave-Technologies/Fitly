@@ -16,7 +16,8 @@
         {
           "launchMode": "most-recent"
         }
-      ]
+      ],
+      "react-native-health"
     ],
     "experiments": {
       "typedRoutes": true,

@@ -6,6 +6,7 @@ import { View, Text, SafeAreaView, Image, Pressable, ScrollView } from 'react-na
 
 import DailyQuote from '~/components/DailyQuote';
 import MainWaterIntake from '~/components/MainWaterIntake';
+import StepCounter from '~/components/StepCounter';
 
 export default function HomePage() {
   const { user } = useUser();
@@ -34,6 +35,8 @@ export default function HomePage() {
         <MainWaterIntake />
         {/* Daily quote */}
         <DailyQuote />
+        {/* Step track */}
+        <StepCounter />
       </ScrollView>
       <StatusBar style="light" />
     </SafeAreaView>
