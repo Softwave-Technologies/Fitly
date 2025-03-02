@@ -1,16 +1,9 @@
 import { useClerk, useUser } from '@clerk/clerk-expo';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Alert,
-  StyleSheet,
-  Image,
-  TextInput,
-  Button,
-} from 'react-native';
+import { View, Text, SafeAreaView, Alert, StyleSheet, Image, TextInput } from 'react-native';
+
+import { Button } from '~/components/Button';
 
 export default function Profile() {
   const { user } = useUser();
@@ -105,15 +98,15 @@ export default function Profile() {
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button title="Update Password" onPress={handleChangePassword} color="white" />
+            <Button title="Update Password" onPress={handleChangePassword} />
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button title="Delete User" onPress={handleDeleteUser} color="red" />
+            <Button title="Delete User" onPress={handleDeleteUser} className="bg-red-500" />
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button title="Sign Out" onPress={() => signOut()} color="white" />
+            <Button title="Sign Out" onPress={() => signOut()} />
           </View>
         </View>
       </SafeAreaView>

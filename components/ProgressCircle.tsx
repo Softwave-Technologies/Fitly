@@ -1,8 +1,21 @@
+import { FontAwesome5 } from '@expo/vector-icons';
 import React from 'react';
 import { View, Text } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
-const CircularProgress = ({ progress, goal }: { progress: number; goal: number }) => {
+const CircularProgress = ({
+  progress,
+  goal,
+  label,
+  iconName,
+  color,
+}: {
+  progress: number;
+  goal: number;
+  label: string;
+  iconName: string;
+  color: string;
+}) => {
   const radius = 50;
   const strokeWidth = 10;
   const circumference = 2 * Math.PI * radius;
@@ -26,7 +39,7 @@ const CircularProgress = ({ progress, goal }: { progress: number; goal: number }
           cx="60"
           cy="60"
           r={radius}
-          stroke="blue"
+          stroke={color}
           strokeWidth={strokeWidth}
           fill="none"
           strokeDasharray={circumference}
@@ -36,11 +49,13 @@ const CircularProgress = ({ progress, goal }: { progress: number; goal: number }
           origin="60,60"
         />
       </Svg>
-      {/* Water Intake Text */}
+
+      {/* Icon and Label */}
       <View style={{ position: 'absolute', alignItems: 'center' }}>
-        <Text className="text-lg font-bold text-white">Water Intake Today</Text>
+        <FontAwesome5 name={iconName} size={30} color="white" />
+        <Text className="text-lg font-bold text-white">{label}</Text>
         <Text className="text-lg font-bold text-white">
-          {progress} / {goal} ml
+          {progress} / {goal}
         </Text>
       </View>
     </View>

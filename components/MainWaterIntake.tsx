@@ -6,24 +6,39 @@ import { ActivityIndicator, View } from 'react-native';
 import { Button } from './Button';
 import CircularProgress from './ProgressCircle';
 
-export default function MainWaterIntake() {
-  const [waterIntake, setWaterIntake] = useState(0);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [waterData, setWaterData] = useState<number[]>([0, 0, 0, 0, 0, 0]);
+interface ProgressTrackerProps {
+  label: string;
+  color: string;
+  storageKey: string;
+  unit: string;
+  incrementValue: number;
+  goal: number;
+  timeRanges?: number[];
+}
 
+export default function ProgressTracker({
+  label,
+  color,
+  storageKey,
+  unit,
+  incrementValue,
+  goal,
+  timeRanges,
+}: ProgressTrackerProps) {
+  const [progress, setProgress] = useState(0);
+  const [data, setData] = useState<number[]>([0, 0, 0, 0, 0, 0]);
   const [loading, setLoading] = useState(true);
-  const timeRanges = [6, 9, 12, 15, 18, 21];
-  const waterGoal = 2000;
 
   const fetchProgressData = async () => {
     try {
-      const storedWater = await AsyncStorage.getItem('waterIntakeData');
-      const waterArray = storedWater ? JSON.parse(storedWater) : [0, 0, 0, 0, 0, 0];
-      const totalWater = waterArray.reduce((acc: any, val: any) => acc + val, 0);
+      const storedData = await AsyncStorage.getItem(storageKey);
+      const dataArray = storedData ? JSON.parse(storedData) : [0, 0, 0, 0, 0, 0];
+      const totalProgress = dataArray.reduce((acc: any, val: any) => acc + val, 0);
 
-      setWaterIntake(totalWater);
+      setProgress(totalProgress);
+      setData(dataArray);
     } catch (error) {
-      console.error('Error fetching progress data:', error);
+      console.error(`Error fetching ${label} data:`, error);
     } finally {
       setLoading(false);
     }
@@ -31,26 +46,23 @@ export default function MainWaterIntake() {
 
   const checkAndResetData = async () => {
     try {
-      const storedData = await AsyncStorage.getItem('waterIntakeData');
       const storedDate = await AsyncStorage.getItem('lastUpdateDate');
-
       const today = new Date().toISOString().split('T')[0];
 
       if (storedDate !== today) {
-        await AsyncStorage.setItem('waterIntakeData', JSON.stringify([0, 0, 0, 0, 0, 0]));
+        await AsyncStorage.setItem(storageKey, JSON.stringify([0, 0, 0, 0, 0, 0]));
         await AsyncStorage.setItem('lastUpdateDate', today);
-        setWaterData([0, 0, 0, 0, 0, 0]);
-      } else if (storedData) {
-        setWaterData(JSON.parse(storedData));
+        setData([0, 0, 0, 0, 0, 0]);
       }
     } catch (error) {
-      console.error('Error loading water data:', error);
+      console.error(`Error resetting ${label} data:`, error);
     } finally {
       setLoading(false);
     }
   };
 
   const getCurrentTimeSlot = () => {
+    if (!timeRanges) return 0;
     const currentHour = new Date().getHours();
     let closestIndex = 0;
 
@@ -64,14 +76,15 @@ export default function MainWaterIntake() {
 
     return closestIndex;
   };
-  const addWaterIntake = async () => {
-    const index = getCurrentTimeSlot();
-    const newData = [...waterData];
-    newData[index] += 200;
-    await AsyncStorage.setItem('waterIntakeData', JSON.stringify(newData));
 
-    setWaterData(newData);
-    setWaterIntake(newData.reduce((acc, val) => acc + val, 0));
+  const addProgress = async () => {
+    const index = timeRanges ? getCurrentTimeSlot() : 0;
+    const newData = [...data];
+    newData[index] += incrementValue;
+    await AsyncStorage.setItem(storageKey, JSON.stringify(newData));
+
+    setData(newData);
+    setProgress(newData.reduce((acc, val) => acc + val, 0));
   };
 
   useFocusEffect(
@@ -85,12 +98,18 @@ export default function MainWaterIntake() {
 
   return (
     <View>
-      <CircularProgress progress={waterIntake} goal={waterGoal} />
+      <CircularProgress
+        progress={progress}
+        goal={goal}
+        label={label}
+        color={color}
+        iconName="tint"
+      />
       <Button
-        title="Add Water 200ml"
+        title={`Add ${incrementValue} ${unit}`}
         className="m-2 w-2/3 self-center"
-        style={{ backgroundColor: 'royalblue' }}
-        onPress={addWaterIntake}
+        style={{ backgroundColor: color }}
+        onPress={addProgress}
       />
     </View>
   );

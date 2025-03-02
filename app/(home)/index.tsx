@@ -1,8 +1,16 @@
 import { useClerk, useUser } from '@clerk/clerk-expo';
 import { FontAwesome } from '@expo/vector-icons';
 import { Redirect } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { View, Text, SafeAreaView, Image, Pressable, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  Pressable,
+  ScrollView,
+  Platform,
+  StatusBar,
+} from 'react-native';
 
 import DailyQuote from '~/components/DailyQuote';
 import MainWaterIntake from '~/components/MainWaterIntake';
@@ -17,7 +25,9 @@ export default function HomePage() {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-900">
+    <SafeAreaView
+      className="flex-1 bg-gray-900"
+      style={{ paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
       <View className="border-b-hairline flex-row items-center gap-5 border-gray-300 p-4">
         {user?.imageUrl && (
           <Image source={{ uri: user.imageUrl }} className="h-16 w-16 rounded-full" />
@@ -31,14 +41,22 @@ export default function HomePage() {
         </Pressable>
       </View>
       <ScrollView showsVerticalScrollIndicator={false} className="pb-4">
-        {/* Water Intake home */}
-        <MainWaterIntake />
-        {/* Daily quote */}
-        <DailyQuote />
         {/* Step track */}
         <StepCounter />
+        {/* Daily quote */}
+        <DailyQuote />
+        {/* Water Intake home */}
+        <MainWaterIntake
+          label="Water Intake"
+          color="#3498db"
+          unit="ml"
+          storageKey="waterIntakeData"
+          goal={2000}
+          timeRanges={[6, 9, 12, 15, 18, 21]}
+          incrementValue={200}
+        />
       </ScrollView>
-      <StatusBar style="light" />
+      <StatusBar barStyle="dark-content" />
     </SafeAreaView>
   );
 }
