@@ -7,7 +7,13 @@ import WorkoutListItem from '~/components/WorkoutListItem';
 import { Workout } from '~/types/types';
 
 export default function WorkoutPage() {
-  const workouts = preMadeWorkouts;
+  const workouts = preMadeWorkouts.map((workout) => ({
+    ...workout,
+    exercises: workout.exercises.map((exercise) => ({
+      ...exercise,
+      workout_id: workout.id.toString(),
+    })),
+  }));
 
   return (
     <View className="flex-1 bg-gray-900">
