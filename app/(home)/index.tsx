@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import DailyQuote from '~/components/DailyQuote';
+import MainNutritionTrack from '~/components/MainNutritionTrack';
 import MainWaterIntake from '~/components/MainWaterIntake';
 import StepCounter from '~/components/StepCounter';
 
@@ -43,13 +44,14 @@ export default function HomePage() {
       <ScrollView showsVerticalScrollIndicator={false} className="pb-4">
         {/* Daily quote */}
         <DailyQuote />
-        <View className="flex-row items-center justify-center gap-5">
+        <View className="flex-row items-center justify-center">
           {/* Calorie track circle */}
+          <MainNutritionTrack />
           {/* Step track */}
           <StepCounter />
           {/* Water Intake home */}
           <MainWaterIntake
-            label="Water Intake"
+            label="Water"
             color="#3498db"
             unit="ml"
             storageKey="waterIntakeData"

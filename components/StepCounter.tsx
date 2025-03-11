@@ -54,9 +54,9 @@ export default function StepCounter() {
       <CircularProgress
         progress={progress}
         goal={goal}
-        label="Steps Today"
+        label="Steps"
         iconName="shoe-prints"
-        color="#FFA500"
+        color="red"
       />
     </View>
   );

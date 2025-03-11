@@ -22,42 +22,47 @@ const CircularProgress = ({
   const progressOffset = circumference - (progress / goal) * circumference;
   const { width } = useWindowDimensions();
   return (
-    <View className="flex-1 items-center justify-center">
-      <Svg height={width / 3} width={width / 3} viewBox="0 0 120 120">
-        {/* Background Circle */}
-        <Circle
-          cx="60"
-          cy="60"
-          r={radius}
-          stroke="gray"
-          strokeWidth={strokeWidth}
-          fill="none"
-          opacity={0.2}
-        />
-        {/* Progress Circle */}
-        <Circle
-          cx="60"
-          cy="60"
-          r={radius}
-          stroke={color}
-          strokeWidth={strokeWidth}
-          fill="none"
-          strokeDasharray={circumference}
-          strokeDashoffset={progressOffset}
-          strokeLinecap="round"
-          rotation="-90"
-          origin="60,60"
-        />
-      </Svg>
+    <View className="flex-1">
+      <View className="flex-1 items-center justify-center">
+        <Svg height={width / 3.3} width={width / 3.3} viewBox="0 0 120 120">
+          {/* Background Circle */}
+          <Circle
+            cx="60"
+            cy="60"
+            r={radius}
+            stroke="gray"
+            strokeWidth={strokeWidth}
+            fill="none"
+            opacity={0.2}
+          />
+          {/* Progress Circle */}
+          <Circle
+            cx="60"
+            cy="60"
+            r={radius}
+            stroke={color}
+            strokeWidth={strokeWidth}
+            fill="none"
+            strokeDasharray={circumference}
+            strokeDashoffset={progressOffset}
+            strokeLinecap="round"
+            rotation="-90"
+            origin="60,60"
+          />
+        </Svg>
 
-      {/* Icon and Label */}
-      <View style={{ position: 'absolute', alignItems: 'center', gap: 5 }}>
-        <FontAwesome5 name={iconName} size={20} color="white" />
-        <Text className="text-md font-bold text-white">{label}</Text>
+        {/* Icon and Label */}
+        <View style={{ position: 'absolute', alignItems: 'center', gap: 5 }}>
+          <FontAwesome5 name={iconName} size={18} color="white" />
+          <Text className="text-md font-bold text-white">{label}</Text>
+        </View>
+      </View>
+      {/* 
+      <View className="items-center">
         <Text className="text-md font-bold text-white">
           {progress} / {goal}
         </Text>
-      </View>
+      </View>*/}
     </View>
   );
 };
