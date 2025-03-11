@@ -3,7 +3,7 @@ import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
-import { Button } from './Button';
+//import { Button } from './Button';
 import CircularProgress from './ProgressCircle';
 
 interface ProgressTrackerProps {
@@ -61,6 +61,8 @@ export default function ProgressTracker({
     }
   };
 
+  {
+    /* 
   const getCurrentTimeSlot = () => {
     if (!timeRanges) return 0;
     const currentHour = new Date().getHours();
@@ -74,9 +76,12 @@ export default function ProgressTracker({
       }
     }
 
-    return closestIndex;
-  };
+    return closestIndex;*
+  };*/
+  }
 
+  {
+    /* 
   const addProgress = async () => {
     const index = timeRanges ? getCurrentTimeSlot() : 0;
     const newData = [...data];
@@ -85,7 +90,8 @@ export default function ProgressTracker({
 
     setData(newData);
     setProgress(newData.reduce((acc, val) => acc + val, 0));
-  };
+  };*/
+  }
 
   useFocusEffect(
     useCallback(() => {
@@ -105,12 +111,12 @@ export default function ProgressTracker({
         color={color}
         iconName="tint"
       />
-      <Button
+      {/*  <Button
         title={`Add ${incrementValue} ${unit}`}
         className="m-2 w-2/3 self-center"
         style={{ backgroundColor: color }}
         onPress={addProgress}
-      />
+      />*/}
     </View>
   );
 }

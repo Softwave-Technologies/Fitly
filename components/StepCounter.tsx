@@ -50,13 +50,13 @@ export default function StepCounter() {
   }, []);
 
   return (
-    <View className="m-4 rounded-lg p-4">
+    <View className="rounded-lg p-4">
       <CircularProgress
         progress={progress}
         goal={goal}
         label="Steps Today"
         iconName="shoe-prints"
-        color="green"
+        color="#FFA500"
       />
     </View>
   );

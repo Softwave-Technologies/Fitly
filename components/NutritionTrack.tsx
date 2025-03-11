@@ -15,7 +15,7 @@ type Meal = {
 
 export default function NutritionTrack() {
   const [meals, setMeals] = useState<Meal[]>([]);
-  const [goal, setGoal] = useState<number>(2000);
+  const [goal, setGoal] = useState<number>(10000);
   const [loading, setLoading] = useState(false);
   const [mealName, setMealName] = useState<string>('');
   const [mealCalories, setMealCalories] = useState<number>(0);
