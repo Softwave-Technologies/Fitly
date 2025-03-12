@@ -1,6 +1,6 @@
 import { Pedometer } from 'expo-sensors';
 import { useEffect, useState } from 'react';
-import { View, Platform } from 'react-native';
+import { View, Platform, Text } from 'react-native';
 import AppleHealthKit, { HealthInputOptions, HealthKitPermissions } from 'react-native-health';
 
 import CircularProgress from './ProgressCircle';
@@ -50,7 +50,7 @@ export default function StepCounter() {
   }, []);
 
   return (
-    <View className="rounded-lg p-4">
+    <View>
       <CircularProgress
         progress={progress}
         goal={goal}
@@ -58,6 +58,9 @@ export default function StepCounter() {
         iconName="shoe-prints"
         color="red"
       />
+      <Text className="text-center text-white">
+        {steps} / {goal}
+      </Text>
     </View>
   );
 }

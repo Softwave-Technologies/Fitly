@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, View, Text } from 'react-native';
 
 import CircularProgress from './ProgressCircle';
 
@@ -62,6 +62,9 @@ export default function MainNutritionTrack() {
         color="#FFA500"
         goal={goal}
       />
+      <Text className="text-center text-white">
+        {calories} / {goal} kcal
+      </Text>
     </View>
   );
 }

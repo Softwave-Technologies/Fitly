@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, View, Text } from 'react-native';
 
 //import { Button } from './Button';
 import CircularProgress from './ProgressCircle';
@@ -117,6 +117,9 @@ export default function ProgressTracker({
         style={{ backgroundColor: color }}
         onPress={addProgress}
       />*/}
+      <Text className="text-center text-white">
+        {progress} / {goal} ml
+      </Text>
     </View>
   );
 }
