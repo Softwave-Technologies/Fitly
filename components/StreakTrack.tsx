@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { View } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { Calendar, DateData } from 'react-native-calendars';
 
 export default function StreakTrack() {
@@ -9,37 +9,26 @@ export default function StreakTrack() {
 
   useFocusEffect(
     useCallback(() => {
-      loadWorkoutData();
+      (async () => {
+        try {
+          const storedData = await AsyncStorage.getItem('workoutDays');
+          if (storedData) setMarkedDates(JSON.parse(storedData));
+        } catch (error) {
+          console.error('Error loading workout data:', error);
+        }
+      })();
     }, [])
   );
 
-  const loadWorkoutData = async () => {
-    try {
-      const storedData = await AsyncStorage.getItem('workoutDays');
-      if (storedData) {
-        setMarkedDates(JSON.parse(storedData));
-      }
-    } catch (error) {
-      console.error('Error loading workout data:', error);
-    }
-  };
-
   const handleDayPress = async (day: DateData) => {
-    const newMarkedDates = { ...markedDates };
-
-    if (newMarkedDates[day.dateString]) {
-      delete newMarkedDates[day.dateString];
+    const updatedMarkedDates = { ...markedDates };
+    if (updatedMarkedDates[day.dateString]) {
+      delete updatedMarkedDates[day.dateString];
     } else {
-      newMarkedDates[day.dateString] = {
-        marked: true,
-        customStyles: {
-          container: { backgroundColor: 'green', borderRadius: 10 },
-          text: { color: 'white', fontWeight: 'bold' },
-        },
-      };
+      updatedMarkedDates[day.dateString] = true;
     }
-    setMarkedDates(newMarkedDates);
-    await AsyncStorage.setItem('workoutDays', JSON.stringify(newMarkedDates));
+    setMarkedDates(updatedMarkedDates);
+    await AsyncStorage.setItem('workoutDays', JSON.stringify(updatedMarkedDates));
   };
 
   return (
@@ -47,18 +36,34 @@ export default function StreakTrack() {
       <Calendar
         markingType="custom"
         onDayPress={handleDayPress}
-        markedDates={markedDates}
         theme={{
-          backgroundColor: '#1F2937', // bg-gray-900
+          backgroundColor: '#1F2937',
           calendarBackground: '#1F2937',
           textSectionTitleColor: '#e5e7eb',
           dayTextColor: '#ffffff',
           todayTextColor: '#facc15',
-          selectedDayBackgroundColor: '#22c55e',
           monthTextColor: '#e5e7eb',
           arrowColor: '#e5e7eb',
           textDisabledColor: '#6b7280',
         }}
+        dayComponent={({ date, state }: { date: any; state: any }) => (
+          <TouchableOpacity onPress={() => handleDayPress(date!)}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', height: 30, width: 30 }}>
+              {markedDates[date?.dateString] ? (
+                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>✅</Text>
+              ) : (
+                <Text
+                  style={{
+                    color: state === 'disabled' ? '#6b7280' : '#ffffff',
+                    fontWeight: 'bold',
+                    fontSize: 16,
+                  }}>
+                  {date?.day}
+                </Text>
+              )}
+            </View>
+          </TouchableOpacity>
+        )}
       />
     </View>
   );
