@@ -45,7 +45,7 @@ export default function HomePage() {
       <ScrollView showsVerticalScrollIndicator={false} className="pb-4">
         {/* Daily quote */}
         <DailyQuote />
-        <View className="flex-row items-center justify-around p-2">
+        <View className="border-b-hairline border-t-hairline m-4 flex-row items-center justify-around border-gray-300 p-2">
           {/* Calorie track circle */}
           <MainNutritionTrack />
           {/* Step track */}
