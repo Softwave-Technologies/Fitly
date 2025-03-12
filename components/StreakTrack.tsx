@@ -64,6 +64,10 @@ export default function StreakTrack() {
       <Text className="mb-2 text-center text-xl font-bold text-white">
         🔥 Current Streak: {streak} days
       </Text>
+      <Text className="text-md p-2 text-center font-semibold text-gray-400">
+        ✅ Tap on a day to mark it as completed. 🔥 Keep marking consecutive days to increase your
+        streak! Keep track on your exercise routine and stay motivated!
+      </Text>
       <Calendar
         markingType="custom"
         onDayPress={handleDayPress}
@@ -81,7 +85,7 @@ export default function StreakTrack() {
           <Pressable onPress={() => handleDayPress(date!)}>
             <View style={{ alignItems: 'center', justifyContent: 'center', height: 30, width: 30 }}>
               {markedDates[date?.dateString] ? (
-                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>✅</Text>
+                <Text style={{ fontSize: 20 }}>✅</Text>
               ) : (
                 <Text
                   style={{
