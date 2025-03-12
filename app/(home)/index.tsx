@@ -16,6 +16,7 @@ import DailyQuote from '~/components/DailyQuote';
 import MainNutritionTrack from '~/components/MainNutritionTrack';
 import MainWaterIntake from '~/components/MainWaterIntake';
 import StepCounter from '~/components/StepCounter';
+import StreakTrack from '~/components/StreakTrack';
 
 export default function HomePage() {
   const { user } = useUser();
@@ -44,7 +45,7 @@ export default function HomePage() {
       <ScrollView showsVerticalScrollIndicator={false} className="pb-4">
         {/* Daily quote */}
         <DailyQuote />
-        <View className="flex-row items-center justify-around">
+        <View className="flex-row items-center justify-around p-2">
           {/* Calorie track circle */}
           <MainNutritionTrack />
           {/* Step track */}
@@ -60,6 +61,8 @@ export default function HomePage() {
             incrementValue={200}
           />
         </View>
+        {/* Calendar for streak */}
+        <StreakTrack />
       </ScrollView>
       <StatusBar barStyle="light-content" />
     </SafeAreaView>
