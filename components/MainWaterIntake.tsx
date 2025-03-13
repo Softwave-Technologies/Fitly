@@ -3,28 +3,16 @@ import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { ActivityIndicator, View, Text } from 'react-native';
 
-//import { Button } from './Button';
 import CircularProgress from './ProgressCircle';
 
 interface ProgressTrackerProps {
   label: string;
   color: string;
   storageKey: string;
-  unit: string;
-  incrementValue: number;
   goal: number;
-  timeRanges?: number[];
 }
 
-export default function ProgressTracker({
-  label,
-  color,
-  storageKey,
-  unit,
-  incrementValue,
-  goal,
-  timeRanges,
-}: ProgressTrackerProps) {
+export default function ProgressTracker({ label, color, storageKey, goal }: ProgressTrackerProps) {
   const [progress, setProgress] = useState(0);
   const [data, setData] = useState<number[]>([0, 0, 0, 0, 0, 0]);
   const [loading, setLoading] = useState(true);
@@ -61,44 +49,14 @@ export default function ProgressTracker({
     }
   };
 
-  {
-    /* 
-  const getCurrentTimeSlot = () => {
-    if (!timeRanges) return 0;
-    const currentHour = new Date().getHours();
-    let closestIndex = 0;
-
-    for (let i = 0; i < timeRanges.length; i++) {
-      if (currentHour >= timeRanges[i]) {
-        closestIndex = i;
-      } else {
-        break;
-      }
-    }
-
-    return closestIndex;*
-  };*/
-  }
-
-  {
-    /* 
-  const addProgress = async () => {
-    const index = timeRanges ? getCurrentTimeSlot() : 0;
-    const newData = [...data];
-    newData[index] += incrementValue;
-    await AsyncStorage.setItem(storageKey, JSON.stringify(newData));
-
-    setData(newData);
-    setProgress(newData.reduce((acc, val) => acc + val, 0));
-  };*/
-  }
-
   useFocusEffect(
     useCallback(() => {
       fetchProgressData();
       checkAndResetData();
     }, [])
   );
+
+  if (!data) return <Text>Error while loading water intake data.</Text>;
 
   if (loading) return <ActivityIndicator size="large" />;
 
@@ -111,12 +69,6 @@ export default function ProgressTracker({
         color={color}
         iconName="tint"
       />
-      {/*  <Button
-        title={`Add ${incrementValue} ${unit}`}
-        className="m-2 w-2/3 self-center"
-        style={{ backgroundColor: color }}
-        onPress={addProgress}
-      />*/}
       <Text className="text-center text-white">
         {progress} / {goal} ml
       </Text>

@@ -60,7 +60,7 @@ export default function StreakTrack() {
   };
 
   return (
-    <View className="p-4">
+    <View className="gap-2 p-4">
       <Text className="mb-2 text-center text-xl font-bold text-white">
         🔥 Current Streak: {streak} days
       </Text>

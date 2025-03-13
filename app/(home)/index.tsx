@@ -43,26 +43,19 @@ export default function HomePage() {
         </Pressable>
       </View>
       <ScrollView showsVerticalScrollIndicator={false} className="pb-4">
-        {/* Daily quote */}
-        <DailyQuote />
+        {/* Calendar for streak */}
+        <StreakTrack />
+
         <View className="border-b-hairline border-t-hairline m-4 flex-row items-center justify-around border-gray-300 p-2">
           {/* Calorie track circle */}
           <MainNutritionTrack />
           {/* Step track */}
           <StepCounter />
           {/* Water Intake home */}
-          <MainWaterIntake
-            label="Water"
-            color="#3498db"
-            unit="ml"
-            storageKey="waterIntakeData"
-            goal={2000}
-            timeRanges={[6, 9, 12, 15, 18, 21]}
-            incrementValue={200}
-          />
+          <MainWaterIntake label="Water" color="#3498db" storageKey="waterIntakeData" goal={2000} />
         </View>
-        {/* Calendar for streak */}
-        <StreakTrack />
+        {/* Daily quote */}
+        <DailyQuote />
       </ScrollView>
       <StatusBar barStyle="light-content" />
     </SafeAreaView>
