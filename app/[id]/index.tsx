@@ -30,7 +30,9 @@ export default function WorkoutDetails() {
       <SafeAreaView className="p-4">
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* Back Button */}
-          <Pressable className="absolute right-1 top-1 z-10" onPress={() => router.back()}>
+          <Pressable
+            className="absolute right-1 top-1 z-10"
+            onPress={() => router.replace('/workout')}>
             <Entypo name="cross" size={25} color="white" />
           </Pressable>
 
