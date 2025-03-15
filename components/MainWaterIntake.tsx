@@ -51,8 +51,8 @@ export default function ProgressTracker({ label, color, storageKey, goal }: Prog
 
   useFocusEffect(
     useCallback(() => {
-      fetchProgressData();
       checkAndResetData();
+      fetchProgressData();
     }, [])
   );
 
