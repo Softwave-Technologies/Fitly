@@ -63,6 +63,9 @@ export default function NutritionTrack() {
     setMeals(updatedMeals);
     setTotalCalories((prevCalories) => prevCalories + newMeal.calories);
     await AsyncStorage.setItem('meals', JSON.stringify(updatedMeals));
+    setMealName('');
+    setMealCalories(0);
+    setMealCategory('');
   };
 
   const deleteMeal = async (id: number) => {

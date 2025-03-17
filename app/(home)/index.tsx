@@ -45,7 +45,6 @@ export default function HomePage() {
       <ScrollView showsVerticalScrollIndicator={false} className="pb-4">
         {/* Calendar for streak */}
         <StreakTrack />
-
         <View className="border-b-hairline border-t-hairline m-4 flex-row items-center justify-around border-gray-300 p-2">
           {/* Calorie track circle */}
           <MainNutritionTrack />
