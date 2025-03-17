@@ -98,21 +98,22 @@ export default function Profile() {
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button title="Update Password" onPress={handleChangePassword} />
+            <Button title="Update Password" onPress={handleChangePassword} className="mx-5" />
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button title="Delete User" onPress={handleDeleteUser} className="bg-red-500" />
+            <Button title="Delete User" onPress={handleDeleteUser} className="mx-5 bg-red-500" />
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button title="Sign Out" onPress={() => signOut()} />
+            <Button title="Sign Out" onPress={() => signOut()} className="mx-5" />
           </View>
         </View>
       </SafeAreaView>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
