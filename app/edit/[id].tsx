@@ -38,7 +38,7 @@ export default function EditPage() {
       <SafeAreaView className="flex-1">
         <View className="border-b-hairline flex-row items-center border-gray-300 p-6">
           <Text className="flex-1 text-2xl font-bold text-green-500">Edit Your Workout</Text>
-          <Pressable onPress={() => router.push('/myworkouts')}>
+          <Pressable onPress={() => router.push('/workout')}>
             <Text className="font-bold text-red-500">CANCEL</Text>
           </Pressable>
         </View>
@@ -207,7 +207,7 @@ export default function EditPage() {
               },
               exercises
             );
-            router.push('/myworkouts');
+            router.push('/workout');
           }}
           className="m-8 mb-10 bg-green-600 text-white"
         />
