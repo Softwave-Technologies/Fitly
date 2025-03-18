@@ -5,7 +5,7 @@ import NutritionTrack from '~/components/NutritionTrack';
 import WaterIntake from '~/components/WaterIntake';
 
 export default function TrackingPage() {
-  const [isOnWater, setIsOnWater] = useState(false);
+  const [isOnWater, setIsOnWater] = useState(true);
   return (
     <View className="flex-1 bg-gray-900">
       <SafeAreaView className="flex-1">

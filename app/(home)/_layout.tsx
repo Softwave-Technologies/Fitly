@@ -1,5 +1,6 @@
 import { FontAwesome, FontAwesome6, Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
+import { Pressable } from 'react-native';
 
 export default function HomeLayout() {
   return (
@@ -22,7 +23,25 @@ export default function HomeLayout() {
       <Tabs.Screen
         name="workout"
         options={{
-          tabBarIcon: ({ color }) => <FontAwesome6 name="dumbbell" size={25} color={color} />,
+          tabBarButton: (props) => (
+            <Pressable
+              {...props}
+              style={{
+                top: -20,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'green',
+                width: 70,
+                height: 70,
+                borderRadius: 35,
+                shadowColor: '#fff',
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.3,
+                shadowRadius: 4,
+              }}>
+              <FontAwesome6 name="dumbbell" size={30} color="white" />
+            </Pressable>
+          ),
         }}
       />
       <Tabs.Screen
