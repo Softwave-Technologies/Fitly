@@ -1,4 +1,4 @@
-import { FontAwesome, FontAwesome6, Ionicons } from '@expo/vector-icons';
+import { FontAwesome, FontAwesome5, FontAwesome6, Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import { Pressable } from 'react-native';
 
@@ -49,7 +49,7 @@ export default function HomeLayout() {
       <Tabs.Screen
         name="bmi"
         options={{
-          tabBarIcon: ({ color }) => <FontAwesome name="calculator" size={25} color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesome5 name="weight" size={25} color={color} />,
         }}
       />
     </Tabs>
