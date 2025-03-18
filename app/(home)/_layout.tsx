@@ -34,6 +34,7 @@ export default function HomeLayout() {
                 width: 70,
                 height: 70,
                 borderRadius: 35,
+                alignSelf: 'center',
               }}>
               <FontAwesome6 name="dumbbell" size={30} color="white" />
             </Pressable>

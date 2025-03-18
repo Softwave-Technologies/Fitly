@@ -50,7 +50,7 @@ export default function MainNutritionTrack() {
   );
 
   if (loading) {
-    return <ActivityIndicator />;
+    return <ActivityIndicator size="large" />;
   }
 
   return (

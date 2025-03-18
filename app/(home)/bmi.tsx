@@ -46,6 +46,10 @@ export default function BMIScreen() {
     // Lean Body Mass (LBM)
     const lbmValue = weightKg * (1 - bodyFatValue / 100);
     setLBM(Number(lbmValue.toFixed(1)));
+    setWeight('');
+    setHeight('');
+    setAge('');
+    setGender('');
   };
 
   return (
