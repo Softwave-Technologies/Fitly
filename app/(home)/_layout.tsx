@@ -9,8 +9,8 @@ export default function HomeLayout() {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarActiveTintColor: 'green',
-        tabBarInactiveTintColor: 'grey',
-        tabBarStyle: { backgroundColor: 'black', paddingTop: 5 },
+        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: { backgroundColor: 'black', paddingTop: 10 },
       }}>
       <Tabs.Screen
         name="index"
@@ -30,14 +30,10 @@ export default function HomeLayout() {
                 top: -20,
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: 'green',
+                backgroundColor: 'darkgreen',
                 width: 70,
                 height: 70,
                 borderRadius: 35,
-                shadowColor: '#fff',
-                shadowOffset: { width: 0, height: 4 },
-                shadowOpacity: 0.3,
-                shadowRadius: 4,
               }}>
               <FontAwesome6 name="dumbbell" size={30} color="white" />
             </Pressable>
@@ -51,8 +47,10 @@ export default function HomeLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
-        options={{ tabBarIcon: ({ color }) => <FontAwesome name="user" size={25} color={color} /> }}
+        name="bmi"
+        options={{
+          tabBarIcon: ({ color }) => <FontAwesome name="calculator" size={25} color={color} />,
+        }}
       />
     </Tabs>
   );

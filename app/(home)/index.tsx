@@ -1,6 +1,6 @@
 import { useClerk, useUser } from '@clerk/clerk-expo';
 import { FontAwesome } from '@expo/vector-icons';
-import { Redirect } from 'expo-router';
+import { Redirect, router } from 'expo-router';
 import {
   View,
   Text,
@@ -38,8 +38,14 @@ export default function HomePage() {
           <Text className="text-lg text-white">Welcome Back!</Text>
           <Text className="text-xl font-bold text-white">{user?.fullName}</Text>
         </View>
-        <Pressable className="p-2" onPress={() => signOut()}>
-          <FontAwesome name="power-off" size={30} color="red" />
+        <Pressable className="flex-row gap-5 p-1">
+          <FontAwesome
+            name="user"
+            size={30}
+            color="gray"
+            onPress={() => router.push('../profile')}
+          />
+          <FontAwesome name="sign-out" size={30} color="red" onPress={() => signOut()} />
         </Pressable>
       </View>
       <ScrollView showsVerticalScrollIndicator={false} className="pb-4">

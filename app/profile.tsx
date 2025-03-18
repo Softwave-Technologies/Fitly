@@ -1,13 +1,21 @@
-import { useClerk, useUser } from '@clerk/clerk-expo';
+import { useUser } from '@clerk/clerk-expo';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { View, Text, SafeAreaView, Alert, StyleSheet, Image, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Alert,
+  StyleSheet,
+  Image,
+  TextInput,
+  Pressable,
+} from 'react-native';
 
 import { Button } from '~/components/Button';
 
 export default function Profile() {
   const { user } = useUser();
-  const { signOut } = useClerk();
   const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -49,8 +57,11 @@ export default function Profile() {
   return (
     <View className="flex-1 bg-gray-900">
       <SafeAreaView>
-        <View className="border-b-hairline border-gray-300 p-6">
-          <Text className="text-2xl font-bold text-green-500">Profile</Text>
+        <View className="border-b-hairline flex-row items-center border-gray-300 p-6">
+          <Text className="flex-1 text-2xl font-bold text-green-500">Profile</Text>
+          <Pressable onPress={() => router.back()}>
+            <Text className="text-xl text-gray-200">Back</Text>
+          </Pressable>
         </View>
         <View className="p-4">
           {user?.imageUrl && <Image source={{ uri: user?.imageUrl }} style={styles.image} />}
@@ -103,10 +114,6 @@ export default function Profile() {
 
           <View style={styles.buttonContainer}>
             <Button title="Delete User" onPress={handleDeleteUser} className="mx-5 bg-red-500" />
-          </View>
-
-          <View style={styles.buttonContainer}>
-            <Button title="Sign Out" onPress={() => signOut()} className="mx-5" />
           </View>
         </View>
       </SafeAreaView>
