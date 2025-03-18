@@ -168,6 +168,10 @@ export default function WaterIntake() {
         style={{ backgroundColor: 'green' }}
         onPress={addWaterIntake}
       />
+      <Text className="text-center text-lg text-gray-400">
+        Keep track your water intake from daily graphs. For updating any particular time just click
+        on it and edit.
+      </Text>
     </View>
   );
 }
