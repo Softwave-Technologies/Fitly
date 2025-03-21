@@ -3,8 +3,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { FlashList } from '@shopify/flash-list';
 import { Link } from 'expo-router';
 import { useState, useEffect } from 'react';
-import { View, Text, Pressable, SafeAreaView, Modal, Alert } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
+import { View, Text, Pressable, SafeAreaView, Modal, Alert, ActivityIndicator } from 'react-native';
 
 import preMadeWorkouts from '../../assets/data/preWorkouts.json';
 
@@ -13,7 +12,7 @@ import WorkoutListItem from '~/components/WorkoutListItem';
 import { useWorkoutStore } from '~/store/useWorkoutStore';
 
 export default function WorkoutsScreen() {
-  const [isCreating, setIsCreating] = useState(false); // Toggle between views
+  const [isCreating, setIsCreating] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const { userId } = useAuth();
   const { fetchWorkouts, workouts, deleteWorkout } = useWorkoutStore();
