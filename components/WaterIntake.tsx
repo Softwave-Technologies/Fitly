@@ -170,7 +170,7 @@ export default function WaterIntake() {
       />
       <Text className="text-center text-lg text-gray-400">
         Keep track your water intake from daily graphs. For updating any particular time just click
-        on it and edit.
+        on it and edit. Water intake data is daily and will reset everyday.
       </Text>
     </View>
   );

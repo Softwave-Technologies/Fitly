@@ -178,6 +178,11 @@ export default function NutritionTrack() {
         style={{ backgroundColor: 'green' }}
       />
 
+      <Text className="p-4 text-center text-lg text-gray-400">
+        Enter your meal details to add it to your meal log. Meals and their calories are daily and
+        will reset everyday.
+      </Text>
+
       {/* Meal display */}
       {meals.length !== 0 && <Text className="px-4 text-xl font-bold text-green-500">Meals</Text>}
       <FlatList
