@@ -12,6 +12,8 @@ Fitly is a comprehensive fitness application designed to help users track their 
 - **Expo**: A framework and platform for universal React applications, allowing for easy development and deployment of mobile apps.
 - **React Native**: A popular framework for building native mobile applications using React, enabling a smooth and responsive user experience.
 - **Tailwind CSS**: A utility-first CSS framework that provides a set of pre-defined classes for styling, making it easy to create responsive designs without writing custom CSS.
+- **Supabase DB**: A PostgreSQL database that provides a scalable and secure backend for storing and managing user data.
+- **Clerk Auth**: A simple authentication system that integrates with Supabase DB to handle user authentication and authorization.
 
 ## License
 This project is licensed under the MIT License, allowing for open-source use and modification.
