@@ -14,7 +14,7 @@ export default function WaterIntake() {
 
   const timeLabels = ['6AM', '9AM', '12PM', '3PM', '6PM', '9PM'];
   const timeRanges = [6, 9, 12, 15, 18, 21];
-  const goal = 2000;
+  const goal = 2500;
 
   useFocusEffect(
     useCallback(() => {
