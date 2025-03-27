@@ -274,5 +274,275 @@
         "instructions": "Alternate between arching and rounding your back in a smooth motion."
       }
     ]
+  },
+  {
+    "id": 11,
+    "name": "Plyometric Training",
+    "category": "Power & Agility",
+    "description": "A high-intensity workout focused on explosive movements to improve power and agility.",
+    "instructions": "Perform each exercise explosively, resting for 60 seconds between sets.",
+    "exercises": [
+      {
+        "name": "Box Jumps",
+        "description": "Jump onto a sturdy box to build explosive leg power.",
+        "sets": "4 sets of 10 reps",
+        "instructions": "Stand in front of the box, jump up, and land softly with knees slightly bent."
+      },
+      {
+        "name": "Clap Push-ups",
+        "description": "An advanced push-up variation that builds upper body power.",
+        "sets": "3 sets of 8 reps",
+        "instructions": "Lower into a push-up and explode upward to clap your hands before landing."
+      },
+      {
+        "name": "Tuck Jumps",
+        "description": "A jump that engages the core and improves leg power.",
+        "sets": "3 sets of 12 reps",
+        "instructions": "Jump as high as possible, bringing your knees to your chest."
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Circuit Training",
+    "category": "Full Body Conditioning",
+    "description": "A fast-paced workout combining strength and cardio exercises.",
+    "instructions": "Perform each exercise for 45 seconds, resting for 15 seconds between exercises. Complete 3 rounds.",
+    "exercises": [
+      {
+        "name": "Kettlebell Swings",
+        "description": "A dynamic movement that targets the posterior chain.",
+        "sets": "3 rounds of 45 seconds",
+        "instructions": "Swing the kettlebell between your legs and thrust your hips forward to swing it up."
+      },
+      {
+        "name": "Battle Ropes",
+        "description": "A full-body workout that improves strength and endurance.",
+        "sets": "3 rounds of 45 seconds",
+        "instructions": "Wave the ropes up and down as quickly as possible."
+      },
+      {
+        "name": "Medicine Ball Slams",
+        "description": "A powerful movement that engages the core and upper body.",
+        "sets": "3 rounds of 45 seconds",
+        "instructions": "Lift the medicine ball overhead and slam it down to the ground with force."
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Yoga Flow",
+    "category": "Mind & Body",
+    "description": "A dynamic yoga routine to improve flexibility, strength, and mindfulness.",
+    "instructions": "Move through each pose fluidly, holding each for 5 breaths.",
+    "exercises": [
+      {
+        "name": "Warrior II",
+        "description": "A standing pose that strengthens the legs and opens the hips.",
+        "sets": "3 rounds of 5 breaths per side",
+        "instructions": "Stand with legs wide, bend one knee, and extend arms parallel to the ground."
+      },
+      {
+        "name": "Tree Pose",
+        "description": "A balancing pose that improves stability and focus.",
+        "sets": "3 rounds of 5 breaths per side",
+        "instructions": "Stand on one leg, place the other foot on your inner thigh, and raise your arms overhead."
+      },
+      {
+        "name": "Cobra Pose",
+        "description": "A backbend that stretches the chest and strengthens the spine.",
+        "sets": "3 rounds of 5 breaths",
+        "instructions": "Lie on your stomach, place hands under shoulders, and lift your chest while keeping hips down."
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Agility Ladder Drills",
+    "category": "Speed & Agility",
+    "description": "A workout focused on improving foot speed and coordination using an agility ladder.",
+    "instructions": "Perform each drill for 30 seconds, resting for 15 seconds between drills.",
+    "exercises": [
+      {
+        "name": "In-and-Outs",
+        "description": "Step in and out of the ladder with quick feet.",
+        "sets": "3 rounds of 30 seconds",
+        "instructions": "Start outside the ladder, step in with both feet, then step out."
+      },
+      {
+        "name": "Lateral Shuffles",
+        "description": "Move sideways through the ladder to improve lateral speed.",
+        "sets": "3 rounds of 30 seconds",
+        "instructions": "Shuffle sideways, placing one foot in each square of the ladder."
+      },
+      {
+        "name": "Single-Leg Hops",
+        "description": "Hop through the ladder on one leg to build balance and strength.",
+        "sets": "3 rounds of 30 seconds per leg",
+        "instructions": "Hop on one leg, landing softly in each square."
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Bodyweight Strength",
+    "category": "Strength Training",
+    "description": "A workout using bodyweight exercises to build strength and endurance.",
+    "instructions": "Perform each exercise for 3 sets, resting for 60 seconds between sets.",
+    "exercises": [
+      {
+        "name": "Pistol Squats",
+        "description": "A challenging single-leg squat that builds leg strength.",
+        "sets": "3 sets of 5 reps per leg",
+        "instructions": "Lower into a squat on one leg while extending the other leg forward."
+      },
+      {
+        "name": "Handstand Push-ups",
+        "description": "An advanced bodyweight exercise targeting shoulders and triceps.",
+        "sets": "3 sets of 5 reps",
+        "instructions": "Kick up into a handstand against a wall and lower your head to the ground."
+      },
+      {
+        "name": "Burpee Pull-ups",
+        "description": "A combination of burpees and pull-ups for full-body strength.",
+        "sets": "3 sets of 8 reps",
+        "instructions": "Perform a burpee, then jump up to a pull-up bar and complete a pull-up."
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Kettlebell Conditioning",
+    "category": "Strength & Endurance",
+    "description": "A workout using kettlebells to build strength and cardiovascular endurance.",
+    "instructions": "Perform each exercise for 30 seconds, resting for 15 seconds between exercises.",
+    "exercises": [
+      {
+        "name": "Kettlebell Goblet Squats",
+        "description": "A squat variation that targets the legs and core.",
+        "sets": "3 rounds of 30 seconds",
+        "instructions": "Hold the kettlebell close to your chest and squat down, keeping your back straight."
+      },
+      {
+        "name": "Kettlebell Snatch",
+        "description": "An explosive movement that builds power and coordination.",
+        "sets": "3 rounds of 30 seconds",
+        "instructions": "Swing the kettlebell between your legs and snatch it overhead in one motion."
+      },
+      {
+        "name": "Kettlebell Russian Twists",
+        "description": "A core exercise that targets the obliques.",
+        "sets": "3 rounds of 30 seconds",
+        "instructions": "Sit on the ground, lean back slightly, and twist the kettlebell side to side."
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "HIIT Cardio",
+    "category": "High-Intensity Interval Training",
+    "description": "A high-intensity cardio workout to improve cardiovascular fitness and burn fat.",
+    "instructions": "Perform each exercise for 20 seconds at maximum effort, followed by 10 seconds of rest. Complete 4 rounds.",
+    "exercises": [
+      {
+        "name": "High Knees",
+        "description": "A cardio exercise that engages the core and legs.",
+        "sets": "4 rounds of 20 seconds",
+        "instructions": "Run in place, bringing your knees up to hip level as quickly as possible."
+      },
+      {
+        "name": "Skaters",
+        "description": "A lateral movement that improves agility and coordination.",
+        "sets": "4 rounds of 20 seconds",
+        "instructions": "Jump side to side, landing on one foot and bringing the other leg behind."
+      },
+      {
+        "name": "Burpee Tuck Jumps",
+        "description": "A combination of burpees and tuck jumps for a full-body workout.",
+        "sets": "4 rounds of 20 seconds",
+        "instructions": "Perform a burpee, then jump up and tuck your knees to your chest."
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Strength Endurance",
+    "category": "Muscle Endurance",
+    "description": "A workout designed to improve muscular endurance through high-rep exercises.",
+    "instructions": "Perform each exercise for 15-20 reps, resting for 30-45 seconds between sets.",
+    "exercises": [
+      {
+        "name": "Dumbbell Lunges",
+        "description": "A lower body exercise that targets the quads and glutes.",
+        "sets": "3 sets of 15 reps per leg",
+        "instructions": "Step forward into a lunge, keeping your front knee over your ankle."
+      },
+      {
+        "name": "Push-up Variations",
+        "description": "Different push-up variations to target various muscle groups.",
+        "sets": "3 sets of 15 reps",
+        "instructions": "Alternate between standard, wide, and diamond push-ups."
+      },
+      {
+        "name": "Dumbbell Rows",
+        "description": "A back exercise that strengthens the upper body.",
+        "sets": "3 sets of 15 reps per arm",
+        "instructions": "Bend at the hips, keep your back straight, and pull the dumbbell towards your hip."
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Outdoor Bootcamp",
+    "category": "Functional Training",
+    "description": "A full-body workout using bodyweight and outdoor elements.",
+    "instructions": "Perform each exercise for 45 seconds, resting for 15 seconds between exercises. Complete 3 rounds.",
+    "exercises": [
+      {
+        "name": "Park Bench Dips",
+        "description": "A bodyweight exercise that targets the triceps.",
+        "sets": "3 rounds of 45 seconds",
+        "instructions": "Use a park bench to lower and raise your body using your arms."
+      },
+      {
+        "name": "Hill Sprints",
+        "description": "A high-intensity cardio exercise that builds speed and endurance.",
+        "sets": "3 rounds of 30 seconds",
+        "instructions": "Sprint up a hill as fast as you can, then walk back down to recover."
+      },
+      {
+        "name": "Tire Flips",
+        "description": "A functional strength exercise that engages the entire body.",
+        "sets": "3 rounds of 10 flips",
+        "instructions": "Flip a heavy tire over using your legs and back."
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Balance & Stability",
+    "category": "Core & Stability",
+    "description": "A workout focused on improving balance and core stability.",
+    "instructions": "Perform each exercise for 30 seconds, resting for 15 seconds between exercises.",
+    "exercises": [
+      {
+        "name": "Single-Leg Deadlifts",
+        "description": "A balance exercise that targets the hamstrings and glutes.",
+        "sets": "3 rounds of 30 seconds per leg",
+        "instructions": "Stand on one leg, hinge at the hips, and lower your torso while extending the other leg back."
+      },
+      {
+        "name": "BOSU Ball Squats",
+        "description": "A squat variation that improves balance and stability.",
+        "sets": "3 rounds of 30 seconds",
+        "instructions": "Stand on a BOSU ball and perform squats, keeping your core engaged."
+      },
+      {
+        "name": "Plank with Leg Lift",
+        "description": "A core exercise that challenges stability.",
+        "sets": "3 rounds of 30 seconds",
+        "instructions": "Hold a plank position and lift one leg at a time, keeping your hips level."
+      }
+    ]
   }
 ]
