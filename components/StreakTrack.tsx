@@ -6,7 +6,8 @@ import { Calendar, DateData } from 'react-native-calendars';
 
 export default function StreakTrack() {
   const [markedDates, setMarkedDates] = useState<{ [key: string]: any }>({});
-  const [streak, setStreak] = useState<number>(0);
+  const [longestStreak, setLongestStreak] = useState<number>(0);
+  const [currentStreak, setCurrentStreak] = useState<number>(0);
 
   useFocusEffect(
     useCallback(() => {
@@ -44,29 +45,50 @@ export default function StreakTrack() {
     const dates = Object.keys(markedDays).map((date) => new Date(date));
     dates.sort((a, b) => a.getTime() - b.getTime());
 
-    let currentStreak = 0;
-    let maxStreak = 0;
+    let currentStreakCount = 0;
+    let maxStreakCount = 0;
 
+    // Calculate longest streak
     for (let i = 0; i < dates.length; i++) {
       if (i === 0 || dates[i].getTime() - dates[i - 1].getTime() === 86400000) {
-        currentStreak++;
+        currentStreakCount++;
       } else {
-        currentStreak = 1;
+        currentStreakCount = 1;
       }
-      maxStreak = Math.max(maxStreak, currentStreak);
+      maxStreakCount = Math.max(maxStreakCount, currentStreakCount);
     }
 
-    setStreak(maxStreak);
+    // Calculate current streak
+    const today = new Date();
+    let tempCurrentStreak = 0;
+
+    // Check if today is marked
+    if (markedDays[today.toISOString().split('T')[0]]) {
+      tempCurrentStreak++;
+      today.setDate(today.getDate() - 1); // Move to yesterday
+
+      // Check for consecutive days
+      while (markedDays[today.toISOString().split('T')[0]]) {
+        tempCurrentStreak++;
+        today.setDate(today.getDate() - 1); // Move to the previous day
+      }
+    }
+
+    setLongestStreak(maxStreakCount);
+    setCurrentStreak(tempCurrentStreak);
   };
 
   return (
     <View className="gap-2 p-4">
       <Text className="mb-2 text-center text-xl font-bold text-white">
-        🔥 Longest Streak: {streak} days
+        🔥 Longest Streak: {longestStreak} days
+      </Text>
+      <Text className="mb-2 text-center text-xl font-bold text-white">
+        🏃 Current Streak: {currentStreak} days
       </Text>
       <Text className="text-md p-2 text-center font-semibold text-gray-400">
         ✅ Tap on a day to mark it as completed. 🔥 Keep marking consecutive days to increase your
-        streak! Keep track on your exercise routine and stay motivated!
+        streak! Keep track of your exercise routine and stay motivated!
       </Text>
       <Calendar
         markingType="custom"
