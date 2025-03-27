@@ -15,7 +15,7 @@ import {
 import DailyQuote from '~/components/DailyQuote';
 import MainNutritionTrack from '~/components/MainNutritionTrack';
 import MainWaterIntake from '~/components/MainWaterIntake';
-//import StepCounter from '~/components/StepCounter';
+import StepCounter from '~/components/StepCounter';
 import StreakTrack from '~/components/StreakTrack';
 
 export default function HomePage() {
@@ -55,7 +55,7 @@ export default function HomePage() {
           {/* Calorie track circle */}
           <MainNutritionTrack />
           {/* Step track */}
-          {/*  <StepCounter />*/}
+          <StepCounter />
           {/* Water Intake home */}
           <MainWaterIntake label="Water" color="#3498db" storageKey="waterIntakeData" goal={2500} />
         </View>
