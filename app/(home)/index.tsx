@@ -48,7 +48,7 @@ export default function HomePage() {
           <FontAwesome name="sign-out" size={30} color="red" onPress={() => signOut()} />
         </Pressable>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false} className="pb-4">
+      <ScrollView showsVerticalScrollIndicator={false} className="mb-20 pb-4">
         {/* Calendar for streak */}
         <StreakTrack />
         <View className="border-b-hairline border-t-hairline m-4 flex-row items-center justify-around border-gray-300 p-2">

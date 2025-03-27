@@ -68,7 +68,7 @@ export default function WorkoutsScreen() {
         {/* Conditional Rendering */}
         {isCreating ? (
           // Create Workout Section
-          <View className="flex-1 p-4">
+          <View className="mb-20 flex-1 p-4">
             {loading ? (
               <ActivityIndicator className="self-center" size="large" />
             ) : workouts.length > 0 ? (
@@ -104,7 +104,7 @@ export default function WorkoutsScreen() {
             <Pressable
               className="absolute bottom-4 right-4 rounded-full bg-green-500 p-4"
               onPress={() => setModalVisible(true)}>
-              <FontAwesome name="plus" size={20} color="black" />
+              <FontAwesome name="plus" size={25} color="black" />
             </Pressable>
 
             {/* Modal for Creating Workout */}
@@ -118,7 +118,7 @@ export default function WorkoutsScreen() {
           </View>
         ) : (
           // Pre-Made Workouts Section
-          <View className="flex-1 p-4">
+          <View className="mb-20 flex-1 p-4">
             <Text className="text-lg font-semibold text-white">Choose Your Workout</Text>
             <FlashList
               data={preMadeList}

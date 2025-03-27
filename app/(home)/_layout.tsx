@@ -10,7 +10,16 @@ export default function HomeLayout() {
         tabBarShowLabel: false,
         tabBarActiveTintColor: 'green',
         tabBarInactiveTintColor: 'gray',
-        tabBarStyle: { backgroundColor: 'black', paddingTop: 10 },
+        tabBarStyle: {
+          backgroundColor: 'black',
+          paddingTop: 10,
+          position: 'absolute',
+          marginHorizontal: 20,
+          borderRadius: 30,
+          height: 70,
+          bottom: 30,
+          borderColor: 'black',
+        },
       }}>
       <Tabs.Screen
         name="index"
