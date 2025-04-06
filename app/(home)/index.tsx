@@ -57,7 +57,12 @@ export default function HomePage() {
           {/* Step track */}
           <StepCounter />
           {/* Water Intake home */}
-          <MainWaterIntake label="Water" color="#3498db" storageKey="waterIntakeData" goal={2500} />
+          <MainWaterIntake
+            label="Water"
+            color="#3498db"
+            storageKey="weeklyWaterIntake"
+            goal={2500}
+          />
         </View>
         {/* Daily quote */}
         <DailyQuote />

@@ -13,37 +13,35 @@ interface ProgressTrackerProps {
 }
 
 export default function ProgressTracker({ label, color, storageKey, goal }: ProgressTrackerProps) {
-  const [progress, setProgress] = useState(0);
-  const [data, setData] = useState<number[]>([0, 0, 0, 0, 0, 0]);
-  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const fetchProgressData = async () => {
-    try {
-      const storedData = await AsyncStorage.getItem(storageKey);
-      const dataArray = storedData ? JSON.parse(storedData) : [0, 0, 0, 0, 0, 0];
-      const totalProgress = dataArray.reduce((acc: any, val: any) => acc + val, 0);
-
-      setProgress(totalProgress);
-      setData(dataArray);
-    } catch (error) {
-      console.error(`Error fetching ${label} data:`, error);
-    } finally {
-      setLoading(false);
-    }
+  // Convert JS getDay (0=Sunday) to Monday-based index (0=Monday)
+  const getTodayIndex = (): number => {
+    const day = new Date().getDay(); // 0 (Sun) - 6 (Sat)
+    return day === 0 ? 6 : day - 1; // convert Sunday to index 6
   };
 
-  const checkAndResetData = async () => {
+  const fetchTodayProgress = async () => {
+    setLoading(true);
     try {
-      const storedDate = await AsyncStorage.getItem('lastUpdateDate');
-      const today = new Date().toISOString().split('T')[0];
+      const storedData = await AsyncStorage.getItem(storageKey);
+      let weeklyData: number[] = [];
 
-      if (storedDate !== today) {
-        await AsyncStorage.setItem(storageKey, JSON.stringify([0, 0, 0, 0, 0, 0]));
-        await AsyncStorage.setItem('lastUpdateDate', today);
-        setData([0, 0, 0, 0, 0, 0]);
+      if (storedData) {
+        const parsed = JSON.parse(storedData);
+        // Make sure it's an array of 7 numbers
+        if (Array.isArray(parsed) && parsed.length === 7) {
+          weeklyData = parsed;
+        }
       }
+
+      const todayIndex = getTodayIndex();
+      const todayProgress = weeklyData[todayIndex] || 0;
+
+      setProgress(todayProgress);
     } catch (error) {
-      console.error(`Error resetting ${label} data:`, error);
+      console.error(`Error fetching progress for ${label}:`, error);
     } finally {
       setLoading(false);
     }
@@ -51,14 +49,13 @@ export default function ProgressTracker({ label, color, storageKey, goal }: Prog
 
   useFocusEffect(
     useCallback(() => {
-      checkAndResetData();
-      fetchProgressData();
+      fetchTodayProgress();
     }, [])
   );
 
-  if (!data) return <Text>Error while loading water intake data.</Text>;
-
-  if (loading) return <ActivityIndicator size="large" />;
+  if (loading) {
+    return <ActivityIndicator size="large" />;
+  }
 
   return (
     <View>
@@ -69,7 +66,7 @@ export default function ProgressTracker({ label, color, storageKey, goal }: Prog
         color={color}
         iconName="tint"
       />
-      <Text className="text-center text-white">
+      <Text className="mt-2 text-center text-white">
         {progress} / {goal} ml
       </Text>
     </View>

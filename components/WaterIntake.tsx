@@ -7,69 +7,67 @@ import { ProgressBar } from 'react-native-paper';
 
 import { Button } from './Button';
 
+const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const DAILY_GOAL = 2000;
+
 export default function WaterIntake() {
   const { width, height } = useWindowDimensions();
-  const [waterData, setWaterData] = useState<number[]>([0, 0, 0, 0, 0, 0]);
+  const [waterData, setWaterData] = useState<number[]>([0, 0, 0, 0, 0, 0, 0]);
   const [loading, setLoading] = useState(true);
-
-  const timeLabels = ['6AM', '9AM', '12PM', '3PM', '6PM', '9PM'];
-  const timeRanges = [6, 9, 12, 15, 18, 21];
-  const goal = 2500;
 
   useFocusEffect(
     useCallback(() => {
-      checkAndResetData();
+      checkAndResetWeeklyData();
     }, [])
   );
 
-  const checkAndResetData = async () => {
+  const getCurrentWeekKey = () => {
+    const today = new Date();
+    const onejan = new Date(today.getFullYear(), 0, 1);
+    const week = Math.ceil(
+      ((today.getTime() - onejan.getTime()) / 86400000 + onejan.getDay() + 1) / 7
+    );
+    return `${today.getFullYear()}-W${week}`;
+  };
+
+  const checkAndResetWeeklyData = async () => {
     try {
-      const storedData = await AsyncStorage.getItem('waterIntakeData');
-      const storedDate = await AsyncStorage.getItem('lastUpdateDate');
+      const storedData = await AsyncStorage.getItem('weeklyWaterIntake');
+      const storedWeekKey = await AsyncStorage.getItem('lastWeekKey');
+      const currentWeekKey = getCurrentWeekKey();
 
-      const today = new Date().toISOString().split('T')[0];
-
-      if (storedDate !== today) {
-        await AsyncStorage.setItem('waterIntakeData', JSON.stringify([0, 0, 0, 0, 0, 0]));
-        await AsyncStorage.setItem('lastUpdateDate', today);
-        setWaterData([0, 0, 0, 0, 0, 0]);
+      if (storedWeekKey !== currentWeekKey) {
+        const newWeekData = [0, 0, 0, 0, 0, 0, 0];
+        await AsyncStorage.setItem('weeklyWaterIntake', JSON.stringify(newWeekData));
+        await AsyncStorage.setItem('lastWeekKey', currentWeekKey);
+        setWaterData(newWeekData);
       } else if (storedData) {
         setWaterData(JSON.parse(storedData));
       }
     } catch (error) {
-      console.error('Error loading water data:', error);
+      console.error('Error loading weekly data:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const getCurrentTimeSlot = () => {
-    const currentHour = new Date().getHours();
-    let closestIndex = 0;
-
-    for (let i = 0; i < timeRanges.length; i++) {
-      if (currentHour >= timeRanges[i]) {
-        closestIndex = i;
-      } else {
-        break;
-      }
-    }
-
-    return closestIndex;
+  const getTodayIndex = () => {
+    const day = new Date().getDay();
+    return (day + 6) % 7; // Monday = 0, Sunday = 6
   };
 
   const addWaterIntake = async () => {
-    const index = getCurrentTimeSlot();
+    const index = getTodayIndex();
     const newData = [...waterData];
     newData[index] += 200;
     setWaterData(newData);
-    await AsyncStorage.setItem('waterIntakeData', JSON.stringify(newData));
+    await AsyncStorage.setItem('weeklyWaterIntake', JSON.stringify(newData));
   };
 
-  const updateWaterIntake = async (index: number) => {
+  const updateWaterIntake = (index: number) => {
     Alert.prompt(
       'Edit Water Intake',
-      `Enter new amount for ${timeLabels[index]}`,
+      `Enter new amount for ${daysOfWeek[index]}`,
       [
         { text: 'Cancel', style: 'cancel' },
         {
@@ -84,7 +82,7 @@ export default function WaterIntake() {
             const newData = [...waterData];
             newData[index] = newValue;
             setWaterData(newData);
-            await AsyncStorage.setItem('waterIntakeData', JSON.stringify(newData));
+            await AsyncStorage.setItem('weeklyWaterIntake', JSON.stringify(newData));
           },
         },
       ],
@@ -92,33 +90,33 @@ export default function WaterIntake() {
     );
   };
 
-  const calculateWaterIntake = () => {
-    const totalIntake = waterData.reduce((acc, val) => acc + val, 0);
-    const progress = Math.min((totalIntake / goal) * 100, 100);
-
-    return { totalIntake, progress };
-  };
-
-  const { totalIntake } = calculateWaterIntake();
+  const todayIndex = getTodayIndex();
+  const todayAmount = waterData[todayIndex];
 
   if (loading) {
     return <ActivityIndicator size="large" />;
   }
 
   const data = {
-    labels: timeLabels,
+    labels: daysOfWeek,
     datasets: [{ data: waterData }],
   };
 
   return (
     <View className="p-4">
-      {/* Daily water intake goal display */}
+      {/* Daily progress for today */}
       <View className="my-2 items-center">
         <Text className="text-xl font-semibold text-white">
-          Total Water Intake: {totalIntake}ml / {goal}ml
+          Today: {todayAmount}ml / {DAILY_GOAL}ml
         </Text>
-        <ProgressBar progress={totalIntake / goal} color="green" className="w-11/12 py-4" />
+        <ProgressBar
+          progress={Math.min(todayAmount / DAILY_GOAL, 1)}
+          color="#00bcd4"
+          className="w-11/12 py-4"
+        />
       </View>
+
+      {/* Weekly Chart */}
       <View>
         <BarChart
           data={data}
@@ -137,7 +135,7 @@ export default function WaterIntake() {
           style={{ borderRadius: 8, alignSelf: 'center' }}
         />
 
-        {/* Touch-sensitive areas for editing */}
+        {/* Tap to edit individual days */}
         <View
           style={{
             position: 'absolute',
@@ -151,26 +149,22 @@ export default function WaterIntake() {
           {waterData.map((_, index) => (
             <Pressable
               key={index}
-              style={{
-                flex: 1,
-                height: '100%',
-              }}
+              style={{ flex: 1, height: '100%' }}
               onPress={() => updateWaterIntake(index)}
             />
           ))}
         </View>
       </View>
 
-      {/* Add Water Intake Button */}
+      {/* Add button */}
       <Button
         title="Add Water (200ml)"
         className="m-6"
         style={{ backgroundColor: 'green' }}
         onPress={addWaterIntake}
       />
-      <Text className="text-center text-lg text-gray-400">
-        Keep track your water intake from daily graphs. For updating any particular time just click
-        on it and edit. Water intake data is daily and will reset everyday.
+      <Text className="text-center text-sm text-gray-400">
+        Tap a bar to manually update a day’s intake. Data resets weekly.
       </Text>
     </View>
   );
