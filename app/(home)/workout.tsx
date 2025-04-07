@@ -54,13 +54,13 @@ export default function WorkoutsScreen() {
         <View className="flex-row gap-5 self-center py-4">
           <Pressable
             onPress={() => setIsCreating(false)}
-            className={`w-2/5 items-center rounded-lg px-4 py-2 ${!isCreating ? 'bg-green-600' : 'bg-gray-500'}`}>
+            className={`w-2/5 items-center justify-center rounded-lg px-4 py-2 ${!isCreating ? 'bg-green-600' : 'bg-gray-500'}`}>
             <Text className="font-semibold text-white">Pre-Made Workouts</Text>
           </Pressable>
 
           <Pressable
             onPress={() => setIsCreating(true)}
-            className={` w-2/5 items-center rounded-lg px-4 py-2 ${isCreating ? 'bg-green-600' : 'bg-gray-500'}`}>
+            className={` w-2/5 items-center justify-center rounded-lg px-4 py-2 ${isCreating ? 'bg-green-600' : 'bg-gray-500'}`}>
             <Text className="font-semibold text-white">Create Workout</Text>
           </Pressable>
         </View>

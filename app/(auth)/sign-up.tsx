@@ -5,7 +5,6 @@ import * as React from 'react';
 import {
   Text,
   TextInput,
-  Button,
   StyleSheet,
   SafeAreaView,
   Dimensions,
@@ -65,12 +64,24 @@ export default function SignUpScreen() {
       <View style={styles.container}>
         <Text style={styles.title}>Verify your email</Text>
         <TextInput
-          style={[styles.textInput, { width: Dimensions.get('window').width / 3 }]}
+          style={[styles.textInput, { width: Dimensions.get('window').width / 2 }]}
           value={code}
-          placeholder="Enter your verification code"
+          placeholder="Verification code"
+          placeholderTextColor="#888"
           onChangeText={(code) => setCode(code)}
+          keyboardType="numeric"
         />
-        <Button title="Verify" onPress={onVerifyPress} color="cyan" />
+        <Pressable
+          onPress={onVerifyPress}
+          style={{
+            backgroundColor: '#00BCD4',
+            paddingVertical: 14,
+            paddingHorizontal: 28,
+            borderRadius: 10,
+            marginTop: 20,
+          }}>
+          <Text style={{ color: '#fff', fontWeight: '600' }}>Verify</Text>
+        </Pressable>
       </View>
     );
   }
@@ -86,21 +97,27 @@ export default function SignUpScreen() {
             style={styles.textInput}
             autoCapitalize="none"
             value={emailAddress}
-            placeholder="Enter email"
+            placeholder="email@email.com"
+            placeholderTextColor="gainsboro"
             onChangeText={(email) => setEmailAddress(email)}
           />
           <Text style={styles.inputText}>Password</Text>
           <TextInput
             style={styles.textInput}
             value={password}
-            placeholder="Enter password"
+            placeholder="**********"
+            placeholderTextColor="gainsboro"
             secureTextEntry
             onChangeText={(password) => setPassword(password)}
           />
           {password.length < 8 && (
             <Text style={styles.warningMessage}>Password must be minimum of 8 characters!</Text>
           )}
-          <Button title="Continue" onPress={onSignUpPress} color="cyan" />
+          <View style={styles.button}>
+            <Pressable onPress={onSignUpPress} style={styles.buttonContainer}>
+              <Text style={styles.buttonText}>Continue</Text>
+            </Pressable>
+          </View>
           <View style={styles.button}>
             <Text style={[styles.buttonText, { color: 'white' }]}>Already have an account?</Text>
             <Link asChild href="/(auth)/sign-in">
@@ -115,17 +132,15 @@ export default function SignUpScreen() {
     </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#121212',
+    justifyContent: 'center',
   },
   bodyContainer: {
-    gap: 5,
-    width: Dimensions.get('window').width,
+    width: '100%',
+    padding: 10,
   },
   title: {
     color: 'gainsboro',
@@ -135,21 +150,27 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   textInput: {
-    backgroundColor: 'white',
-    padding: 20,
-    margin: 20,
-    borderRadius: 10,
+    backgroundColor: '#1c1c1e',
+    color: '#fff',
+    padding: 16,
+    borderRadius: 12,
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#333',
   },
   inputText: {
-    color: 'gainsboro',
-    fontWeight: 'bold',
-    paddingLeft: 20,
+    color: '#ccc',
+    fontSize: 14,
+    marginLeft: 8,
+    marginTop: 16,
+    marginBottom: 4,
   },
   warningMessage: {
     color: 'red',
     fontSize: 12,
     textAlign: 'center',
     fontWeight: 'bold',
+    marginVertical: 10,
   },
   button: {
     alignItems: 'center',
@@ -157,15 +178,21 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   buttonText: {
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
     padding: 5,
+    textAlign: 'center',
   },
   buttonContainer: {
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: 'darkgrey',
-    padding: 10,
-    backgroundColor: 'gainsboro',
+    backgroundColor: '#6c47ff',
+    paddingVertical: 14,
+    paddingHorizontal: 32,
+    borderRadius: 12,
+    width: '100%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
   },
 });

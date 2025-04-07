@@ -6,11 +6,9 @@ import React, { useState } from 'react';
 import {
   Text,
   TextInput,
-  Button,
   View,
   StyleSheet,
   SafeAreaView,
-  Dimensions,
   Pressable,
   KeyboardAvoidingView,
   Platform,
@@ -73,23 +71,29 @@ export default function Page() {
             style={styles.textInput}
             autoCapitalize="none"
             value={emailAddress}
-            placeholder="Enter email"
+            placeholder="email@email.com"
+            placeholderTextColor="gainsboro"
             onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
           />
           <Text style={styles.inputText}>Password</Text>
           <TextInput
             style={styles.textInput}
             value={password}
-            placeholder="Enter password"
+            placeholder="**********"
+            placeholderTextColor="gainsboro"
             secureTextEntry
             onChangeText={(password) => setPassword(password)}
           />
           {error && <Text style={styles.errorMessage}>{error}</Text>}
+          <View style={styles.signupContainer}>
+            <Pressable style={styles.signupButton} onPress={onSignInPress}>
+              <Text style={styles.signupText}>Sign in</Text>
+            </Pressable>
+          </View>
           <Pressable style={styles.googleButton} onPress={handleGoogleAuth}>
             <Text style={styles.signInGoogleText}>Sign in with Google</Text>
             <FontAwesome name="google" size={20} color="black" />
           </Pressable>
-          <Button title="Sign in" onPress={onSignInPress} color="cyan" />
           <View style={styles.signupContainer}>
             <Text style={styles.bottomText}>Don't have an account?</Text>
             <Link href="/sign-up" asChild>
@@ -108,73 +112,87 @@ export default function Page() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#0f0f0f',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#121212',
+    paddingHorizontal: 24,
   },
   title: {
-    color: 'gainsboro',
-    fontSize: 30,
-    fontWeight: 'bold',
+    color: '#fff',
+    fontSize: 32,
+    fontWeight: '600',
     textAlign: 'center',
-    paddingBottom: 30,
+    marginBottom: 40,
   },
   bodyContainer: {
-    gap: 5,
-    width: Dimensions.get('window').width,
-  },
-  textInput: {
-    backgroundColor: 'white',
-    padding: 20,
-    margin: 20,
-    borderRadius: 10,
+    width: '100%',
+    padding: 10,
   },
   inputText: {
-    color: 'gainsboro',
-    fontWeight: 'bold',
-    paddingLeft: 20,
+    color: '#ccc',
+    fontSize: 14,
+    marginLeft: 8,
+    marginTop: 16,
+    marginBottom: 4,
   },
-  bottomText: {
-    color: 'gainsboro',
-    textAlign: 'center',
-    fontWeight: 'bold',
+  textInput: {
+    backgroundColor: '#1c1c1e',
+    color: '#fff',
+    padding: 16,
+    borderRadius: 12,
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#333',
   },
   signupContainer: {
-    gap: 20,
+    marginTop: 24,
     alignItems: 'center',
   },
   signupButton: {
-    backgroundColor: 'gainsboro',
-    padding: 10,
-    borderRadius: 10,
-    zIndex: 10,
-    width: Dimensions.get('window').width / 2,
+    backgroundColor: '#6c47ff',
+    paddingVertical: 14,
+    paddingHorizontal: 32,
+    borderRadius: 12,
+    width: '100%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
   },
   signupText: {
-    color: 'purple',
-    fontWeight: 'bold',
+    color: '#fff',
+    fontWeight: '600',
     textAlign: 'center',
-    fontSize: 15,
+    fontSize: 16,
+  },
+  bottomText: {
+    color: '#888',
+    marginTop: 16,
+    marginBottom: 8,
+    fontSize: 14,
+    textAlign: 'center',
   },
   errorMessage: {
-    color: 'red',
-    fontSize: 15,
-    fontWeight: 'bold',
+    color: 'tomato',
+    textAlign: 'center',
+    marginTop: 8,
+    fontSize: 14,
+    fontWeight: '500',
   },
   googleButton: {
     flexDirection: 'row',
-    backgroundColor: 'white',
-    padding: 10,
-    borderRadius: 10,
-    marginVertical: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    paddingVertical: 14,
+    marginTop: 20,
+    width: '100%',
     gap: 10,
-    width: Dimensions.get('window').width / 2,
-    alignSelf: 'center',
   },
   signInGoogleText: {
+    color: '#000',
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: '500',
   },
 });
