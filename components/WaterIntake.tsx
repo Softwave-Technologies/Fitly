@@ -23,11 +23,20 @@ export default function WaterIntake() {
 
   const getCurrentWeekKey = () => {
     const today = new Date();
-    const onejan = new Date(today.getFullYear(), 0, 1);
-    const week = Math.ceil(
-      ((today.getTime() - onejan.getTime()) / 86400000 + onejan.getDay() + 1) / 7
+    const monday = new Date(today);
+    const day = monday.getDay();
+    const diff = monday.getDate() - day + (day === 0 ? -6 : 1);
+    monday.setDate(diff);
+
+    const year = monday.getFullYear();
+    const weekNumber = Math.ceil(
+      ((monday.getTime() - new Date(year, 0, 1).getTime()) / 86400000 +
+        new Date(year, 0, 1).getDay() +
+        1) /
+        7
     );
-    return `${today.getFullYear()}-W${week}`;
+
+    return `${year}-W${weekNumber}`;
   };
 
   const checkAndResetWeeklyData = async () => {

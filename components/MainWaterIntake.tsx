@@ -16,10 +16,9 @@ export default function ProgressTracker({ label, color, storageKey, goal }: Prog
   const [progress, setProgress] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Convert JS getDay (0=Sunday) to Monday-based index (0=Monday)
   const getTodayIndex = (): number => {
-    const day = new Date().getDay(); // 0 (Sun) - 6 (Sat)
-    return day === 0 ? 6 : day - 1; // convert Sunday to index 6
+    const day = new Date().getDay();
+    return day === 0 ? 6 : day - 1;
   };
 
   const fetchTodayProgress = async () => {
@@ -30,7 +29,6 @@ export default function ProgressTracker({ label, color, storageKey, goal }: Prog
 
       if (storedData) {
         const parsed = JSON.parse(storedData);
-        // Make sure it's an array of 7 numbers
         if (Array.isArray(parsed) && parsed.length === 7) {
           weeklyData = parsed;
         }
