@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   title: {
-    color: 'darkgreen',
+    color: 'green',
     fontSize: 32,
     fontWeight: '600',
     textAlign: 'center',
