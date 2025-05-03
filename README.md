@@ -38,13 +38,13 @@
 Here are some preview images from the **Fitly** app showing the clean UI and core features:
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/1ed34544-b34c-410b-9e55-fc46f51a276f" alt="Fitly Screenshot 1" width="300" />
   <img src="https://github.com/user-attachments/assets/46758ff7-def3-4914-a583-f8c7313dc36f" alt="Fitly Screenshot 2" width="300" />
   <img src="https://github.com/user-attachments/assets/5fb83dea-343d-4985-a790-dc65f4426233" alt="Fitly Screenshot 3" width="300" />
   <img src="https://github.com/user-attachments/assets/227b9d72-569c-41e1-9970-0467bceea98a" alt="Fitly Screenshot 4" width="300" />
   <img src="https://github.com/user-attachments/assets/f3642319-235a-4eb8-98c8-5a257b58a4d6" alt="Fitly Screenshot 5" width="300" />
   <img src="https://github.com/user-attachments/assets/d3e19ffe-cb3a-4d9d-a9bc-0ca7dbfc6b1b" alt="Fitly Screenshot 6" width="300" />
   <img src="https://github.com/user-attachments/assets/818a2085-b365-4df5-96de-0a6b8d26b61f" alt="Fitly Screenshot 7" width="300" />
+  <img src="https://github.com/user-attachments/assets/1ed34544-b34c-410b-9e55-fc46f51a276f" alt="Fitly Screenshot 1" width="300" />
 </div>
 
 ---
