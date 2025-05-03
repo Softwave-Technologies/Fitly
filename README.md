@@ -1,19 +1,68 @@
-# Fitly
+# 🏋️‍♂️ Fitly
 
-## Description
-Fitly is a comprehensive fitness application designed to help users track their workouts and manage their exercise routines effectively. The app provides an intuitive interface that allows users to easily navigate through various workout plans, view detailed exercise instructions, and monitor their progress over time.
+**Fitly** is a modern, user-friendly fitness and workout tracking app designed to help users stay consistent with their health goals. From structured workout plans to personalized progress tracking, Fitly provides everything needed to support a healthier lifestyle.
 
-## Features
-- **Workout Display**: Users can view a list of workouts, each containing detailed information about the exercises included. Each workout item displays the name of the workout and a list of exercises, including the number of sets for each exercise.
-- **Tailwind CSS Styling**: The app utilizes Tailwind CSS, a utility-first CSS framework, to create a responsive and visually appealing user interface. This approach allows for rapid styling and customization, ensuring a consistent look and feel throughout the application.
-- **Navigation**: The app features seamless navigation using `expo-router`, enabling users to easily access detailed views of each workout. This enhances the user experience by providing quick access to workout details and exercise instructions.
+---
 
-## Technologies Used
-- **Expo**: A framework and platform for universal React applications, allowing for easy development and deployment of mobile apps.
-- **React Native**: A popular framework for building native mobile applications using React, enabling a smooth and responsive user experience.
-- **Tailwind CSS**: A utility-first CSS framework that provides a set of pre-defined classes for styling, making it easy to create responsive designs without writing custom CSS.
-- **Supabase DB**: A PostgreSQL database that provides a scalable and secure backend for storing and managing user data.
-- **Clerk Auth**: A simple authentication system that integrates with Supabase DB to handle user authentication and authorization.
+## ✨ Features
 
-## License
-This project is licensed under the MIT License, allowing for open-source use and modification.
+- **📋 Workout Plans**  
+  Browse and follow structured workout routines. Each workout includes a list of exercises, number of sets, and clear exercise breakdowns.
+
+- **💡 Clean UI with Tailwind CSS**  
+  Built using Tailwind CSS (via NativeWind for React Native), Fitly features a sleek, responsive design with consistent styling across screens.
+
+- **🧭 Seamless Navigation**  
+  Navigate effortlessly between workouts and exercise details using `expo-router`, offering a fast and intuitive user experience.
+
+- **🔐 User Authentication**  
+  Secure login and registration powered by **Clerk**, with user sessions and data managed through **Supabase**.
+
+---
+
+## 🛠️ Tech Stack
+
+| Tool/Library     | Purpose                                      |
+|------------------|----------------------------------------------|
+| **Expo**         | Simplifies development and builds for iOS/Android |
+| **React Native** | Core framework for building native UIs       |
+| **Tailwind CSS** | Utility-first styling via NativeWind         |
+| **Supabase**     | Backend-as-a-Service (PostgreSQL, auth, API) |
+| **Clerk**        | Authentication and user management           |
+| **expo-router**  | File-based routing for Expo/React Native     |
+
+---
+
+## 📱 Screenshots
+
+Here are some preview images from the **Fitly** app showing the clean UI and core features:
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/1ed34544-b34c-410b-9e55-fc46f51a276f" alt="Fitly Screenshot 1" width="300" />
+  <img src="https://github.com/user-attachments/assets/46758ff7-def3-4914-a583-f8c7313dc36f" alt="Fitly Screenshot 2" width="300" />
+  <img src="https://github.com/user-attachments/assets/5fb83dea-343d-4985-a790-dc65f4426233" alt="Fitly Screenshot 3" width="300" />
+  <img src="https://github.com/user-attachments/assets/227b9d72-569c-41e1-9970-0467bceea98a" alt="Fitly Screenshot 4" width="300" />
+  <img src="https://github.com/user-attachments/assets/f3642319-235a-4eb8-98c8-5a257b58a4d6" alt="Fitly Screenshot 5" width="300" />
+  <img src="https://github.com/user-attachments/assets/d3e19ffe-cb3a-4d9d-a9bc-0ca7dbfc6b1b" alt="Fitly Screenshot 6" width="300" />
+  <img src="https://github.com/user-attachments/assets/818a2085-b365-4df5-96de-0a6b8d26b61f" alt="Fitly Screenshot 7" width="300" />
+</div>
+
+---
+
+## 📝 License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
+## 👤 Author
+
+**Anıl [@anildev](https://github.com/anilyavas)**  
+Founder & Developer of **Fitly**
+
+- 🚀 Passionate about mobile development, especially React Native.
+- 🎯 Focused on building accessible and performance-optimized apps.
+- 📬 Reach out on [LinkedIn](https://www.linkedin.com/in/anilyavas) for collaboration or feedback!
+
+---
+
+Feel free to ⭐️ this repo if you like the project!
+
