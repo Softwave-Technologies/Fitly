@@ -12,6 +12,7 @@ import {
   Pressable,
   KeyboardAvoidingView,
   Platform,
+  Image,
 } from 'react-native';
 
 export default function Page() {
@@ -22,6 +23,7 @@ export default function Page() {
   const [emailAddress, setEmailAddress] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = useState('');
+  const image = require('../../assets/onboarding/logo.png');
 
   const onSignInPress = React.useCallback(async () => {
     if (!isLoaded) return;
@@ -84,7 +86,11 @@ export default function Page() {
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View style={styles.bodyContainer}>
-          <Text style={styles.title}>Sign In</Text>
+          <Image
+            source={image}
+            style={{ width: 200, height: 200, borderRadius: 30, alignSelf: 'center', margin: 5 }}
+          />
+          <Text style={styles.title}>Fitly</Text>
           <Text style={styles.inputText}>Email</Text>
           <TextInput
             style={styles.textInput}

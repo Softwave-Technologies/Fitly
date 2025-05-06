@@ -12,6 +12,7 @@ import {
   Pressable,
   Platform,
   KeyboardAvoidingView,
+  Image,
 } from 'react-native';
 
 export default function SignUpScreen() {
@@ -22,6 +23,7 @@ export default function SignUpScreen() {
   const [password, setPassword] = React.useState('');
   const [pendingVerification, setPendingVerification] = React.useState(false);
   const [code, setCode] = React.useState('');
+  const image = require('../../assets/onboarding/logo.png');
 
   const onSignUpPress = async () => {
     if (!isLoaded) return;
@@ -90,9 +92,12 @@ export default function SignUpScreen() {
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View style={styles.bodyContainer}>
-          <Text style={styles.title}>Sign Up</Text>
+          <Image
+            source={image}
+            style={{ width: 200, height: 200, borderRadius: 30, alignSelf: 'center', margin: 5 }}
+          />
+          <Text style={styles.title}>Fitly</Text>
           <Text style={styles.inputText}>Email</Text>
-
           <TextInput
             style={styles.textInput}
             autoCapitalize="none"
