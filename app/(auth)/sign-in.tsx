@@ -120,7 +120,7 @@ export default function Page() {
           <View style={styles.signupContainer}>
             <Text style={styles.bottomText}>Don't have an account?</Text>
             <Link href="/sign-up" asChild>
-              <Pressable style={styles.signupButton}>
+              <Pressable>
                 <Text style={styles.signupText}>Sign Up</Text>
               </Pressable>
             </Link>
@@ -168,7 +168,10 @@ const styles = StyleSheet.create({
   },
   signupContainer: {
     marginTop: 24,
+    justifyContent: 'center',
     alignItems: 'center',
+    gap: 10,
+    flexDirection: 'row',
   },
   signupButton: {
     backgroundColor: '#6c47ff',
@@ -186,12 +189,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '600',
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 14,
   },
   bottomText: {
     color: '#888',
-    marginTop: 16,
-    marginBottom: 8,
     fontSize: 14,
     textAlign: 'center',
   },
