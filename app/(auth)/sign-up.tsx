@@ -119,9 +119,9 @@ export default function SignUpScreen() {
             </Pressable>
           </View>
           <View style={styles.button}>
-            <Text style={[styles.buttonText, { color: 'white' }]}>Already have an account?</Text>
+            <Text style={[styles.buttonText, { color: '#888' }]}>Already have an account?</Text>
             <Link asChild href="/(auth)/sign-in">
-              <Pressable style={styles.buttonContainer}>
+              <Pressable>
                 <Text style={styles.buttonText}>Sign In</Text>
               </Pressable>
             </Link>
@@ -174,14 +174,17 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
+    justifyContent: 'center',
     padding: 10,
     gap: 10,
+    flexDirection: 'row',
   },
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
     padding: 5,
     textAlign: 'center',
+    fontSize: 14,
   },
   buttonContainer: {
     backgroundColor: '#6c47ff',
