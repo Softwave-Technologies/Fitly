@@ -56,7 +56,7 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 ## 👤 Author
 
-**Anıl [@anildev](https://github.com/anilyavas)**  
+**Anıl [@anilyavas](https://github.com/anilyavas)**  
 Founder & Developer of **Fitly**
 
 - 🚀 Passionate about mobile development, especially React Native.
