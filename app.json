@@ -3,7 +3,7 @@
     "name": "Fitly",
     "slug": "Fitly",
     "version": "1.0.0",
-    "scheme": "fitly",
+    "scheme": "Fitly",
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -31,9 +31,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anilyavas.Fitly",
